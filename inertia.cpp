@@ -54,6 +54,23 @@ double CubeSim::Inertia::operator ()(const Vector3D& axis, const Vector3D& origi
 }
 
 
+// Compute Inertia Matrix
+CubeSim::Inertia::operator const Matrix3D(void) const
+{
+   // Compute Translation Matrix
+   Matrix3D T;
+   T(1, 1) = _mass * (_center.y() * _center.y() + _center.z() * _center.z());
+   T(1, 2) = T(2, 1) = -_mass * _center.x() * _center.y();
+   T(1, 3) = T(3, 1) = -_mass * _center.x() * _center.z();
+   T(2, 2) = _mass * (_center.x() * _center.x() + _center.z() * _center.z());
+   T(2, 3) = T(3, 2) = -_mass * _center.y() * _center.z();
+   T(3, 3) = _mass * (_center.x() * _center.x() + _center.y() * _center.y());
+
+   // Compute and return Momentum of Inertia
+   return (static_cast<const Matrix3D&>(*this) + T);
+}
+
+
 // Add and assign
 CubeSim::Inertia& CubeSim::Inertia::operator +=(const Inertia& inertia)
 {

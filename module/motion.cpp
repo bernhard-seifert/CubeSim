@@ -46,9 +46,9 @@ void CubeSim::Module::Motion::_behavior(void)
       _State& state_ = state[spacecraft->second];
 
       // Initialize Acceleration, angular Acceleration, Moment of Inertia (Body Frame)
-     state_.acceleration.x(NAN);
-     state_.angular_acceleration.x(NAN);
-     state_.inertia = Inertia();
+      state_.acceleration.x(NAN);
+      state_.angular_acceleration.x(NAN);
+      state_.inertia = Inertia();
    }
 
    // Parse Celestial Body List

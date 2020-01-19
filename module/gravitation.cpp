@@ -84,7 +84,7 @@ void CubeSim::Module::Gravitation::_behavior(void)
          ++spacecraft)
       {
          // Check cached Value
-         if (std::isnan(spacecraft->second->__center.x()))
+//***         if (std::isnan(spacecraft->second->__center.x()))
          {
             // Compute Center of Mass
             spacecraft->second->center();

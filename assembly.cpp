@@ -75,6 +75,8 @@ const CubeSim::Vector3D CubeSim::Assembly::_angular_momentum(void) const
       L += part->second->angular_momentum();
    }
 
+   // *** we need to consider the velocity of the parts as well!!!
+
    // Return Momentum
    return L;
 }

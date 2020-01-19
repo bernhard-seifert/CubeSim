@@ -19,7 +19,8 @@ namespace CubeSim
 }
 
 
-// Class Inertia
+// Class Inertia ***
+// class CubeSim::Inertia : private Matrix3D
 class CubeSim::Inertia : public Matrix3D
 {
 public:
@@ -30,6 +31,12 @@ public:
 
    // Compute Inertia around arbitrary Axis and Origin [kg*m^2]
    double operator ()(const Vector3D& axis, const Vector3D& origin = Vector3D()) const;
+
+   // Compute Inertia Matrix
+   operator const Matrix3D(void) const;
+
+   // ***
+   operator int(void) const {return 0;}
 
    // Add
    const Inertia operator +(const Inertia& inertia) const;

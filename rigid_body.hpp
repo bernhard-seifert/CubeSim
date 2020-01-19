@@ -4,7 +4,6 @@
 
 
 // Includes
-#include <cmath>
 #include "inertia.hpp"
 #include "wrench.hpp"
 
@@ -111,6 +110,16 @@ public:
 
 protected:
 
+   // Cache
+   static const uint8_t _CACHE_ANGULAR_MOMENTUM = 0x01;
+   static const uint8_t _CACHE_AREA = 0x02;
+   static const uint8_t _CACHE_CENTER = 0x04;
+   static const uint8_t _CACHE_INERTIA = 0x08;
+   static const uint8_t _CACHE_MASS = 0x10;
+   static const uint8_t _CACHE_MOMENTUM = 0x20;
+   static const uint8_t _CACHE_VOLUME = 0x40;
+   static const uint8_t _CACHE_WRENCH = 0x80;
+
    // Update Properties
    static const uint8_t _UPDATE_ANGULAR_MOMENTUM = 1;
    static const uint8_t _UPDATE_ANGULAR_RATE = 2;
@@ -169,6 +178,7 @@ private:
    Vector3D _velocity;
    Rotation _rotation;
    RigidBody* _rigid_body;
+   mutable uint8_t _cache;
    mutable double __area;
    mutable double __mass;
    mutable double __volume;
@@ -231,11 +241,14 @@ inline void CubeSim::RigidBody::angular_rate(const Vector3D& angular_rate)
 // Compute Surface Area [m^2]
 inline double CubeSim::RigidBody::area(void) const
 {
-   // Check cached Value
-   if (std::isnan(__area))
+   // Check Cache
+   if (!(_cache & _CACHE_AREA))
    {
       // Compute Surface Area
       __area = _area();
+
+      // Set Cache
+      _cache |= _CACHE_AREA;
    }
 
    // Return Surface Area
@@ -306,11 +319,14 @@ inline void CubeSim::RigidBody::insert(const std::string& name, const Torque& to
 // Compute Mass [kg]
 inline double CubeSim::RigidBody::mass(void) const
 {
-   // Check cached Value
-   if (std::isnan(__mass))
+   // Check Cache
+   if (!(_cache & _CACHE_MASS))
    {
       // Compute Mass
       __mass = _mass();
+
+      // Set Cache
+      _cache |= _CACHE_MASS;
    }
 
    // Return Mass
@@ -450,11 +466,14 @@ inline void CubeSim::RigidBody::velocity(const Vector3D& velocity)
 // Compute Volume [m^3]
 inline double CubeSim::RigidBody::volume(void) const
 {
-   // Check cached Value
-   if (std::isnan(__volume))
+   // Check Cache
+   if (!(_cache & _CACHE_VOLUME))
    {
       // Compute Volume
       __volume = _volume();
+
+      // Set Cache
+      _cache |= _CACHE_VOLUME;
    }
 
    // Return Volume

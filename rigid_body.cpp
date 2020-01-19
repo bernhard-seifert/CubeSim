@@ -10,22 +10,16 @@
 
 // Constructor
 CubeSim::RigidBody::RigidBody(const Vector3D& position, const Rotation& rotation, const Vector3D& velocity,
-   const Vector3D& angular_rate) : _position(position), _rotation(rotation), _velocity(velocity),
-   _angular_rate(angular_rate), _rigid_body(), __area(NAN), __mass(NAN), __volume(NAN),
-   __angular_momentum(NAN, 0.0, 0.0), __center(NAN, 0.0, 0.0), __momentum(NAN, 0.0, 0.0)
+   const Vector3D& angular_rate) : _angular_rate(angular_rate), _position(position), _velocity(velocity),
+   _rotation(rotation), _rigid_body(), _cache()
 {
-   // Initialize
-   __inertia.at(1, 1) = NAN;
-   __wrench.force(NAN, 0.0, 0.0);
 }
 
 
 // Copy Constructor (Rigid Body Reference is reset)
 CubeSim::RigidBody::RigidBody(const RigidBody& rigid_body) : List<Force>(rigid_body), List<Torque>(rigid_body),
    _angular_rate(rigid_body._angular_rate), _position(rigid_body._position), _velocity(rigid_body._velocity),
-   _rotation(rigid_body._rotation), _rigid_body(), __area(rigid_body.__area), __mass(rigid_body.__mass),
-   __volume(rigid_body.__volume), __angular_momentum(rigid_body.__angular_momentum), __center(rigid_body.__center),
-   __momentum(rigid_body.__momentum), __inertia(rigid_body.__inertia), __wrench(rigid_body.__wrench)
+   _rotation(rigid_body._rotation), _rigid_body(), _cache()
 {
    // Parse Force List
    for (auto force_ = force().begin(); force_ != force().end(); ++force_)
@@ -60,6 +54,7 @@ CubeSim::RigidBody& CubeSim::RigidBody::operator =(const RigidBody& rigid_body)
    _position = rigid_body._position;
    _velocity = rigid_body._velocity;
    _rotation = rigid_body._rotation;
+   _cache = rigid_body._cache;
    __area = rigid_body.__area;
    __mass = rigid_body.__mass;
    __volume = rigid_body.__volume;
@@ -77,15 +72,41 @@ CubeSim::RigidBody& CubeSim::RigidBody::operator =(const RigidBody& rigid_body)
 // Compute angular Momentum (local Frame) [kg*m^2/s]
 const CubeSim::Vector3D CubeSim::RigidBody::angular_momentum(void) const
 {
-   // Check cached Value
-//***   if (std::isnan(__angular_momentum.x()))
+   // Check Cache
+   if (!(_cache & _CACHE_ANGULAR_MOMENTUM))
    {
       // Compute internal angular Momentum
       __angular_momentum = _angular_momentum();
+
+      // Set Cache
+      _cache |= _CACHE_ANGULAR_MOMENTUM;
    }
 
    // Transform internal angular Momentum
    Vector3D angular_momentum = __angular_momentum + _rotation;
+
+   // Check angular Rate
+   if (_angular_rate != Vector3D())
+   {
+      int y = inertia();
+      Inertia i = inertia();
+//      Matrix3D x2 = i;
+//      Matrix3D x = static_cast<const Matrix3D>(inertia());
+      // Compute external Momentum and update Momentum
+//      angular_momentum += inertia() * _angular_rate;
+   }
+
+   // Check Parent Rigid Body and Velocity
+   // *** why is it important to have a parent here?
+   if (_rigid_body && (_velocity != Vector3D()))
+   {
+      // Compute external angular Momentum from Translation and update angular Momentum
+      angular_momentum += mass() * (center() ^ _velocity);
+   }
+
+
+
+/*
 
    // Check angular Rate
    if (_angular_rate != Vector3D())
@@ -99,6 +120,7 @@ const CubeSim::Vector3D CubeSim::RigidBody::angular_momentum(void) const
 
       angular_momentum += inertia() * _angular_rate;
    }
+*/
 
    // Return angular Momentum
    return angular_momentum;
@@ -108,11 +130,14 @@ const CubeSim::Vector3D CubeSim::RigidBody::angular_momentum(void) const
 // Compute Center of Mass (local Frame) [m]
 const CubeSim::Vector3D CubeSim::RigidBody::center(void) const
 {
-   // Check cached Value
-   if (std::isnan(__center.x()))
+   // Check Cache
+   if (!(_cache & _CACHE_CENTER))
    {
       // Compute Center of Mass (Body Frame)
       __center = _center();
+
+      // Set Cache
+      _cache |= _CACHE_CENTER;
    }
 
    // Transform and return Center of Mass
@@ -120,14 +145,17 @@ const CubeSim::Vector3D CubeSim::RigidBody::center(void) const
 }
 
 
-// Compute Moment of Inertia (local Frame) [kg*m^2]
+// Compute Moment of Inertia (local Frame) [kg*m^2] *** if no parent exists, compute inertia around center
 const CubeSim::Inertia CubeSim::RigidBody::inertia(void) const
 {
-   // Check cached Value
-   if (std::isnan(__inertia.at(1, 1)))
+   // Check Cache
+   if (!(_cache & _CACHE_INERTIA))
    {
       // Compute Moment of Inertia (Body Frame)
       __inertia = _inertia();
+
+      // Set Cache
+      _cache |= _CACHE_INERTIA;
    }
 
    // Transform and return Moment of Inertia
@@ -158,11 +186,14 @@ const std::pair<CubeSim::Vector3D, CubeSim::Rotation> CubeSim::RigidBody::locate
 // Compute Momentum (local Frame) [m/s]
 const CubeSim::Vector3D CubeSim::RigidBody::momentum(void) const
 {
-   // Check cached Value
-   if (std::isnan(__momentum.x()))
+   // Check Cache
+   if (!(_cache & _CACHE_MOMENTUM))
    {
       // Compute internal Momentum
       __momentum = _momentum();
+
+      // Set Cache
+      _cache |= _CACHE_MOMENTUM;
    }
 
    // Transform internal Momentum
@@ -175,6 +206,14 @@ const CubeSim::Vector3D CubeSim::RigidBody::momentum(void) const
       momentum += mass() * _velocity;
    }
 
+   // Check Parent Rigid Body and angular Rate
+   // *** why is it important to have a parent here?
+   if (_rigid_body && (_angular_rate != Vector3D()))
+   {
+      // Compute external Momentum from Rotation around Origin (Body Frame) and update Momentum
+      momentum += mass() * (_angular_rate ^ (center() - position()));
+   }
+
    // Return Momentum
    return momentum;
 }
@@ -183,16 +222,46 @@ const CubeSim::Vector3D CubeSim::RigidBody::momentum(void) const
 // Compute Wrench (local Frame)
 const CubeSim::Wrench CubeSim::RigidBody::wrench(void) const
 {
-   // Check cached Value
-   if (std::isnan(__wrench.force().x()))
+   // Check Cache
+   if (!(_cache & _CACHE_WRENCH))
    {
       // Compute Wrench (Body Frame)
       __wrench = _wrench();
+
+      // Set Cache
+      _cache |= _CACHE_WRENCH;
    }
 
    // Transform and return Wrench
    return (__wrench + _rotation + _position);
 }
+
+
+// Cache
+const uint8_t CubeSim::RigidBody::_CACHE_ANGULAR_MOMENTUM;
+const uint8_t CubeSim::RigidBody::_CACHE_AREA;
+const uint8_t CubeSim::RigidBody::_CACHE_CENTER;
+const uint8_t CubeSim::RigidBody::_CACHE_INERTIA;
+const uint8_t CubeSim::RigidBody::_CACHE_MASS;
+const uint8_t CubeSim::RigidBody::_CACHE_MOMENTUM;
+const uint8_t CubeSim::RigidBody::_CACHE_VOLUME;
+const uint8_t CubeSim::RigidBody::_CACHE_WRENCH;
+
+// Update Properties
+const uint8_t CubeSim::RigidBody::_UPDATE_ANGULAR_MOMENTUM;
+const uint8_t CubeSim::RigidBody::_UPDATE_ANGULAR_RATE;
+const uint8_t CubeSim::RigidBody::_UPDATE_AREA;
+const uint8_t CubeSim::RigidBody::_UPDATE_CENTER;
+const uint8_t CubeSim::RigidBody::_UPDATE_FORCE;
+const uint8_t CubeSim::RigidBody::_UPDATE_INERTIA;
+const uint8_t CubeSim::RigidBody::_UPDATE_MASS;
+const uint8_t CubeSim::RigidBody::_UPDATE_MOMENTUM;
+const uint8_t CubeSim::RigidBody::_UPDATE_POSITION;
+const uint8_t CubeSim::RigidBody::_UPDATE_ROTATION;
+const uint8_t CubeSim::RigidBody::_UPDATE_TORQUE;
+const uint8_t CubeSim::RigidBody::_UPDATE_VELOCITY;
+const uint8_t CubeSim::RigidBody::_UPDATE_VOLUME;
+const uint8_t CubeSim::RigidBody::_UPDATE_WRENCH;
 
 
 // Update Property
@@ -209,10 +278,11 @@ void CubeSim::RigidBody::_update(uint8_t update)
          {
             // Update Property
             _rigid_body->_update(_UPDATE_ANGULAR_MOMENTUM);
+            _rigid_body->_update(_UPDATE_MOMENTUM);
          }
 
-         // Invalidate angular Momentum
-         __angular_momentum.x(NAN);
+         // Reset Cache
+         _cache &= ~_CACHE_ANGULAR_MOMENTUM;
          break;
       }
 
@@ -234,16 +304,26 @@ void CubeSim::RigidBody::_update(uint8_t update)
             _rigid_body->_update(_UPDATE_AREA);
          }
 
-         // Invalidate Surface Area
-         __area = NAN;
+         // Reset Cache
+         _cache &= ~_CACHE_AREA;
          break;
       }
 
       // Center of Mass
       case _UPDATE_CENTER:
       {
-         // Invalidate Center of Mass
-         __center.x(NAN);
+         // Check Parent Rigid Body
+         if (_rigid_body)
+         {
+            // Update Property
+            _rigid_body->_update(_UPDATE_CENTER);
+         }
+
+         // Update Property
+         _update(_UPDATE_WRENCH);
+
+         // Reset Cache
+         _cache &= ~_CACHE_CENTER;
          break;
       }
 
@@ -258,24 +338,36 @@ void CubeSim::RigidBody::_update(uint8_t update)
       // Moment of Inertia
       case _UPDATE_INERTIA:
       {
-         // Invalidate Moment of Inertia
-         __inertia.at(1, 1) = NAN;
+         // Check Parent Rigid Body
+         if (_rigid_body)
+         {
+            // Update Property
+            _rigid_body->_update(_UPDATE_INERTIA);
+         }
 
          // Update Property
          _update(_UPDATE_ANGULAR_MOMENTUM);
+
+         // Reset Cache
+         _cache &= ~_CACHE_INERTIA;
          break;
       }
 
       // Mass
       case _UPDATE_MASS:
       {
-         // Invalidate Mass
-         __mass = NAN;
+         // Check Parent Rigid Body
+         if (_rigid_body)
+         {
+            // Update Property
+            _rigid_body->_update(_UPDATE_MASS);
+         }
 
-         // Update Properties
-         _update(_UPDATE_CENTER);
-         _update(_UPDATE_INERTIA);
+         // Update Property
          _update(_UPDATE_MOMENTUM);
+
+         // Reset Cache
+         _cache &= ~_CACHE_MASS;
          break;
       }
 
@@ -285,15 +377,13 @@ void CubeSim::RigidBody::_update(uint8_t update)
          // Check Parent Rigid Body
          if (_rigid_body)
          {
-            // Update Property
-            _rigid_body->_update(_UPDATE_MOMENTUM);
-
-            // *** this should also affect angular momentum, TBC?
+            // Update Properties
             _rigid_body->_update(_UPDATE_ANGULAR_MOMENTUM);
+            _rigid_body->_update(_UPDATE_MOMENTUM);
          }
 
-         // Invalidate Momentum
-         __momentum.x(NAN);
+         // Reset Cache
+         _cache &= ~_CACHE_MOMENTUM;
          break;
       }
 
@@ -303,11 +393,8 @@ void CubeSim::RigidBody::_update(uint8_t update)
          // Check Parent Rigid Body
          if (_rigid_body)
          {
-            // Update Property
+            // Update Properties
             _rigid_body->_update(_UPDATE_INERTIA);
-
-            // *** this should also affect angular momentum, TBC?
-            _rigid_body->_update(_UPDATE_ANGULAR_MOMENTUM);
             _rigid_body->_update(_UPDATE_CENTER);
          }
 
@@ -321,10 +408,8 @@ void CubeSim::RigidBody::_update(uint8_t update)
          // Check Parent Rigid Body
          if (_rigid_body)
          {
-            // Update Property
+            // Update Properties
             _rigid_body->_update(_UPDATE_INERTIA);
-
-            // ***
             _rigid_body->_update(_UPDATE_CENTER);
          }
 
@@ -361,8 +446,8 @@ void CubeSim::RigidBody::_update(uint8_t update)
          // Update Property
          _update(_UPDATE_MASS);
 
-         // Invalidate Volume
-         __volume = NAN;
+         // Reset Cache
+         _cache &= ~_CACHE_VOLUME;
          break;
       }
 
@@ -376,8 +461,8 @@ void CubeSim::RigidBody::_update(uint8_t update)
             _rigid_body->_update(_UPDATE_WRENCH);
          }
 
-         // Invalidate Wrench
-         __wrench.force(NAN, 0.0, 0.0);
+         // Reset Cache
+         _cache &= ~_CACHE_WRENCH;
          break;
       }
    }
