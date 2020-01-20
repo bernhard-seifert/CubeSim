@@ -3,9 +3,6 @@
 // CUBESIM - SIMULATION
 
 
-// *** we should define a stop which just sets a flag => dispatcher stops simulation
-
-
 // Includes
 #include <fiber.hpp>
 #include "celestial_body.hpp"
@@ -58,6 +55,9 @@ public:
    const std::map<std::string, Spacecraft*>& spacecraft(void) const;
    Spacecraft* spacecraft(const std::string& name) const;
 
+   // Stop
+   void stop(void);
+
    // Time
    const Time time(void) const;
    void time(const Time& time);
@@ -74,6 +74,7 @@ private:
    static void _parse(std::vector<Fiber*>& fiber, const std::map<std::string, System*>& system);
 
    // Variables
+   bool _stop;
    uint64_t _delay;
    uint64_t _time;
 };
@@ -226,6 +227,14 @@ inline CubeSim::Spacecraft* CubeSim::Simulation::spacecraft(const std::string& n
 {
    // Return Spacecraft 
    return List<Spacecraft>::item(name);
+}
+
+
+// Stop
+inline void CubeSim::Simulation::stop(void)
+{
+   // Set Stop Flag
+   _stop = true;
 }
 
 

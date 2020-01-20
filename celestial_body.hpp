@@ -131,7 +131,7 @@ private:
    // Check if Point is inside (Body Frame)
    virtual bool _contains(const Vector3D& point) const;
 
-   // Compute Moment of Inertia (Body Frame, Origin) [kg*m^2]
+   // Compute Momentum of Inertia (Body Frame, Origin) [kg*m^2]
    virtual const Inertia _inertia(void) const;
 
    // Compute Mass [kg]
@@ -380,7 +380,7 @@ inline bool CubeSim::CelestialBody::_contains(const Vector3D& point) const
 }
 
 
-// Compute Moment of Inertia Tensor (Body Frame) [kg*m^2]
+// Compute Momentum of Inertia Tensor (Body Frame) [kg*m^2]
 inline const CubeSim::Inertia CubeSim::CelestialBody::_inertia(void) const
 {
    // Compute Mass

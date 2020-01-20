@@ -55,17 +55,17 @@ CubeSim::Spacecraft& CubeSim::Spacecraft::operator =(const Spacecraft& spacecraf
 const CubeSim::Vector3D CubeSim::Spacecraft::_angular_momentum(void) const
 {
    // Angular Momentum
-   Vector3D L;
+   Vector3D angular_momentum;
 
    // Parse System List
    for (auto system = this->system().begin(); system != this->system().end(); ++system)
    {
       // Update angular Momentum
-      L += system->second->angular_momentum();
+      angular_momentum += system->second->angular_momentum();
    }
 
    // Return Momentum
-   return L;
+   return angular_momentum;
 }
 
 
@@ -129,20 +129,20 @@ bool CubeSim::Spacecraft::_contains(const Vector3D& point) const
 }
 
 
-// Compute Moment of Inertia (Body Frame) [kg*m^2]
+// Compute Momentum of Inertia (Body Frame) [kg*m^2]
 const CubeSim::Inertia CubeSim::Spacecraft::_inertia(void) const
 {
-   // Moment of Inertia
+   // Momentum of Inertia
    Inertia I;
 
    // Parse Systems
    for (auto system = this->system().begin(); system != this->system().end(); ++system)
    {
-      // Update Moment of Inertia
+      // Update Momentum of Inertia
       I += system->second->inertia();
    }
 
-   // Return Moment of Inertia
+   // Return Momentum of Inertia
    return I;
 }
 

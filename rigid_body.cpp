@@ -88,39 +88,16 @@ const CubeSim::Vector3D CubeSim::RigidBody::angular_momentum(void) const
    // Check angular Rate
    if (_angular_rate != Vector3D())
    {
-      int y = inertia();
-      Inertia i = inertia();
-//      Matrix3D x2 = i;
-//      Matrix3D x = static_cast<const Matrix3D>(inertia());
       // Compute external Momentum and update Momentum
-//      angular_momentum += inertia() * _angular_rate;
+      angular_momentum += static_cast<const Matrix3D>(inertia()) * _angular_rate;
    }
 
-   // Check Parent Rigid Body and Velocity
-   // *** why is it important to have a parent here?
+   // Check Parent Rigid Body and Velocity (the Center of Mass of a free rigid Body carries out a linear Motion)
    if (_rigid_body && (_velocity != Vector3D()))
    {
       // Compute external angular Momentum from Translation and update angular Momentum
       angular_momentum += mass() * (center() ^ _velocity);
    }
-
-
-
-/*
-
-   // Check angular Rate
-   if (_angular_rate != Vector3D())
-   {
-      // Compute angular Momentum (either free or fixed Axis) and update angular Momentum
-      // *** we need to check the formula for the reaction wheels, is the angular momentum really constant???
-      // *** angular_momentum += _rigid_body ? (inertia()(_angular_rate) * _angular_rate) : (inertia() * _angular_rate);
-      // ***                                                                                    ^ this is in local frame but through COG!
-      // *** this formula might be wrong... check that
-      // REMARK: when inertia() is converted to a 3D matrix, it is in local frame but through COG, so for the angular momentum computation fine!?
-
-      angular_momentum += inertia() * _angular_rate;
-   }
-*/
 
    // Return angular Momentum
    return angular_momentum;
@@ -145,21 +122,35 @@ const CubeSim::Vector3D CubeSim::RigidBody::center(void) const
 }
 
 
-// Compute Moment of Inertia (local Frame) [kg*m^2] *** if no parent exists, compute inertia around center
+// Compute Momentum of Inertia (local Frame, around Center for free rigid Bodies) [kg*m^2]
 const CubeSim::Inertia CubeSim::RigidBody::inertia(void) const
 {
    // Check Cache
    if (!(_cache & _CACHE_INERTIA))
    {
-      // Compute Moment of Inertia (Body Frame)
+      // Compute Momentum of Inertia (Body Frame)
       __inertia = _inertia();
+
+      // Check Parent Rigid Body
+      if (!_rigid_body)
+      {
+         // Set Center of Mass
+         __inertia.center(Vector3D());
+      }
 
       // Set Cache
       _cache |= _CACHE_INERTIA;
    }
 
-   // Transform and return Moment of Inertia
-   return (__inertia + _rotation + _position);
+   // Check Parent Rigid Body
+   if (_rigid_body)
+   {
+      // Transform and return Momentum of Inertia (Rotation around Origin)
+      return (__inertia + _rotation + _position);
+   }
+
+   // Transform and return Momentum of Inertia (Rotation around Center of Mass)
+   return (__inertia + _rotation);
 }
 
 
@@ -206,8 +197,7 @@ const CubeSim::Vector3D CubeSim::RigidBody::momentum(void) const
       momentum += mass() * _velocity;
    }
 
-   // Check Parent Rigid Body and angular Rate
-   // *** why is it important to have a parent here?
+   // Check Parent Rigid Body and angular Rate (a free rigid Body rotates around Center of Mass)
    if (_rigid_body && (_angular_rate != Vector3D()))
    {
       // Compute external Momentum from Rotation around Origin (Body Frame) and update Momentum
@@ -335,7 +325,7 @@ void CubeSim::RigidBody::_update(uint8_t update)
          break;
       }
 
-      // Moment of Inertia
+      // Momentum of Inertia
       case _UPDATE_INERTIA:
       {
          // Check Parent Rigid Body

@@ -83,12 +83,8 @@ void CubeSim::Module::Gravitation::_behavior(void)
       for (auto spacecraft = simulation()->spacecraft().begin(); spacecraft != simulation()->spacecraft().end();
          ++spacecraft)
       {
-         // Check cached Value
-//***         if (std::isnan(spacecraft->second->__center.x()))
-         {
-            // Compute Center of Mass
-            spacecraft->second->center();
-         }
+         // Make sure Center of Mass is cached
+         spacecraft->second->center();
 
          // Transform and assign Force acting on Center of Mass (bypass its Transformation)
          *spacecraft->second->force(_FORCE) = Force(field(spacecraft->second->position()) * spacecraft->second->mass() -

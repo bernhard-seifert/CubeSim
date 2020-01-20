@@ -45,7 +45,7 @@ void CubeSim::Module::Motion::_behavior(void)
       // Get State
       _State& state_ = state[spacecraft->second];
 
-      // Initialize Acceleration, angular Acceleration, Moment of Inertia (Body Frame)
+      // Initialize Acceleration, angular Acceleration, Momentum of Inertia (Body Frame)
       state_.acceleration.x(NAN);
       state_.angular_acceleration.x(NAN);
       state_.inertia = Inertia();
@@ -102,16 +102,16 @@ void CubeSim::Module::Motion::_behavior(void)
          // Update Acceleration
          state_.acceleration = acceleration;
 
-         // Compute Moment of Inertia (Body Frame)
+         // Compute Momentum of Inertia (Body Frame)
          Matrix3D inertia = spacecraft->second->inertia() - spacecraft->second->rotation();
 
-         // Check if Moment of Inertia (Body Frame) was modified
+         // Check if Momentum of Inertia (Body Frame) was modified
          if (inertia != state_.inertia)
          {
-            // Update inverse Moment of Inertia (Body Frame)
+            // Update inverse Momentum of Inertia (Body Frame)
             state_.inertia_inverse = inertia.inverse();
 
-            // Set Moment of Inertia (Body Frame)
+            // Set Momentum of Inertia (Body Frame)
             state_.inertia = inertia;
          }
 

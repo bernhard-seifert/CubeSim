@@ -7,7 +7,7 @@
 #include "prism.hpp"
 
 
-// Compute Moment of Inertia (Body Frame) [kg*m^2]
+// Compute Momentum of Inertia (Body Frame) [kg*m^2]
 const CubeSim::Inertia CubeSim::Part::Prism::_inertia(void) const
 {
    // Mass, Integrals
@@ -42,15 +42,15 @@ const CubeSim::Inertia CubeSim::Part::Prism::_inertia(void) const
    xy -= mass * center.x() * center.y();
    yy -= mass * center.y() * center.y();
 
-   // Moment of Inertia
+   // Momentum of Inertia
    Matrix3D I;
 
-   // Compute Moment of Inertia
+   // Compute Momentum of Inertia
    I(1, 1) = yy + zz;
    I(1, 2) = I(2, 1) = -xy;
    I(2, 2) = xx + zz;
    I(3, 3) = xx + yy;
 
-   // Return Moment of Inertia
+   // Return Momentum of Inertia
    return Inertia(I, mass, Vector3D(center.x(), center.y(), _height / 2.0));
 }

@@ -68,8 +68,11 @@ void CubeSim::Simulation::run(const Time& time)
       // Create Delay List
       std::vector<uint64_t> delay(fiber.size(), _time);
 
-      // Loop until End Time is reached
-      while (_time < time_)
+      // Clear Stop Flag
+      _stop = false;
+
+      // Loop until Stop Flag is set or End Time is reached
+      while (!_stop && (_time < time_))
       {
          // Time
          uint64_t time_ = delay[0];

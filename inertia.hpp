@@ -19,9 +19,8 @@ namespace CubeSim
 }
 
 
-// Class Inertia ***
-// class CubeSim::Inertia : private Matrix3D
-class CubeSim::Inertia : public Matrix3D
+// Class Inertia
+class CubeSim::Inertia
 {
 public:
 
@@ -29,14 +28,11 @@ public:
    Inertia(void);
    Inertia(const Matrix3D& inertia, double mass, const Vector3D& center = Vector3D());
 
-   // Compute Inertia around arbitrary Axis and Origin [kg*m^2]
-   double operator ()(const Vector3D& axis, const Vector3D& origin = Vector3D()) const;
+   // Compute Inertia around arbitrary Axis and Pivot [kg*m^2]
+   double operator ()(const Vector3D& axis, const Vector3D& pivot = Vector3D()) const;
 
-   // Compute Inertia Matrix
+   // Compute Momentum of Inertia Matrix
    operator const Matrix3D(void) const;
-
-   // ***
-   operator int(void) const {return 0;}
 
    // Add
    const Inertia operator +(const Inertia& inertia) const;
@@ -67,6 +63,7 @@ private:
    // Variables
    double _mass;
    Vector3D _center;
+   Matrix3D _matrix;
 };
 
 
@@ -77,7 +74,7 @@ inline CubeSim::Inertia::Inertia(void) : _mass()
 
 
 // Constructor
-inline CubeSim::Inertia::Inertia(const Matrix3D& inertia, double mass, const Vector3D& center) : Matrix3D(inertia)
+inline CubeSim::Inertia::Inertia(const Matrix3D& inertia, double mass, const Vector3D& center) : _matrix(inertia)
 {
    // Initialize
    this->center(center);
@@ -151,7 +148,7 @@ inline const CubeSim::Inertia CubeSim::Inertia::operator -(const Rotation& rotat
 inline CubeSim::Inertia& CubeSim::Inertia::operator +=(const Rotation& rotation)
 {
    // Rotate and assign
-   static_cast<Matrix3D&>(*this) += rotation;
+   _matrix += rotation;
    _center += rotation;
 
    // Return Reference
@@ -163,7 +160,7 @@ inline CubeSim::Inertia& CubeSim::Inertia::operator +=(const Rotation& rotation)
 inline CubeSim::Inertia& CubeSim::Inertia::operator -=(const Rotation& rotation)
 {
    // Rotate and assign
-   static_cast<Matrix3D&>(*this) -= rotation;
+   _matrix -= rotation;
    _center -= rotation;
 
    // Return Reference
