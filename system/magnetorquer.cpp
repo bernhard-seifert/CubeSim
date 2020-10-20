@@ -56,7 +56,7 @@ void CubeSim::System::Magnetorquer::_behavior(void)
    for (;;)
    {
       // Check if enabled
-      if (enabled())
+      if (is_enabled())
       {
          // Magnetic Field
          Vector3D field;

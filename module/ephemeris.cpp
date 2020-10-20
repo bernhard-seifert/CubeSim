@@ -47,18 +47,18 @@ void CubeSim::Module::Ephemeris::_behavior(void)
          // Set Earth
          earth = celestial_body->second;
 
-         // Set Earth Orbit around Earth-Moon Barycenter
+         // Set Earth Orbit around Earth-Moon Barycenter *** TODO
          orbit = {4.652679725E+6, 3.849005238E-2, 5.245913309E+0, 3.407239897E+0, 8.773217456E-2, 1.576133700E+0,
             2.343771949E+6};
 
          // Earth Axis Tilt
-         Rotation tilt(Vector3D::X, -23.43928 * Constant::PI / 180.0);
+         Rotation tilt(Vector3D::X, -23.4392811 * Constant::PI / 180.0);
 
-         // Earth Angular Rate [rad/s]
-         double angular_rate = 7.292115E-5;
+         // Earth Angular Rate [rad/s] (considering the Earth's Revolution around the Sun takes 365.2425 days)
+         double angular_rate = 7.292115838E-05;
 
-         // Compute Earth Rotation and angular Rate
-         earth->rotation(Rotation(Vector3D::Z, 1.750679930 + (simulation()->time() - time) / 1000.0 * angular_rate) +
+         // Compute Earth Rotation and angular Rate (Offset is chosen that Noon is in the Mean at 12:00 in Year 2015) *** recheck offset
+         earth->rotation(Rotation(Vector3D::Z, 1.774015093 + (simulation()->time() - time) / 1000.0 * angular_rate) +
             tilt);
          earth->angular_rate((Vector3D::Z + tilt) * angular_rate);
       }

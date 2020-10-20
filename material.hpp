@@ -36,7 +36,7 @@ public:
    static const Material STEEL;
 
    // Constructor
-   Material(double density = 0.0, const Color& color = Color::BLACK);
+   Material(const std::string& name = "", double density = 0.0, const Color& color = Color::BLACK);
 
    // Color
    const Color& color(void) const;
@@ -46,16 +46,22 @@ public:
    double density(void) const;
    void density(double density);
 
+   // Name
+   const std::string& name(void) const;
+   void name(const std::string& name);
+
 private:
 
    // Variables
    double _density;
    Color _color;
+   std::string _name;
 };
 
 
 // Constructor
-inline CubeSim::Material::Material(double density, const Color& color) : _color(color)
+inline CubeSim::Material::Material(const std::string& name, double density, const Color& color) : _color(color),
+   _name(name)
 {
    // Initialize
    this->density(density);
@@ -98,4 +104,20 @@ inline void CubeSim::Material::density(double density)
 
    // Set Density
    _density = density;
+}
+
+
+// Get Name
+inline const std::string& CubeSim::Material::name(void) const
+{
+   // Return Name
+   return _name;
+}
+
+
+// Set Name
+inline void CubeSim::Material::name(const std::string& name)
+{
+   // Set Name
+   _name = name;
 }

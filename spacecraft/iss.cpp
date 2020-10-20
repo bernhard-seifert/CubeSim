@@ -24,7 +24,7 @@ CubeSim::Spacecraft::ISS::ISS(void) : Spacecraft(Vector3D(-2.517666808E+10, 1.44
 {
    // Spacecraft Bus (Envelope)
    Part::Box bus(72.8, 108.5, 20.0);
-   bus.material(Material(2.849));
+   bus.material(Material("", 2.849));
 
    // Make Assembly
    Assembly assembly;

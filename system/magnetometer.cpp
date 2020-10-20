@@ -13,7 +13,7 @@
 const CubeSim::Vector3D CubeSim::System::Magnetometer::magnetic_field(void) const
 {
    // Check if enabled
-   if (!enabled())
+   if (!is_enabled())
    {
       // Return invalid magnetic Field
       return Vector3D(NAN, NAN, NAN);

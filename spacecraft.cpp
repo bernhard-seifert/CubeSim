@@ -129,20 +129,20 @@ bool CubeSim::Spacecraft::_contains(const Vector3D& point) const
 }
 
 
-// Compute Momentum of Inertia (Body Frame) [kg*m^2]
+// Compute Moment of Inertia (Body Frame) [kg*m^2]
 const CubeSim::Inertia CubeSim::Spacecraft::_inertia(void) const
 {
-   // Momentum of Inertia
+   // Moment of Inertia
    Inertia I;
 
    // Parse Systems
    for (auto system = this->system().begin(); system != this->system().end(); ++system)
    {
-      // Update Momentum of Inertia
+      // Update Moment of Inertia
       I += system->second->inertia();
    }
 
-   // Return Momentum of Inertia
+   // Return Moment of Inertia
    return I;
 }
 

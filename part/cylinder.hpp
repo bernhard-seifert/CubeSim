@@ -42,7 +42,7 @@ private:
    // Check if Point is inside (Body Frame)
    virtual bool _contains(const Vector3D& point) const;
 
-   // Compute Momentum of Inertia Tensor (Body Frame) [kg*m^2]
+   // Compute Moment of Inertia Tensor (Body Frame) [kg*m^2]
    virtual const Inertia _inertia(void) const;
 
    // Compute Volume [m^3]

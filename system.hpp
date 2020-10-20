@@ -75,13 +75,13 @@ public:
    // Enable
    void enable(void);
 
-   // Check if enabled
-   bool enabled(void) const;
-
    // Insert Assembly, System, Force (Body Frame) and Torque (Body Frame)
    void insert(const std::string& name, const Assembly& assembly);
    void insert(const std::string& name, const System& system);
    using RigidBody::insert;
+
+   // Check if enabled
+   bool is_enabled(void) const;
 
    // Get Simulation
    Simulation* simulation(void) const;
@@ -107,7 +107,7 @@ private:
    // Check if contains Point (Body Frame)
    virtual bool _contains(const Vector3D& point) const;
 
-   // Compute Momentum of Inertia (Body Frame) [kg*m^2]
+   // Compute Moment of Inertia (Body Frame) [kg*m^2]
    virtual const Inertia _inertia(void) const;
 
    // Compute Mass [kg]
@@ -170,14 +170,6 @@ inline void CubeSim::System::enable(void)
 }
 
 
-// Check if enabled
-inline bool CubeSim::System::enabled(void) const
-{
-   // Return enabled Flag
-   return _enabled;
-}
-
-
 // Insert Assembly
 inline void CubeSim::System::insert(const std::string& name, const Assembly& assembly)
 {
@@ -186,6 +178,14 @@ inline void CubeSim::System::insert(const std::string& name, const Assembly& ass
 
    // Set parent Rigid Body
    assembly_._rigid_body = this;
+}
+
+
+// Check if enabled
+inline bool CubeSim::System::is_enabled(void) const
+{
+   // Return enabled Flag
+   return _enabled;
 }
 
 

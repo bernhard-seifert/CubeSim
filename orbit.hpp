@@ -77,6 +77,9 @@ public:
    // Get Periapsis [m]
    double periapsis(void) const;
 
+   // Compute Perimeter (Travel Distance for one Revolution) [m]
+   double perimeter(void) const;
+
    // Get Period [s]
    double period(void) const;
 

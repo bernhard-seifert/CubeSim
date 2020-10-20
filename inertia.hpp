@@ -31,7 +31,7 @@ public:
    // Compute Inertia around arbitrary Axis and Pivot [kg*m^2]
    double operator ()(const Vector3D& axis, const Vector3D& pivot = Vector3D()) const;
 
-   // Compute Momentum of Inertia Matrix
+   // Compute Moment of Inertia Matrix
    operator const Matrix3D(void) const;
 
    // Add

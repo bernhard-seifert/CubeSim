@@ -58,7 +58,7 @@ public:
    Module(const Module& module);
 
    // Assign (Simulation Reference is maintained)
-   Module& operator =(const Module& module);
+//***   Module& operator =(const Module& module);
 
    // Clone
    virtual Module* clone(void) const = 0;
@@ -87,7 +87,7 @@ inline CubeSim::Module::Module(const Module& module) : _simulation()
 {
 }
 
-
+/* ***
 // Assign (Simulation Reference is maintained)
 inline CubeSim::Module& CubeSim::Module::operator =(const Module& module)
 {
@@ -101,7 +101,7 @@ inline CubeSim::Module& CubeSim::Module::operator =(const Module& module)
    // Return Reference
    return *this;
 }
-
+*/
 
 // Get Simulation
 inline CubeSim::Simulation* CubeSim::Module::simulation(void) const

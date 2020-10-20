@@ -13,7 +13,7 @@
 double CubeSim::System::Photodetector::irradiance(void) const
 {
    // Check if enabled
-   if (!enabled())
+   if (!is_enabled())
    {
       // Return invalid Irradiance
       return NAN;

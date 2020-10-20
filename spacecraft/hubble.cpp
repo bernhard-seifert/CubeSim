@@ -24,7 +24,7 @@ CubeSim::Spacecraft::Hubble::Hubble(void) : Spacecraft(Vector3D(-2.518433226E+10
 {
    // Spacecraft Bus
    Part::Cylinder bus(4.2, 13.2);
-   bus.material(Material(60.75));
+   bus.material(Material("", 60.75));
 
    // Make Assembly
    Assembly assembly;

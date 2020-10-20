@@ -59,7 +59,7 @@ public:
    const std::map<std::string, Force*>& force(void) const;
    Force* force(const std::string& name) const;
 
-   // Compute Momentum of Inertia (local Frame, around Center for free rigid Bodies) [kg*m^2]
+   // Compute Moment of Inertia (local Frame, around Center for free rigid Bodies) [kg*m^2]
    const Inertia inertia(void) const;
 
    // Insert Force (Body Frame) and Torque (Body Frame)
@@ -153,7 +153,7 @@ private:
    // Check if contains Point (Body Frame)
    virtual bool _contains(const Vector3D& point) const = 0;
 
-   // Compute Momentum of Inertia (Body Frame) [kg*m^2]
+   // Compute Moment of Inertia (Body Frame) [kg*m^2]
    virtual const Inertia _inertia(void) const = 0;
 
    // Compute Mass [kg]

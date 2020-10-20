@@ -18,6 +18,8 @@ public:
    Vector3D angular_acceleration;
    Matrix3D inertia;
    Matrix3D inertia_inverse;
+   Vector3D a0, a1;
+
 };
 
 
@@ -45,7 +47,7 @@ void CubeSim::Module::Motion::_behavior(void)
       // Get State
       _State& state_ = state[spacecraft->second];
 
-      // Initialize Acceleration, angular Acceleration, Momentum of Inertia (Body Frame)
+      // Initialize Acceleration, angular Acceleration, Moment of Inertia (Body Frame)
       state_.acceleration.x(NAN);
       state_.angular_acceleration.x(NAN);
       state_.inertia = Inertia();
@@ -102,16 +104,16 @@ void CubeSim::Module::Motion::_behavior(void)
          // Update Acceleration
          state_.acceleration = acceleration;
 
-         // Compute Momentum of Inertia (Body Frame)
+         // Compute Moment of Inertia (Body Frame)
          Matrix3D inertia = spacecraft->second->inertia() - spacecraft->second->rotation();
 
-         // Check if Momentum of Inertia (Body Frame) was modified
+         // Check if Moment of Inertia (Body Frame) was modified
          if (inertia != state_.inertia)
          {
-            // Update inverse Momentum of Inertia (Body Frame)
+            // Update inverse Moment of Inertia (Body Frame)
             state_.inertia_inverse = inertia.inverse();
 
-            // Set Momentum of Inertia (Body Frame)
+            // Set Moment of Inertia (Body Frame)
             state_.inertia = inertia;
          }
 
@@ -173,8 +175,17 @@ void CubeSim::Module::Motion::_behavior(void)
          {
             // Initialize Acceleration
             state_.acceleration = acceleration;
+
+            state_.a0 = state_.a1 = acceleration;
          }
 
+         // Update Position
+         celestial_body->second->move((celestial_body->second->velocity() + acceleration / 2.0 * time_step) * time_step);
+
+         // Update Velocity
+         celestial_body->second->velocity(celestial_body->second->velocity() + acceleration * time_step);
+
+/* *** UNKNOWN FORMULA
          // Update Position
          celestial_body->second->move((celestial_body->second->velocity() + (4.0 * acceleration - state_.acceleration) *
             time_step / 6.0) * time_step);
@@ -182,7 +193,29 @@ void CubeSim::Module::Motion::_behavior(void)
          // Update Velocity
          celestial_body->second->velocity(celestial_body->second->velocity() + (3.0 * acceleration -
             state_.acceleration) * time_step / 2.0);
+*/
+/*
+         // Update Position
+         celestial_body->second->move((celestial_body->second->velocity() +
+            (3.0 * acceleration + 10.0 * state_.a1 - state_.a0) * time_step / 24.0) * time_step);
 
+         // Update Velocity
+         celestial_body->second->velocity(celestial_body->second->velocity() +
+            (5.0 * acceleration + 8.0 * state_.a1 - state_.a0) * time_step / 12.0);
+
+
+         state_.a0 = state_.a1;
+         state_.a1 = acceleration;
+*/
+/*
+         // Update Position
+         celestial_body->second->move((celestial_body->second->velocity() + (state_.acceleration + acceleration / 2.0) *
+            time_step / 3.0) * time_step);
+
+         // Update Velocity
+         celestial_body->second->velocity(celestial_body->second->velocity() + (acceleration + state_.acceleration) *
+            time_step / 2.0);
+*/
          // Update Acceleration
          state_.acceleration = acceleration;
 

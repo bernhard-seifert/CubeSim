@@ -23,7 +23,7 @@ double CubeSim::Inertia::operator ()(const Vector3D& axis, const Vector3D& pivot
    // Check Pivot
    if (pivot == _center)
    {
-      // Compute and return Momentum of Inertia
+      // Compute and return Moment of Inertia
       return (_matrix * axis_ * axis_);
    }
 
@@ -36,7 +36,7 @@ double CubeSim::Inertia::operator ()(const Vector3D& axis, const Vector3D& pivot
    // Check distance
    if (distance == Vector3D())
    {
-      // Compute and return Momentum of Inertia
+      // Compute and return Moment of Inertia
       return (_matrix * axis_ * axis_);
    }
 
@@ -49,12 +49,12 @@ double CubeSim::Inertia::operator ()(const Vector3D& axis, const Vector3D& pivot
    T(2, 3) = T(3, 2) = -_mass * distance.y() * distance.z();
    T(3, 3) = _mass * (distance.x() * distance.x() + distance.y() * distance.y());
 
-   // Compute and return Momentum of Inertia
+   // Compute and return Moment of Inertia
    return ((_matrix + T) * axis_ * axis_);
 }
 
 
-// Compute Momentum of Inertia Matrix
+// Compute Moment of Inertia Matrix
 CubeSim::Inertia::operator const CubeSim::Matrix3D(void) const
 {
    // Compute Translation Matrix
@@ -66,7 +66,7 @@ CubeSim::Inertia::operator const CubeSim::Matrix3D(void) const
    T(2, 3) = T(3, 2) = -_mass * _center.y() * _center.z();
    T(3, 3) = _mass * (_center.x() * _center.x() + _center.y() * _center.y());
 
-   // Compute and return Momentum of Inertia Matrix
+   // Compute and return Moment of Inertia Matrix
    return (_matrix + T);
 }
 
@@ -87,7 +87,7 @@ CubeSim::Inertia& CubeSim::Inertia::operator +=(const Inertia& inertia)
       center = (_center * _mass + inertia._center * inertia._mass) / mass;
    }
 
-   // Momentum of Inertia Matrix
+   // Moment of Inertia Matrix
    Matrix3D matrix;
 
    // Inertia List
@@ -96,7 +96,7 @@ CubeSim::Inertia& CubeSim::Inertia::operator +=(const Inertia& inertia)
    // Parse Inertia List
    for (auto inertia__ = inertia_.begin(); inertia__ != inertia_.end(); ++inertia__)
    {
-      // Update Momentum of Inertia Matrix
+      // Update Moment of Inertia Matrix
       matrix += (*inertia__)->_matrix;
 
       // Compute Distance
@@ -114,12 +114,12 @@ CubeSim::Inertia& CubeSim::Inertia::operator +=(const Inertia& inertia)
          T(2, 3) = T(3, 2) = -(*inertia__)->_mass * distance.y() * distance.z();
          T(3, 3) = (*inertia__)->_mass * (distance.x() * distance.x() + distance.y() * distance.y());
 
-         // Update Momentum of Inertia
+         // Update Moment of Inertia
          matrix += T;
       }
    }
 
-   // Update Momentum of Inertia Matrix, Center, Mass
+   // Update Moment of Inertia Matrix, Center, Mass
    _matrix = matrix;
    _center = center;
    _mass = mass;

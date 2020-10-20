@@ -13,7 +13,7 @@
 const CubeSim::Vector3D CubeSim::System::Gyroscope::angular_rate(void) const
 {
    // Check if enabled
-   if (!enabled())
+   if (!is_enabled())
    {
       // Return invalid angular Rate
       return Vector3D(NAN, NAN, NAN);

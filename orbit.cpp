@@ -11,7 +11,7 @@
 // Reference Frames
 const CubeSim::Rotation CubeSim::Orbit::REFERENCE_ECLIPTIC;
 const CubeSim::Rotation CubeSim::Orbit::REFERENCE_ECI = Rotation(Vector3D(1.0, 0.0, 0.0),
-   -23.43928 * Constant::PI / 180.0);
+   -23.4392811 * Constant::PI / 180.0);
 
 
 // Constructor
@@ -189,6 +189,30 @@ CubeSim::Orbit::Orbit(const std::set<const CelestialBody*>& central, const Rigid
    // Compute Rotation
    _rotation = Rotation(Vector3D::Z, _argument_periapsis) + Rotation(Vector3D::X, _inclination) +
       Rotation(Vector3D::Z, _longitude_ascending);
+}
+
+
+// Compute Perimeter (Travel Distance for one Revolution) [m]
+double CubeSim::Orbit::perimeter(void) const
+{
+   // Compute semi-minor Axis
+   double semiminor_axis = _semimajor_axis * sqrt(1.0 - _eccentricity * _eccentricity);
+
+   // Compute auxiliary Variables
+   double m = (_semimajor_axis - semiminor_axis) / (_semimajor_axis + semiminor_axis);
+   double x = pow(m, 4.0) / 64.0;
+   double s = 1.0 + m * m / 4.0 + x;
+
+   // Loop Series (for Eccentricity of 1 the Error is less than 1 ppm)
+   for (size_t i = 0; i < 350; i += 2)
+   {
+      // Update auxiliary Variables
+      x *= pow(m * (3.0 + i) / (6.0 + i), 2.0);
+      s += x;
+   }
+
+   // Compute and return Perimeter
+   return (2.0 * Constant::PI * _semimajor_axis / (1.0 + m) * s);
 }
 
 

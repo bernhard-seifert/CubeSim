@@ -43,7 +43,7 @@ const CubeSim::Location CubeSim::System::GNSS::location(void) const
    }
 
    // Check if enabled
-   if (!enabled())
+   if (!is_enabled())
    {
       // Return invalid Location
       return Location(*_earth, NAN, NAN, NAN);

@@ -169,27 +169,27 @@ bool CubeSim::Assembly::_contains(const Vector3D& point) const
 }
 
 
-// Compute Momentum of Inertia (Body Frame) [kg*m^2]
+// Compute Moment of Inertia (Body Frame) [kg*m^2]
 const CubeSim::Inertia CubeSim::Assembly::_inertia(void) const
 {
-   // Momentum of Inertia
+   // Moment of Inertia
    Inertia I;
 
    // Parse Assembly List
    for (auto assembly = this->assembly().begin(); assembly != this->assembly().end(); ++assembly)
    {
-      // Update Momentum of Inertia
+      // Update Moment of Inertia
       I += assembly->second->inertia();
    }
 
    // Parse Part List
    for (auto part = this->part().begin(); part != this->part().end(); ++part)
    {
-      // Update Momentum of Inertia
+      // Update Moment of Inertia
       I += part->second->inertia();
    }
 
-   // Return Momentum of Inertia
+   // Return Moment of Inertia
    return I;
 }
 

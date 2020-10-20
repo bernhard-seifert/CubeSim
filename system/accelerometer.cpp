@@ -13,7 +13,7 @@
 const CubeSim::Vector3D CubeSim::System::Accelerometer::acceleration(void) const
 {
    // Check if enabled and Position List Size
-   if (!enabled() || (_position.size() < 4))
+   if (!is_enabled() || (_position.size() < 4))
    {
       // Return invalid Acceleration
       return Vector3D(NAN, NAN, NAN);

@@ -8,19 +8,19 @@
 #include "../constant.hpp"
 
 
-// Compute Momentum of Inertia (Body Frame) [kg*m^2]
+// Compute Moment of Inertia (Body Frame) [kg*m^2]
 const CubeSim::Inertia CubeSim::Part::Cone::_inertia(void) const
 {
-   // Momentum of Inertia
+   // Moment of Inertia
    Matrix3D I;
 
    // Compute Mass
    double mass = this->mass();
 
-   // Compute Momentum of Inertia
+   // Compute Moment of Inertia
    I(1, 1) = I(2, 2) = 3.0 * mass * (_height * _height / 80.0 + 3.0 * _radius * _radius / 20.0);
-   I(3, 3) = mass * 3.0 * _radius * _radius / 10.0;
+   I(3, 3) = 3.0 * mass * _radius * _radius / 10.0;
 
-   // Return Momentum of Inertia
+   // Return Moment of Inertia
    return Inertia(I, mass, _center());
 }

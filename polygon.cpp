@@ -24,7 +24,7 @@ double CubeSim::Polygon2D::area(void) const
    for (size_t i = 0; i < _vertex.size(); ++i)
    {
       // Update Area
-      area += fabs(_vertex[i] ^ _vertex[(i + 1) % _vertex.size()]) / 2.0;
+      area += abs(_vertex[i] ^ _vertex[(i + 1) % _vertex.size()]) / 2.0;
    }
 
    // Return Area
@@ -35,18 +35,15 @@ double CubeSim::Polygon2D::area(void) const
 // Compute Order of Vertices
 uint8_t CubeSim::Polygon2D::order(void) const
 {
-   // Area
-   double area = 0.0;
-
-   // Parse Vertices
-   for (size_t i = 0; i < _vertex.size(); ++i)
+   // Check if Star-shaped and Number of Vertices
+   if (!star() || (_vertex.size() < 2))
    {
-      // Update Area
-      area += _vertex[i] ^ _vertex[(i + 1) % _vertex.size()];
+      // Exception
+      throw Exception::Failed();
    }
 
    // Return Result
-   return ((area <= 0.0) ? ORDER_CW : ORDER_CCW);
+   return (((_vertex[0] ^ _vertex[1]) <= 0.0) ? ORDER_CW : ORDER_CCW);
 }
 
 
@@ -101,7 +98,7 @@ const CubeSim::Vector2D CubeSim::Polygon2D::center(void) const
 
       // Compute Area and Center of Mass of Triangle
       double area_ = abs(v1 ^ v2) / 2.0;
-      Vector2D center_ = Vector2D((v1.x() + v2.x()) / 3.0, (v1.y() + v2.y()) / 3.0);
+      Vector2D center_ = (v1 + v2) / 3.0;
 
       // Update Area and Center of Mass
       area += area_;
@@ -134,12 +131,13 @@ bool CubeSim::Polygon2D::inside(const Vector2D& point) const
    for (size_t i = 0; i < _vertex.size(); ++i)
    {
       // Compute Cross Products
-      double p1 = _vertex[i] ^ point;
-      double p2 = (_vertex[(i + 1) % _vertex.size()] - _vertex[i]) ^ (point - _vertex[i]);
-      double p3 = (point - _vertex[(i + 1) % _vertex.size()]) ^ _vertex[(i + 1) % _vertex.size()];
+      double p1 = point ^ _vertex[i];
+      double p2 = _vertex[(i + 1) % _vertex.size()] ^ point;
+      double p3 = (point ^ (_vertex[(i + 1) % _vertex.size()] - _vertex[i])) -
+         (_vertex[i] ^ _vertex[(i + 1) % _vertex.size()]);
 
       // Check Cross Products
-      if (((0.0 <= p1) && (0.0 <= p2) && (0.0 <= p3)) || ((p1 <= 0.0) && (p2 <= 0.0) && (p3 <= 0.0)))
+      if (((0.0 <= p1) && (0.0 <= p2) && (0.0 <= p3)) || ((p1 < 0.0) && (p2 < 0.0) && (p3 < 0.0)))
       {
          // Return Result
          return true;

@@ -122,13 +122,13 @@ const CubeSim::Vector3D CubeSim::RigidBody::center(void) const
 }
 
 
-// Compute Momentum of Inertia (local Frame, around Center for free rigid Bodies) [kg*m^2]
+// Compute Moment of Inertia (local Frame, around Center for free rigid Bodies) [kg*m^2]
 const CubeSim::Inertia CubeSim::RigidBody::inertia(void) const
 {
    // Check Cache
    if (!(_cache & _CACHE_INERTIA))
    {
-      // Compute Momentum of Inertia (Body Frame)
+      // Compute Moment of Inertia (Body Frame)
       __inertia = _inertia();
 
       // Check Parent Rigid Body
@@ -145,11 +145,11 @@ const CubeSim::Inertia CubeSim::RigidBody::inertia(void) const
    // Check Parent Rigid Body
    if (_rigid_body)
    {
-      // Transform and return Momentum of Inertia (Rotation around Origin)
+      // Transform and return Moment of Inertia (Rotation around Origin)
       return (__inertia + _rotation + _position);
    }
 
-   // Transform and return Momentum of Inertia (Rotation around Center of Mass)
+   // Transform and return Moment of Inertia (Rotation around Center of Mass)
    return (__inertia + _rotation);
 }
 
@@ -325,7 +325,7 @@ void CubeSim::RigidBody::_update(uint8_t update)
          break;
       }
 
-      // Momentum of Inertia
+      // Moment of Inertia
       case _UPDATE_INERTIA:
       {
          // Check Parent Rigid Body
