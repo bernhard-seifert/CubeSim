@@ -81,7 +81,7 @@ private:
 
 
 // Constructor
-inline CubeSim::Simulation::Simulation(const Time& time) : _time(time)
+inline CubeSim::Simulation::Simulation(const Time& time) : _stop(), _delay(), _time(time)
 {
 }
 

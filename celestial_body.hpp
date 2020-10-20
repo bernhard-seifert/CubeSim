@@ -153,7 +153,7 @@ private:
 
 
 // Constructor
-inline CubeSim::CelestialBody::CelestialBody(void)
+inline CubeSim::CelestialBody::CelestialBody(void) : _radius(), _flattening(), _density(), _temperature(), _simulation()
 {
 }
 
@@ -162,7 +162,7 @@ inline CubeSim::CelestialBody::CelestialBody(void)
 inline CubeSim::CelestialBody::CelestialBody(double radius, double flattening, double density, double temperature,
    const Vector3D& position, const Vector3D& velocity, const Vector3D& angular_rate, const Rotation& rotation) :
    RigidBody(position, rotation, velocity, angular_rate), _radius(radius), _flattening(flattening), _density(density),
-   _temperature(temperature)
+   _temperature(temperature), _simulation()
 {
 }
 

@@ -13,7 +13,6 @@
 #include "../celestial_body/moon.hpp"
 #include "../celestial_body/neptune.hpp"
 #include "../celestial_body/saturn.hpp"
-#include "../celestial_body/sun.hpp"
 #include "../celestial_body/uranus.hpp"
 #include "../celestial_body/venus.hpp"
 #include "../spacecraft/hubble.hpp"
@@ -30,16 +29,17 @@ void CubeSim::Module::Ephemeris::_behavior(void)
       throw Exception::Failed();
    }
 
-   // Earth, default Time
+   // Earth, Epoch
    CelestialBody* earth = NULL;
-   Time time(2015, 1, 1);
+   Time epoch(2000, 1, 1);
 
    // Parse Celestial Body List
    for (auto celestial_body = simulation()->celestial_body().begin();
       celestial_body != simulation()->celestial_body().end(); ++celestial_body)
    {
-      // Orbital Elements
+      // Orbital Elements and their Change
       std::vector<double> orbit;
+      std::vector<double> orbit_change;
 
       // Check Celestial Body
       if (dynamic_cast<CelestialBody::Earth*>(celestial_body->second))
@@ -47,90 +47,114 @@ void CubeSim::Module::Ephemeris::_behavior(void)
          // Set Earth
          earth = celestial_body->second;
 
-         // Set Earth Orbit around Earth-Moon Barycenter *** TODO
-         orbit = {4.652679725E+6, 3.849005238E-2, 5.245913309E+0, 3.407239897E+0, 8.773217456E-2, 1.576133700E+0,
-            2.343771949E+6};
+         // Set Earth Orbit around Earth-Moon Barycenter
+         orbit = {4.658498505E+06, 5.553913677E-02, 7.668218294E-01, 4.664353837E+00, 8.999685009E-02, 2.241665360E+00,
+            2.348206323E+06};
+         orbit_change = {-9.257321428E-02, -3.371475821E-08, 1.211927378E+02, -1.948930709E+01, -8.610071545E-08};
 
          // Earth Axis Tilt
          Rotation tilt(Vector3D::X, -23.4392811 * Constant::PI / 180.0);
 
-         // Earth Angular Rate [rad/s] (considering the Earth's Revolution around the Sun takes 365.2425 days)
-         double angular_rate = 7.292115838E-05;
+         // Earth Angular Rate [rad/s]
+         double angular_rate = 7.292115E-05;
 
-         // Compute Earth Rotation and angular Rate (Offset is chosen that Noon is in the Mean at 12:00 in Year 2015) *** recheck offset
-         earth->rotation(Rotation(Vector3D::Z, 1.774015093 + (simulation()->time() - time) / 1000.0 * angular_rate) +
+         // Compute Earth Rotation and angular Rate (Offset is chosen that Noon is in the Mean at 12:00 in Year 2000)
+         earth->rotation(Rotation(Vector3D::Z, 1.768959 + (simulation()->time() - epoch) / 1000.0 * angular_rate) +
             tilt);
          earth->angular_rate((Vector3D::Z + tilt) * angular_rate);
-      }
-      else if (dynamic_cast<CelestialBody::Mercury*>(celestial_body->second))
-      {
-         // Set Mercury Orbit around Solar System Barycenter
-         orbit = {5.868254919E+10, 2.031085798E-1, 4.820103106E-1, 8.417219571E-1, 1.217887647E-1, 4.820820403E+0,
-            7.748121727E+6};
-      }
-      else if (dynamic_cast<CelestialBody::Moon*>(celestial_body->second))
-      {
-         // Set Moon Orbit around Earth-Moon Barycenter
-         orbit = {3.782655094E+8, 3.849005238E-2, 2.104320655E+0, 3.407239897E+0, 8.773217456E-2, 1.576133700E+0,
-            2.343771949E+6};
       }
       else if (dynamic_cast<CelestialBody::Jupiter*>(celestial_body->second))
       {
          // Set Jupiter Orbit around Solar System Barycenter
-         orbit = {7.779386661E+11, 4.881582774E-2, 4.779224530E+0, 1.754980707E+0, 2.275156566E-2, 2.010444516E+0,
-            3.745176004E+8};
+         orbit = {7.783408167E+11, 4.838624000E-02, 4.786645248E+00, 1.753600526E+00, 2.276602153E-02, 3.432706710E-01,
+            3.743816182E+08};
+         orbit_change = {-1.736382485E+05, -1.325300000E-06, 1.367573679E-06, 3.572532946E-05, -3.206414182E-07};
       }
       else if (dynamic_cast<CelestialBody::Mars*>(celestial_body->second))
       {
          // Set Mars Orbit around Solar System Barycenter
-         orbit = {2.288617405E+11, 9.519285062E-2, 5.004129063E+0, 8.648825038E-1, 3.228850052E-2, 1.759586744E-1,
-            5.967506140E+7};
+         orbit = {2.279438224E+11, 9.339410000E-02, 5.000313006E+00, 8.649771297E-01, 3.228320542E-02, 3.384227897E-01,
+            5.935642698E+07};
+         orbit_change = {2.763072672E+04, 7.882000000E-07, 1.286280275E-04, -5.106369657E-05, -1.419181320E-06};
+      }
+      else if (dynamic_cast<CelestialBody::Mercury*>(celestial_body->second))
+      {
+         // Set Mercury Orbit around Solar System Barycenter
+         orbit = {5.790922654E+10, 2.056359300E-01, 5.083625809E-01, 8.435309955E-01, 1.222599479E-01, 3.050705108E+00,
+            7.600551917E+06};
+         orbit_change = {5.535121216E+02, 1.906000000E-07, 4.988459925E-05, -2.187609822E-05, -1.038032827E-06};
+      }
+      else if (dynamic_cast<CelestialBody::Moon*>(celestial_body->second))
+      {
+         // Set Moon Orbit around Earth-Moon Barycenter
+         orbit = {3.787385795E+08, 5.553913677E-02, 3.908411829E+00, 4.664353837E+00, 8.999685009E-02, 2.241665360E+00,
+            2.348206323E+06};
+         orbit_change = {-7.526255024E+00, -3.371475820E-08, 1.211927378E+02, -1.948930709E+01, -8.610071545E-08};
       }
       else if (dynamic_cast<CelestialBody::Neptune*>(celestial_body->second))
       {
          // Set Neptune Orbit around Solar System Barycenter
-         orbit = {4.498827406E+12, 8.844143231E-3, 4.768228950E+0, 2.298453991E+0, 3.079118664E-2, 5.109965625E+0,
-            5.201341577E+9};
+         orbit = {4.498396417E+12, 8.590480000E-03, 4.767899815E+00, 2.300068641E+00, 3.089308645E-02, 4.536376156E+00,
+            5.192722829E+09};
+         orbit_change = {3.933077619E+05, 5.105000000E-07, -5.538418409E-05, -8.877861586E-07, 6.173578630E-08};
       }
       else if (dynamic_cast<CelestialBody::Saturn*>(celestial_body->second))
       {
          // Set Saturn Orbit around Solar System Barycenter
-         orbit = {1.428013189E+12, 5.382749445E-2, 5.917080462E+0, 1.983944213E+0, 4.336770123E-2, 2.454783510E+0,
-            9.305016908E+8};
-      }
-      else if (dynamic_cast<CelestialBody::Sun*>(celestial_body->second))
-      {
-         // Set Sun Orbit around Solar System Barycenter
-         orbit = {2.441456828E+8, 8.439804636E-1, 1.671586482E+0, 1.247548406E+0, 4.623863575E-2, 2.702027222E+0,
-            4.238666167E+7};
+         orbit = {1.426666414E+12, 5.386179000E-02, 5.915557074E+00, 1.983783543E+00, 4.338874331E-02, 5.538896034E+00,
+            9.289900238E+08};
+         orbit_change = {-1.870870971E+06, -5.099100000E-06, -2.274063135E-05, -5.038380531E-05, 3.379114511E-07};
       }
       else if (dynamic_cast<CelestialBody::Uranus*>(celestial_body->second))
       {
          // Set Uranus Orbit around Solar System Barycenter
-         orbit = {2.870290696E+12, 4.738811504E-2, 1.692928690E+0, 1.293400541E+0, 1.346172181E-2, 3.602350940E+0,
-            2.650636035E+9};
+         orbit = {2.870658171E+12, 4.725744000E-02, 1.691875948E+00, 1.291839044E+00, 1.348507406E-02, 2.483321275E+00,
+            2.653918870E+09};
+         orbit_change = {-2.934751188E+06, -4.397000000E-07, 6.381742654E-05, 7.401224027E-06, -4.240085432E-07};
       }
       else if (dynamic_cast<CelestialBody::Venus*>(celestial_body->second))
       {
          // Set Venus Orbit around Solar System Barycenter
-         orbit = {1.089392142E+11, 3.729540062E-3, 1.281668562E+0, 1.337986300E+0, 5.919680524E-2, 2.950720970E+0,
-            1.959795788E+7};
+         orbit = {1.082094745E+11, 6.776720000E-03, 9.585806336E-01, 1.338315722E+00, 5.924827411E-02, 8.792381001E-01,
+            1.941415011E+07};
+         orbit_change = {5.834316957E+03, -4.107000000E-07, 4.893510000E-05, -4.846677755E-05, -1.376890247E-07};
       }
 
       // Check orbital Elements
       if (orbit.size())
       {
-         // Create Orbit
-         Orbit orbit_(orbit[0], orbit[1], orbit[2], orbit[3], orbit[4], orbit[5], orbit[6], time);
+         // Compute elapsed Years since Epoch
+         double dt = (simulation()->time() - epoch) / 1000.0 / 3600 / 24 / 365.25;
+
+         // Parse oribital Elements
+         for (uint8_t i = 0; i < orbit_change.size(); ++i)
+         {
+            // Update orbital Elements
+            orbit[i] += orbit_change[i] * dt;
+         }
+
+         // Create Orbit (mean Anomaly still defined at Epoch)
+         Orbit orbit_(orbit[0], orbit[1], _wrap(orbit[2]), _wrap(orbit[3]), orbit[4], orbit[5], orbit[6], epoch);
          orbit_.time(simulation()->time());
 
          // Check Celestial Body
          if (dynamic_cast<CelestialBody::Earth*>(celestial_body->second) ||
             dynamic_cast<CelestialBody::Moon*>(celestial_body->second))
          {
-            // Create Earth-Moon Barycenter Orbit around Solar System Barycenter
-            Orbit barycenter(1.488969653E+11, 1.378388280E-2, 4.971615490E+0, 3.300938853E+0, 1.716643248E-4,
-               6.043508101E+0, 3.131580770E+7, time);
+            // Set Earth-Moon Barycenter Orbit around Solar System Barycenter
+            orbit = {1.495982612E+11, 1.671123000E-02, 1.796601474E+00, 0.000000000E+00, -2.672099084E-07,
+               6.240021390E+00, 3.155843351E+07};
+            orbit_change = {8.407400333E+03, -4.392000000E-07, 5.642189403E-05, 0.000000000E+00, -2.259621932E-06};
+
+            // Parse oribital Elements
+            for (uint8_t i = 0; i < orbit_change.size(); ++i)
+            {
+               // Update orbital Elements
+               orbit[i] += orbit_change[i] * dt;
+            }
+
+            // Create Earth-Moon Barycenter Orbit (mean Anomaly still defined at Epoch)
+            Orbit barycenter(orbit[0], orbit[1], _wrap(orbit[2]), _wrap(orbit[3]), orbit[4], orbit[5], orbit[6], epoch);
             barycenter.time(simulation()->time());
 
             // Compute Celestial Body Position and Velocity
@@ -157,14 +181,14 @@ void CubeSim::Module::Ephemeris::_behavior(void)
       if (dynamic_cast<Spacecraft::Hubble*>(spacecraft->second))
       {
          // Set Hubble Telescope Orbit around Earth
-         orbit = {6.928215562E+6, 5.089375304E-4, 5.178991525E+0, 3.094281862E+0, 9.051785599E-1, 7.613037526E-2,
-            5.739090477E+3};
+         orbit = {6.984447463E+06, 1.958558163E-03, 8.137903143E+00, 3.661528333E+00, 8.185426590E-01, 1.135650041E+01,
+            5.809102859E+03};
       }
       else if (dynamic_cast<Spacecraft::ISS*>(spacecraft->second))
       {
          // Set International Space Station Orbit around Earth
-         orbit = {6.783712195E+6, 6.586537290E-4, 2.259750046E+0, 3.398197826E+0, 1.293696705E+0, 6.228476746E+0,
-            5.560477726E+3};
+         orbit = {6.759645261E+06, 2.048033237E-03, 7.786127834E+00, 4.525324174E+00, 9.106251262E-01, 1.202919227E+01,
+            5.530913186E+03};
       }
 
       // Check orbital Elements
@@ -178,7 +202,8 @@ void CubeSim::Module::Ephemeris::_behavior(void)
          }
 
          // Create Orbit
-         Orbit orbit_(orbit[0], orbit[1], orbit[2], orbit[3], orbit[4], orbit[5], orbit[6], time, Orbit::REFERENCE_ECI);
+         Orbit orbit_(orbit[0], orbit[1], _wrap(orbit[2]), _wrap(orbit[3]), orbit[4], orbit[5], orbit[6], epoch,
+            Orbit::REFERENCE_ECI);
          orbit_.time(simulation()->time());
 
          // Compute Spacecraft Position and Velocity
@@ -186,4 +211,18 @@ void CubeSim::Module::Ephemeris::_behavior(void)
          spacecraft->second->velocity(earth->velocity() + orbit_.velocity());
       }
    }
+}
+
+
+// Wrap to [0; 2 * PI) Range
+double CubeSim::Module::Ephemeris::_wrap(double x)
+{
+   // Increase Number when < 0
+   for (; x < 0.0; x += 2.0 * Constant::PI);
+
+   // Decrease Number when >= 2 * PI
+   for (; (2 * Constant::PI) <= x; x -= 2.0 * Constant::PI);
+
+   // Return Number
+   return x;
 }

@@ -23,6 +23,9 @@ private:
 
    // Behavior
    virtual void _behavior(void);
+
+   // Wrap to [0; 2 * PI) Range
+   static double _wrap(double x);
 };
 
 

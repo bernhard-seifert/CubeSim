@@ -67,6 +67,9 @@ template <typename T> class CubeSim::List<T>::Item
 {
 public:
 
+   // Constructor
+   Item(void);
+
    // Clone
    virtual T* clone(void) const;
 
@@ -213,6 +216,12 @@ template <typename T> void CubeSim::List<T>::_remove(const T& item)
          return;
       }
    }
+}
+
+
+// Constructor
+template <typename T> inline CubeSim::List<T>::Item::Item(void) : _list()
+{
 }
 
 
