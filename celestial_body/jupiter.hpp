@@ -25,9 +25,8 @@ class CubeSim::CelestialBody::Jupiter : public CelestialBody
 
 
 // Constructor
-inline CubeSim::CelestialBody::Jupiter::Jupiter(void) : CelestialBody(6.991100E+7, 6.487E-02, 1326.2, 163.2,
-   Vector3D(-5.575103879E+11, 5.674636167E+11, 1.010688851E+10), Vector3D(-9.475619834E+3, -8.540278736E+3,
-   2.475675327E+2))
+inline CubeSim::CelestialBody::Jupiter::Jupiter(void) : CelestialBody(6.991100E+7, 6.487E-2, 1418.171689, 165.0,
+   Vector3D(5.978410556E11, 4.387048656E11, -1.520164176E10), Vector3D(-7.892632216E3, 1.115034526E4, 1.305100444E2))
 {
 }
 

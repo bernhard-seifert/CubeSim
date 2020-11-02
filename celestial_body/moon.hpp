@@ -25,9 +25,8 @@ public:
 
 
 // Constructor
-inline CubeSim::CelestialBody::Moon::Moon(void) : CelestialBody(1.737530E6, 1.200E-03, 3343.7, 250.2,
-   Vector3D(-2.493673284E+10, 1.450227363E+11, -4.439107656E+7), Vector3D(-3.056658317E+4, -4.617726841E+3,
-   -7.424309523E+1))
+inline CubeSim::CelestialBody::Moon::Moon(void) : CelestialBody(1.73753E6, 0.0, 3344.588581, 250.2,
+   Vector3D(-2.659657953E10, 1.442683562E11, 6.678400538E7), Vector3D(-2.926974097E4, -6.020397948E3, -1.740793458E0))
 {
 }
 

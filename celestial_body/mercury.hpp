@@ -25,9 +25,8 @@ public:
 
 
 // Constructor
-inline CubeSim::CelestialBody::Mercury::Mercury(void) : CelestialBody(2.440000E+6, 0.000E+00, 5427.0, 440.2,
-   Vector3D(5.088632720E+10, -3.058604451E+10, -7.138828499E+9), Vector3D(1.562065207E+4, 4.394732263E+4,
-   2.157455516E+3))
+inline CubeSim::CelestialBody::Mercury::Mercury(void) : CelestialBody(2.44E+6, 0.0, 5426.489670, 440.0,
+   Vector3D(-2.212062176E10, -6.682431830E10, -3.461601353E9), Vector3D(3.666229236E4, -1.230266987E4, -4.368336052E3))
 {
 }
 

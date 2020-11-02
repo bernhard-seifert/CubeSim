@@ -39,3 +39,18 @@ const CubeSim::Vector3D CubeSim::CelestialBody::gravitational_field(const Vector
    // Return ideal gravitational Field
    return ((radius() <= r) ? (-Constant::G * mass() / pow(r, 3.0) * point) : Vector3D());
 }
+
+
+// Compute Moment of Inertia Tensor (Body Frame) [kg*m^2]
+const CubeSim::Inertia CubeSim::CelestialBody::_inertia(void) const
+{
+   // Compute Mass
+   double mass = this->mass();
+
+   // Compute Coefficient for X and Y Axes
+   double a = 1.0 + pow(1.0 - _flattening, 2.0);
+   
+   // Compute and return Tensor
+   return Inertia(mass * radius() * radius() / 5.0 *
+      Matrix3D(Vector3D(a, 0.0, 0.0), Vector3D(0.0, a, 0.0), Vector3D(0.0, 0.0, 2.0)), mass);
+}

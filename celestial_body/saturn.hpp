@@ -25,9 +25,8 @@ public:
 
 
 // Constructor
-inline CubeSim::CelestialBody::Saturn::Saturn(void) : CelestialBody(5.823200E+7, 9.796E-02, 687.1, 133.2,
-   Vector3D(-8.086233424E+11, -1.249156227E+12, 5.390151707E+10), Vector3D(7.580739881E+3, -5.277321267E+3,
-   -2.093410854E+2))
+inline CubeSim::CelestialBody::Saturn::Saturn(void) : CelestialBody(5.8232E+7, 9.796E-2, 761.743397, 134.0,
+   Vector3D(9.576383365E+11, 9.821475308E11, -5.518981181E10), Vector3D(-7.419580383E3, 6.725982471E3, 1.775012040E2))
 {
 }
 

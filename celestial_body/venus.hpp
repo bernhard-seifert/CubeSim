@@ -25,9 +25,8 @@ public:
 
 
 // Constructor
-inline CubeSim::CelestialBody::Venus::Venus(void) : CelestialBody(6.051800E+6, 0.000E+00, 5243.0, 737.2,
-   Vector3D(8.265257646E+10, -7.134718253E+10, -5.741900324E+9), Vector3D(2.271112507E+4, 2.634865255E+4,
-   -9.494098281E+2))
+inline CubeSim::CelestialBody::Venus::Venus(void) : CelestialBody(6.05184E6, 0.0, 5243.777460, 735.0,
+   Vector3D(-1.085735509E11, -3.784200933E9, 6.190064473E9), Vector3D(8.984651055E2, -3.517203951E4, -5.320225583E2))
 {
 }
 

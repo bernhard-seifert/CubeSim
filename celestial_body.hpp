@@ -47,6 +47,9 @@ public:
    // Class Neptune
    class Neptune;
 
+   // Class Pluto
+   class Pluto;
+
    // Class Saturn
    class Saturn;
 
@@ -377,17 +380,6 @@ inline bool CubeSim::CelestialBody::_contains(const Vector3D& point) const
 {
    // Return Result
    return ((point.x() * point.x() + point.y() * point.y() + point.z() * point.z()) <= (_radius * _radius));
-}
-
-
-// Compute Moment of Inertia Tensor (Body Frame) [kg*m^2]
-inline const CubeSim::Inertia CubeSim::CelestialBody::_inertia(void) const
-{
-   // Compute Mass
-   double mass = this->mass();
-
-   // Compute and return Tensor
-   return Inertia(2.0 * mass * radius() * radius() / 5.0 * Matrix3D::IDENTITY, mass);
 }
 
 
