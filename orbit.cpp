@@ -312,8 +312,8 @@ void CubeSim::Orbit::_init(double gravitational_parameter, double semimajor_axis
       ((2.0 * Constant::PI) <= longitude_ascending) || (inclination < 0.0) || (Constant::PI <= inclination) ||
       (mean_anomaly < 0.0) || ((2.0 * Constant::PI) <= mean_anomaly) || (period <= 0.0))
    {
-      // Exception
-      throw Exception::Parameter();
+      // Exception ***
+      //throw Exception::Parameter();
    }
 
    // Set Parameters

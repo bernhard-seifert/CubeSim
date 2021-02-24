@@ -32,7 +32,7 @@ public:
    // Reference Frames
    static const Rotation REFERENCE_ECLIPTIC;
    static const Rotation REFERENCE_ECI;
-   
+
    // Constructor
    Orbit(double semimajor_axis, double eccentricity, double argument_periapsis, double longitude_ascending,
       double inclination, double mean_anomaly, double period, const Time& time, const Rotation& reference =
@@ -112,7 +112,7 @@ private:
    void _init(double gravitational_parameter, double semimajor_axis, double eccentricity, double argument_periapsis,
       double longitude_ascending, double inclination, double mean_anomaly, double period, const Time& time,
       const Rotation& reference);
-   
+
    // Variables
    double _apoapsis;
    double _argument_periapsis;
