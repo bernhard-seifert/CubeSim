@@ -7,6 +7,8 @@
 #include "motion.hpp"
 #include "../simulation.hpp"
 
+// ***
+#include "gravitation.hpp"
 
 // Class _State
 class CubeSim::Module::Motion::_State
@@ -18,7 +20,7 @@ public:
    Vector3D angular_acceleration;
    Matrix3D inertia;
    Matrix3D inertia_inverse;
-   Vector3D a0, a1;
+   Vector3D a0, a1, a2, a3, a4;
 
 };
 
@@ -37,8 +39,9 @@ void CubeSim::Module::Motion::_behavior(void)
       throw Exception::Failed();
    }
 
-   // State List
+   // State List, first Flag
    std::map<void*, _State> state;
+   bool first = true;
 
    // Parse Spacecraft List
    for (auto spacecraft = simulation()->spacecraft().begin(); spacecraft != simulation()->spacecraft().end();
@@ -64,11 +67,23 @@ void CubeSim::Module::Motion::_behavior(void)
       state_.acceleration.x(NAN);
    }
 
+   // ***
+   uint64_t i = 0;
+   float time_step_final = _time_step;
+
+   double time_step = 1;
+
    // Loop
-   for (;;)
+   for (;;++i)
    {
       // Get Time Step
       double time_step = _time_step;
+
+      // ***
+//      if (time_step < time_step_final) time_step *= 1.1;
+//      dynamic_cast<CubeSim::Module::Gravitation*>(simulation()->module("Gravitation"))->time_step(time_step);
+
+
 
       // Delay
       simulation()->delay(time_step);
@@ -170,6 +185,60 @@ void CubeSim::Module::Motion::_behavior(void)
          // Compute Acceleration
          Vector3D acceleration = wrench.force() / celestial_body->second->mass();
 
+         if (first)
+         {
+            state_.a4 = acceleration;
+            state_.a3 = acceleration;
+            state_.a2 = acceleration;
+            state_.a1 = acceleration;
+         }
+         else
+         {
+            state_.a4 = state_.a3;
+            state_.a3 = state_.a2;
+            state_.a2 = state_.a1;
+            state_.a1 = acceleration;
+         }
+
+
+         uint8_t model = 3;
+         if (i < model) model = i;
+         if (model == 0)
+         {
+
+            // Update Position
+            celestial_body->second->move((celestial_body->second->velocity() + state_.a1 / 2.0 * time_step) * time_step);
+
+            // Update Velocity
+            celestial_body->second->velocity(celestial_body->second->velocity() + state_.a1 * time_step);
+         }
+         else if (model == 1)
+         {
+            // Update Position
+            celestial_body->second->move((celestial_body->second->velocity() + (4.0 * state_.a1 - state_.a2) / 6.0 * time_step) * time_step);
+
+            // Update Velocity
+            celestial_body->second->velocity(celestial_body->second->velocity() + (3.0 * state_.a1 - state_.a2) / 2.0 * time_step);
+         }
+         else if (model == 2)
+         {
+            // Update Position
+            celestial_body->second->move((celestial_body->second->velocity() + (19.0 * state_.a1 - 10.0 * state_.a2 + 3.0 * state_.a3) / 24.0 * time_step) * time_step);
+
+            // Update Velocity
+            celestial_body->second->velocity(celestial_body->second->velocity() + (23.0 * state_.a1 - 16.0 * state_.a2 + 5.0 * state_.a3) / 12.0 * time_step);
+         }
+         else if (model == 3)
+         {
+            // Update Position
+            celestial_body->second->move((celestial_body->second->velocity() + (323.0 * state_.a1 - 264.0 * state_.a2 + 159.0 * state_.a3 - 38.0 * state_.a4) / 360.0 * time_step) * time_step);
+
+            // Update Velocity
+            celestial_body->second->velocity(celestial_body->second->velocity() + (55.0 * state_.a1 - 59.0 * state_.a2 + 37.0 * state_.a3 - 9.0 * state_.a4) / 24.0 * time_step);
+         }
+
+/*
+
          // Check Acceleration
          if (isnan(state_.acceleration.x()))
          {
@@ -184,6 +253,8 @@ void CubeSim::Module::Motion::_behavior(void)
 
          // Update Velocity
          celestial_body->second->velocity(celestial_body->second->velocity() + acceleration * time_step);
+*/
+
 
 /* *** UNKNOWN FORMULA
          // Update Position
@@ -227,5 +298,8 @@ void CubeSim::Module::Motion::_behavior(void)
                celestial_body->second->angular_rate().norm() * time_step);
          }
       }
+
+      // Clear first Flag
+      first = false;
    }
 }

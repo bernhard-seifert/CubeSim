@@ -17,11 +17,11 @@ class CubeSim::System::Gyroscope : public System
 {
 public:
 
-   // Measure angular Rate [rad/s]
-   const Vector3D angular_rate(void) const;
-
    // Clone
    virtual System* clone(void) const;
+
+   // Measure Spin Rate [rad/s]
+   const Vector3D spin_rate(void) const;
 
 protected:
 

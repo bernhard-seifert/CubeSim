@@ -32,7 +32,7 @@ void CubeSim::Module::Ephemeris::_behavior(void)
 
    // Earth, J2000.0 Epoch
    CelestialBody* earth = NULL;
-   Time epoch(2000, 1, 1, 12);
+   Time epoch(2000, 1, 1, 11, 58, 55, 816);
 
    // Parse Celestial Body List
    for (auto celestial_body = simulation()->celestial_body().begin();
@@ -48,11 +48,11 @@ void CubeSim::Module::Ephemeris::_behavior(void)
          // Set Earth
          earth = celestial_body->second;
 
-         // Set Earth Orbit around Earth-Moon Barycenter ***
-         // these elements we need to be get from HORIZONS, compute the other values and fit from 1800 to 2050
-         element = {4.658498505E+06, 5.553913677E-02, 7.668218294E-01, 4.664353837E+00, 8.999685009E-02, 2.241665360E+00,
-            2.348206323E+06};
-         rate = {-9.257321428E-02, -3.371475821E-08, 1.211927378E+02, -1.948930709E+01, -8.610071545E-08};
+         // Set Earth Orbit around Earth-Moon Barycenter
+         element = {4.658498587E+6, 5.553836620E-2, 8.999684967E-2, 1.128749988E+0, 4.600191282E+0, 2.180545012E+0,
+            2.348206387E+6};
+         rate = {-8.229550089E-2, -4.098924943E-8, -8.626228689E-8, 8.399684851E+1, 7.099355303E-1, -3.378157191E-1,
+            -6.240603093E-2};
 
          // Earth Axis Tilt
          Rotation tilt(Vector3D::X, -23.4392811 * Constant::PI / 180.0);
@@ -91,11 +91,11 @@ void CubeSim::Module::Ephemeris::_behavior(void)
       }
       else if (dynamic_cast<CelestialBody::Moon*>(celestial_body->second))
       {
-         // Set Moon Orbit around Earth-Moon Barycenter ***
-         // these elements we need to be get from HORIZONS, compute the other values and fit from 1800 to 2050
-         element = {3.787385795E+08, 5.553913677E-02, 3.908411829E+00, 4.664353837E+00, 8.999685009E-02, 2.241665360E+00,
-            2.348206323E+06};
-         rate = {-7.526255024E+00, -3.371475820E-08, 1.211927378E+02, -1.948930709E+01, -8.610071545E-08};
+         // Set Moon Orbit around Earth-Moon Barycenter
+         element = {3.787385861E+8, 5.553836620E-2, 8.999684967E-2, 4.270342642E+0, 1.458598628E+0, 2.180545012E+0,
+            2.348206387E+6};
+         rate = {-6.690671110E+0, -4.098924944E-8, -8.626228689E-8, 8.399684851E+1, 7.099355303E-1, -3.378157191E-1,
+            -6.240603101E-2};
       }
       else if (dynamic_cast<CelestialBody::Neptune*>(celestial_body->second))
       {
@@ -152,20 +152,16 @@ void CubeSim::Module::Ephemeris::_behavior(void)
          }
 
          // Create Orbit (Mean Anomaly does not need to be updated)
-         Orbit orbit_(element[0], element[1], _wrap(element[4]), _wrap(element[5]), element[2], _wrap(element[3] -
-            element[4]), element[6], epoch);
+         Orbit orbit_(element[0], element[1], _wrap(element[4] - element[5]), _wrap(element[5]), element[2],
+            _wrap(element[3] - element[4]), element[6], epoch);
 
          // Check Celestial Body
          if (dynamic_cast<CelestialBody::Earth*>(celestial_body->second) ||
             dynamic_cast<CelestialBody::Moon*>(celestial_body->second))
          {
             // Set Earth-Moon Barycenter Orbit around Solar System Barycenter
-            element = {1.495982612E+11, 1.671123000E-02, -2.672099085E-07, 1.753437557E+00, 1.796601474E+00,
-               0.000000000E+00, 3.155784242E+07};
-
-            // *** this way we can use a positive inclination
-            element = {1.495982612E+11, 1.671123000E-02, 2.672099085E-07, 1.753437557E+00 + CubeSim::Constant::PI, 1.796601474E+00 + CubeSim::Constant::PI,
-               0.000000000E+00 + CubeSim::Constant::PI, 3.155784242E+07};
+            element = {1.495982612E+11, 1.671123000E-02, 2.672099085E-07, 4.895030211E+00, 4.938194128E+00,
+               3.141592654E+00, 3.155784242E+07};
             rate = {8.407400333E+03, -4.392000000E-07, 2.259621932E-06, 6.283075779E+00, 5.642189403E-05,
                0.000000000E+00, 2.660319173E+00};
 
@@ -177,7 +173,7 @@ void CubeSim::Module::Ephemeris::_behavior(void)
             }
 
             // Create Earth-Moon Barycenter Orbit (Mean Anomaly does not need to be updated)
-            Orbit barycenter(element[0], element[1], _wrap(element[4]), _wrap(element[5]), element[2],
+            Orbit barycenter(element[0], element[1], _wrap(element[4] - element[5]), _wrap(element[5]), element[2],
                _wrap(element[3] - element[4]), element[6], epoch);
 
             // Compute Celestial Body Position and Velocity
@@ -204,14 +200,14 @@ void CubeSim::Module::Ephemeris::_behavior(void)
       if (dynamic_cast<Spacecraft::Hubble*>(spacecraft->second))
       {
          // Set Hubble Telescope Orbit around Earth
-         element = {6.984447463E+6, 1.958558163E-3, 1.854717836E+0, 3.661528333E+0, 8.185426590E-1, 5.073315107E+0,
-            5.809102859E+3};
+         element = {6.984639415E+6, 2.659630888E-3, 2.844978396E+0, 3.628100297E+0, 8.293403478E-1, 5.979586919E-1,
+            5.809342336E+3};
       }
       else if (dynamic_cast<Spacecraft::ISS*>(spacecraft->second))
       {
          // Set International Space Station Orbit around Earth
-         element = {6.759645261E+6, 2.048033237E-3, 1.502942526E+0, 4.525324174E+0, 9.106251262E-1, 5.746006968E+0,
-            5.530913186E+3};
+         element = {6.756323843E+6, 1.123814944E-3, 1.496062122E+0, 4.486773278E+0, 9.279504874E-1, 4.563976240E+0,
+            5.526837184E+3};
       }
 
       // Check orbital Elements
@@ -244,7 +240,7 @@ double CubeSim::Module::Ephemeris::_wrap(double x)
    for (; x < 0.0; x += 2.0 * Constant::PI);
 
    // Decrease Number when >= 2 * PI
-   for (; (2 * Constant::PI) <= x; x -= 2.0 * Constant::PI);
+   for (; (2.0 * Constant::PI) <= x; x -= 2.0 * Constant::PI);
 
    // Return Number
    return x;

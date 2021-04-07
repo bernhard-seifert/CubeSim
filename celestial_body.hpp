@@ -76,7 +76,7 @@ public:
 
    // Clone
    virtual CelestialBody* clone(void) const = 0;
-   
+
    // Density [kg/m^3]
    double density(void) const;
    void density(double density);

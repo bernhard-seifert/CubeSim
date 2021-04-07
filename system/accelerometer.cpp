@@ -12,6 +12,9 @@
 // Measure Acceleration [m/s^2]
 const CubeSim::Vector3D CubeSim::System::Accelerometer::acceleration(void) const
 {
+   // Gravitational Force on Spacecraft
+   static Force* gravitation;
+
    // Check if enabled and Position List Size
    if (!is_enabled() || (_position.size() < 4))
    {
@@ -26,6 +29,18 @@ const CubeSim::Vector3D CubeSim::System::Accelerometer::acceleration(void) const
    Vector3D acceleration = (_position[0] * 2.0 - _position[1] * 5.0 + _position[2] * 4.0 - _position[3]) / _time_step_ /
       _time_step_ - rotation;
 
+   // Check gravitational Force
+   if (!gravitation)
+   {
+      // Get gravitational Force
+      gravitation = spacecraft()->force("Gravitation");
+   }
+   else
+   {
+      // Add gravitational Acceleration
+      acceleration -= (*gravitation - _rotation) / spacecraft()->mass();
+   }
+
    // Compute and return Acceleration (consider Accuracy and Range)
    return Vector3D(std::min(_range_, std::max(-_range_, acceleration.x() + _distribution(_generator) * _accuracy_)),
       std::min(_range_, std::max(-_range_, acceleration.y() + _distribution(_generator) * _accuracy_)),
@@ -38,6 +53,9 @@ const double CubeSim::System::Accelerometer::_ACCURACY = 0.0;
 
 // Default Range [m/s^2]
 const double CubeSim::System::Accelerometer::_RANGE = std::numeric_limits<double>::infinity();
+
+// Default Time Step [s]
+const double CubeSim::System::Accelerometer::_TIME_STEP = 1.0;
 
 
 // Behavior

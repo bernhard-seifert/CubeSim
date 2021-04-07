@@ -9,7 +9,7 @@
 
 
 // Default Time Step [s]
-const double CubeSim::Module::Gravitation::_TIME_STEP = 1.000;
+const double CubeSim::Module::Gravitation::_TIME_STEP = 1.0;
 
 // Force Name
 const std::string CubeSim::Module::Gravitation::_FORCE = "Gravitation";

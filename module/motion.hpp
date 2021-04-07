@@ -22,7 +22,7 @@ public:
    // Clone
    virtual Module* clone(void) const;
 
-   // Time Step [S]
+   // Time Step [s]
    double time_step(void) const;
    void time_step(double time_step);
 

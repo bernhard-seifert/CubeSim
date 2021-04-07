@@ -9,8 +9,8 @@
 #include "../spacecraft.hpp"
 
 
-// Measure angular Rate [rad/s]
-const CubeSim::Vector3D CubeSim::System::Gyroscope::angular_rate(void) const
+// Measure Spin Rate [rad/s]
+const CubeSim::Vector3D CubeSim::System::Gyroscope::spin_rate(void) const
 {
    // Check if enabled
    if (!is_enabled())
