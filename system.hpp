@@ -53,6 +53,9 @@ public:
    // Class ReactionWheel
    class ReactionWheel;
 
+   // Class Thruster
+   class Thruster;
+
    // Constructor
    System(void);
 

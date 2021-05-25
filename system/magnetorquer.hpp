@@ -3,9 +3,6 @@
 // CUBESIM - SYSTEM - MAGNETORQUER
 
 
-// *** better to make time_step public (compare to module motion or gravitation)
-
-
 // Includes
 #include <algorithm>
 #include <random>
@@ -28,6 +25,10 @@ public:
    double current(void) const;
    void current(double current);
 
+   // Time Step [s]
+   double time_step(void) const;
+   void time_step(double time_step);
+
 protected:
 
    // Constructor
@@ -48,13 +49,13 @@ protected:
    Part* _part(void) const;
    void _part(Part& part);
 
+   // Relative magnetic Permeability
+   double _permeability(void) const;
+   void _permeability(double permeability);
+
    // Range [A]
    double _range(void) const;
    void _range(double range);
-
-   // Time Step [s]
-   double _time_step(void) const;
-   void _time_step(double time_step);
 
 private:
 
@@ -74,8 +75,9 @@ private:
    double _accuracy_;
    double _area_;
    double _current;
+   double _permeability_;
    double _range_;
-   double _time_step_;
+   double _time_step;
    Part* _part_;
    mutable std::normal_distribution<double> _distribution;
    mutable std::default_random_engine _generator;
@@ -106,22 +108,45 @@ inline void CubeSim::System::Magnetorquer::current(double current)
 }
 
 
+// Get Time Step [s]
+inline double CubeSim::System::Magnetorquer::time_step(void) const
+{
+   // Return Time Step
+   return _time_step;
+}
+
+
+// Set Time Step [s]
+inline void CubeSim::System::Magnetorquer::time_step(double time_step)
+{
+   // Check Time Step
+   if (time_step <= 0.0)
+   {
+      // Exception
+      throw Exception::Parameter();
+   }
+
+   // Set Time Step
+   _time_step = time_step;
+}
+
+
 // Constructor
 inline CubeSim::System::Magnetorquer::Magnetorquer(double area, double range, double accuracy, double time_step) :
    _current(), _part_(), _distribution(0.0, 1.0)
 {
    // Initialize
+   this->time_step(time_step);
    _accuracy(accuracy);
    _area(area);
    _range(range);
-   _time_step(time_step);
 }
 
 
 // Copy Constructor
 inline CubeSim::System::Magnetorquer::Magnetorquer(const Magnetorquer& magnetorquer) : System(magnetorquer),
    _accuracy_(magnetorquer._accuracy_), _area_(magnetorquer._area_), _current(magnetorquer._current),
-   _range_(magnetorquer._range_), _time_step_(magnetorquer._time_step_), _part_(),
+   _permeability_(1.0), _range_(magnetorquer._range_), _time_step(magnetorquer._time_step), _part_(),
    _distribution(magnetorquer._distribution)
 {
 }
@@ -189,6 +214,29 @@ inline void CubeSim::System::Magnetorquer::_part(Part& part)
 }
 
 
+// Get relative magnetic Permeability
+inline double CubeSim::System::Magnetorquer::_permeability(void) const
+{
+   // Return relative magnetic Permeability
+   return _permeability_;
+}
+
+
+// Set relative magnetic Permeability
+inline void CubeSim::System::Magnetorquer::_permeability(double permeability)
+{
+   // Check relative magnetic Permeability
+   if (permeability < 1.0)
+   {
+      // Exception
+      throw Exception::Parameter();
+   }
+
+   // Set relative magnetic Permeability
+   _permeability_ = permeability;
+}
+
+
 // Get Range [A]
 inline double CubeSim::System::Magnetorquer::_range(void) const
 {
@@ -212,27 +260,4 @@ inline void CubeSim::System::Magnetorquer::_range(double range)
 
    // Limit Current
    current(_current);
-}
-
-
-// Get Time Step [s]
-inline double CubeSim::System::Magnetorquer::_time_step(void) const
-{
-   // Return Time Step
-   return _time_step_;
-}
-
-
-// Set Time Step [s]
-inline void CubeSim::System::Magnetorquer::_time_step(double time_step)
-{
-   // Check Time Step
-   if (time_step <= 0.0)
-   {
-      // Exception
-      throw Exception::Parameter();
-   }
-
-   // Set Time Step
-   _time_step_ = time_step;
 }

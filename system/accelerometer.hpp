@@ -23,6 +23,10 @@ public:
    // Clone
    virtual System* clone(void) const;
 
+   // Time Step [s]
+   double time_step(void) const;
+   void time_step(double time_step);
+
 protected:
 
    // Constructor
@@ -43,10 +47,6 @@ protected:
    double _range(void) const;
    void _range(double range);
 
-   // Time Step [s]
-   double _time_step(void) const;
-   void _time_step(double time_step);
-
 private:
 
    // Default Accuracy [m/s^2]
@@ -64,7 +64,7 @@ private:
    // Variables
    double _accuracy_;
    double _range_;
-   double _time_step_;
+   double _time_step;
    Part* _part_;
    Rotation _rotation;
    std::vector<Vector3D> _position;
@@ -81,20 +81,43 @@ inline CubeSim::System* CubeSim::System::Accelerometer::clone(void) const
 }
 
 
+// Get Time Step [s]
+inline double CubeSim::System::Accelerometer::time_step(void) const
+{
+   // Return Time Step
+   return _time_step;
+}
+
+
+// Set Time Step [s]
+inline void CubeSim::System::Accelerometer::time_step(double time_step)
+{
+   // Check Time Step
+   if (time_step <= 0.0)
+   {
+      // Exception
+      throw Exception::Parameter();
+   }
+
+   // Set Time Step
+   _time_step = time_step;
+}
+
+
 // Constructor
 inline CubeSim::System::Accelerometer::Accelerometer(double accuracy, double range, double time_step) : _part_(),
    _distribution(0.0, 1.0)
 {
    // Initialize
+   this->time_step(time_step);
    _accuracy(accuracy);
    _range(range);
-   _time_step(time_step);
 }
 
 
 // Copy Constructor
 inline CubeSim::System::Accelerometer::Accelerometer(const Accelerometer& accelerometer) : System(accelerometer),
-   _accuracy_(accelerometer._accuracy_), _range_(accelerometer._range_), _time_step_(accelerometer._time_step_),
+   _accuracy_(accelerometer._accuracy_), _range_(accelerometer._range_), _time_step(accelerometer._time_step),
    _part_(), _distribution(accelerometer._distribution)
 {
 }
@@ -159,27 +182,4 @@ inline void CubeSim::System::Accelerometer::_range(double range)
 
    // Set Range
    _range_ = range;
-}
-
-
-// Get Time Step [s]
-inline double CubeSim::System::Accelerometer::_time_step(void) const
-{
-   // Return Time Step
-   return _time_step_;
-}
-
-
-// Set Time Step [s]
-inline void CubeSim::System::Accelerometer::_time_step(double time_step)
-{
-   // Check Time Step
-   if (time_step <= 0.0)
-   {
-      // Exception
-      throw Exception::Parameter();
-   }
-
-   // Set Time Step
-   _time_step_ = time_step;
 }

@@ -144,6 +144,11 @@ void CubeSim::Module::Motion::_behavior(void)
          Vector3D angular_acceleration = (state_.inertia_inverse + spacecraft->second->rotation()) *
             (wrench.torque() - (spacecraft->second->angular_rate() ^ spacecraft->second->angular_momentum()));
 
+//         auto w = spacecraft->second->wrench();
+
+//            printf("torque: %.3E, %.3E, %.3E\n", wrench.torque().x(), wrench.torque().y(), wrench.torque().z());
+
+
          // Check angular Acceleration
          if (isnan(state_.angular_acceleration.x()))
          {
@@ -158,8 +163,24 @@ void CubeSim::Module::Motion::_behavior(void)
          // Check Rotation
          if (rotation != Vector3D())
          {
+            // Compute Rotation Matrix
+            CubeSim::Rotation R(rotation, rotation.norm());
+//            printf("ROT: %.3E\n", R.angle());
+
+
+            auto cog = spacecraft->second->center();
+            //printf("before: %.3E, %.3E, %.3E\n", cog.x(), cog.y(), cog.z());
+
             // Update Rotation
-            spacecraft->second->rotate(rotation, rotation.norm());
+            spacecraft->second->rotate(R);
+
+            // *** cache that somehow
+            spacecraft->second->move(cog - spacecraft->second->center());
+
+
+            //cog = spacecraft->second->center();
+            //printf("after: %.3E, %.3E, %.3E\n", cog.x(), cog.y(), cog.z());
+
          }
 
          // Update angular Rate *** whrere is this formula coming from?

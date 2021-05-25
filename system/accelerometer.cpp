@@ -26,8 +26,8 @@ const CubeSim::Vector3D CubeSim::System::Accelerometer::acceleration(void) const
    Rotation rotation = _rotation + spacecraft()->rotation();
 
    // Obtain Acceleration from Position Spline (Body Frame)
-   Vector3D acceleration = (_position[0] * 2.0 - _position[1] * 5.0 + _position[2] * 4.0 - _position[3]) / _time_step_ /
-      _time_step_ - rotation;
+   Vector3D acceleration = (_position[0] * 2.0 - _position[1] * 5.0 + _position[2] * 4.0 - _position[3]) / _time_step /
+      _time_step - rotation;
 
    // Check gravitational Force
    if (!gravitation)
@@ -35,7 +35,9 @@ const CubeSim::Vector3D CubeSim::System::Accelerometer::acceleration(void) const
       // Get gravitational Force
       gravitation = spacecraft()->force("Gravitation");
    }
-   else
+
+   // Check gravitational Force
+   if (gravitation)
    {
       // Add gravitational Acceleration
       acceleration -= (*gravitation - _rotation) / spacecraft()->mass();
@@ -89,6 +91,6 @@ void CubeSim::System::Accelerometer::_behavior(void)
       _position.insert(_position.begin(), position + spacecraft()->rotation() + spacecraft()->position());
 
       // Delay
-      simulation()->delay(_time_step_);
+      simulation()->delay(_time_step);
    }
 }

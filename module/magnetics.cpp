@@ -14,7 +14,7 @@ const CubeSim::Vector3D CubeSim::Module::Magnetics::field(const Vector3D& point)
    // Check for specific Celestial Body
    if (_celestial_body)
    {
-      // Compute and return Irradiance
+      // Compute and return magnetic Field
       return _field(*_celestial_body, point);
    }
 

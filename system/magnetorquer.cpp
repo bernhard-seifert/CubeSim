@@ -70,7 +70,7 @@ void CubeSim::System::Magnetorquer::_behavior(void)
 
          // Compute and update Torque (Body Frame)
          *_part_->torque("Magnetorquer") = _area_ * (_current + _distribution(_generator) * _accuracy_) *
-            (Vector3D::Z ^ field);
+            _permeability_ * (Vector3D::Z ^ field);
       }
       else
       {
@@ -79,6 +79,6 @@ void CubeSim::System::Magnetorquer::_behavior(void)
       }
 
       // Delay
-      simulation()->delay(_time_step_);
+      simulation()->delay(_time_step);
    }
 }
