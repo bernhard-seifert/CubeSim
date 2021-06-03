@@ -7,8 +7,6 @@
 #include "motion.hpp"
 #include "../simulation.hpp"
 
-// ***
-#include "gravitation.hpp"
 
 // Class _State
 class CubeSim::Module::Motion::_State
@@ -18,6 +16,7 @@ public:
    // Variables *** we add angular momentum here ***
    Vector3D acceleration;
    Vector3D angular_acceleration;
+   Vector3D angular_momentum;
    Matrix3D inertia;
    Matrix3D inertia_inverse;
    Vector3D a0, a1, a2, a3, a4;
@@ -52,8 +51,10 @@ void CubeSim::Module::Motion::_behavior(void)
 
       // Initialize Acceleration, angular Acceleration, Moment of Inertia (Body Frame)
       state_.acceleration.x(NAN);
+/*
       state_.angular_acceleration.x(NAN);
       state_.inertia = Inertia();
+*/
    }
 
    // Parse Celestial Body List
@@ -119,11 +120,13 @@ void CubeSim::Module::Motion::_behavior(void)
          // Update Acceleration
          state_.acceleration = acceleration;
 
+         // *** SPACECRAFT ROTATION FROM HERE ***********************************************************************************
+
          // Compute Moment of Inertia (Body Frame)
          Matrix3D inertia = spacecraft->second->inertia() - spacecraft->second->rotation();
 
-         // Check if Moment of Inertia (Body Frame) was modified
-         if (inertia != state_.inertia)
+         // Check for first Run or if Moment of Inertia (Body Frame) was modified
+         if (first || (inertia != state_.inertia))
          {
             // Update inverse Moment of Inertia (Body Frame)
             state_.inertia_inverse = inertia.inverse();
@@ -140,23 +143,26 @@ void CubeSim::Module::Motion::_behavior(void)
          // *** L = I * w + L_int => w = I_new_inv * L_old
          // *** problem: angular momentum is allowed to change due to external torques!!!
 
+
+
          // Compute angular Acceleration
          Vector3D angular_acceleration = (state_.inertia_inverse + spacecraft->second->rotation()) *
             (wrench.torque() - (spacecraft->second->angular_rate() ^ spacecraft->second->angular_momentum()));
 
 //         auto w = spacecraft->second->wrench();
 
-//            printf("torque: %.3E, %.3E, %.3E\n", wrench.torque().x(), wrench.torque().y(), wrench.torque().z());
+//            printf("accel: %.3E, %.3E, %.3E\n", angular_acceleration.x(), angular_acceleration.y(), angular_acceleration.z());
 
 
-         // Check angular Acceleration
-         if (isnan(state_.angular_acceleration.x()))
+         // Check for First Run
+         if (first)
          {
-            // Initialize angular Acceleration
+            // Initialize angular Acceleration and angular Momentum
             state_.angular_acceleration = angular_acceleration;
+            state_.angular_momentum = spacecraft->second->angular_momentum();
          }
 
-         // Compute Rotation *** whrere is this formula coming from?
+         // Compute Rotation
          Vector3D rotation = (spacecraft->second->angular_rate() + (4.0 * angular_acceleration -
             state_.angular_acceleration) * time_step / 6.0) * time_step;
 
@@ -165,32 +171,29 @@ void CubeSim::Module::Motion::_behavior(void)
          {
             // Compute Rotation Matrix
             CubeSim::Rotation R(rotation, rotation.norm());
-//            printf("ROT: %.3E\n", R.angle());
 
-
-            auto cog = spacecraft->second->center();
-            //printf("before: %.3E, %.3E, %.3E\n", cog.x(), cog.y(), cog.z());
+            // Get Center of Mass
+            Vector3D center = spacecraft->second->center();
 
             // Update Rotation
             spacecraft->second->rotate(R);
 
-            // *** cache that somehow
-            spacecraft->second->move(cog - spacecraft->second->center());
-
-
-            //cog = spacecraft->second->center();
-            //printf("after: %.3E, %.3E, %.3E\n", cog.x(), cog.y(), cog.z());
-
+            // Restore Center of Mass (important for Accelerometers)
+            spacecraft->second->move(center - spacecraft->second->center());
          }
 
-         // Update angular Rate *** whrere is this formula coming from?
+         // Update angular Rate (due to external Torques)
          spacecraft->second->angular_rate(spacecraft->second->angular_rate() +
             (3.0 * angular_acceleration - state_.angular_acceleration) * time_step / 2.0);
 
-         // *** here we should save angular momentum for next round
+         // Update angular Rate (due to Conservation of angular Momentum)
+         spacecraft->second->angular_rate(spacecraft->second->angular_rate() +
+            (state_.inertia_inverse + spacecraft->second->rotation()) *
+            (state_.angular_momentum - spacecraft->second->angular_momentum()));
 
-         // Update angular Acceleration
+         // Update angular Acceleration and angular Momentum
          state_.angular_acceleration = angular_acceleration;
+         state_.angular_momentum = spacecraft->second->angular_momentum();
       }
 
       // Parse Celestial Body List
