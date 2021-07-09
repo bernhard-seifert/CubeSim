@@ -57,7 +57,7 @@ double CubeSim::Module::Light::irradiance(const Vector3D& point, const Vector3D&
 
 
 // Temperature Limit (Red Star) [K]
-const double CubeSim::Module::Light::_TEMPERATURE = 3500.0;
+const double CubeSim::Module::Light::_TEMPERATURE = 2000.0;
 
 
 // Compute Irradiance [W/m^2]

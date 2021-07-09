@@ -24,8 +24,8 @@ public:
 };
 
 
-// Constructor ***
-inline CubeSim::CelestialBody::Sun::Sun(void) : CelestialBody(6.957E8, 5.0E-5, 1409.914222, 5772.0, Vector3D(),
+// Constructor (Density modified to match total Mass of 1.98847E30 kg)
+inline CubeSim::CelestialBody::Sun::Sun(void) : CelestialBody(6.957E8, 5.0E-5, 1409.892950, 5772.0, Vector3D(),
    Vector3D())
 {
 }

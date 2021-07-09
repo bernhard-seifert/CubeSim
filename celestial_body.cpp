@@ -49,7 +49,7 @@ const CubeSim::Inertia CubeSim::CelestialBody::_inertia(void) const
 
    // Compute Coefficient for X and Y Axes
    double a = 1.0 + pow(1.0 - _flattening, 2.0);
-   
+
    // Compute and return Tensor
    return Inertia(mass * radius() * radius() / 5.0 *
       Matrix3D(Vector3D(a, 0.0, 0.0), Vector3D(0.0, a, 0.0), Vector3D(0.0, 0.0, 2.0)), mass);

@@ -79,8 +79,8 @@ double CubeSim::Vector3D::operator |(const Vector3D& v) const
       throw CubeSim::Exception::Parameter();
    }
 
-   // Compute and return Angle
-   return acos(*this * v / norm1 / norm2);
+   // Compute and return Angle (catch numeric Errors)
+   return acos(std::max(std::min(*this * v / norm1 / norm2, 1.0), -1.0));
 }
 
 

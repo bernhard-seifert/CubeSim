@@ -18,9 +18,6 @@ class CubeSim::Module::Albedo : public Module
 {
 public:
 
-   // Earth
-   class Earth;
-
    // Constructor
    Albedo(uint32_t resolution = _RESOLUTION);
    Albedo(CelestialBody& celestial_body, uint32_t resolution = _RESOLUTION);
@@ -42,7 +39,7 @@ public:
 private:
 
    // Default Resolution (Number of Grid Points)
-   static const uint32_t _RESOLUTION = 1000;
+   static const uint32_t _RESOLUTION = 400;
 
    // Compute Irradiance [W/m^2]
    double _irradiance(const CelestialBody& celestial_body, const Vector3D& point, const Vector3D& direction,

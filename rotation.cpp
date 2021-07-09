@@ -122,13 +122,13 @@ void CubeSim::Rotation::_euler(void) const
       double cos_ = 0.5 * (_matrix(1, 1) + _matrix(2, 2) + _matrix(3, 3) - 1.0);
 
       // Check Cosine of Euler Angle
-      if (cos_ == 1.0)
+      if (1.0 <= cos_)
       {
          // Set Euler Angle and Axis
          _angle = 0.0;
          _axis = Vector3D::Z;
       }
-      else if (cos_ == -1.0)
+      else if (cos_ <= -1.0)
       {
          // Set Euler Angle
          _angle = Constant::PI;

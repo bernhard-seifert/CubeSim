@@ -22,8 +22,8 @@ public:
    // Clone
    virtual System* clone(void) const;
 
-   // Measure Irradiance [W]
-   double irradiance(void) const;
+   // Measure Radiant Flux [W]
+   double radiant_flux(void) const;
 
 protected:
 

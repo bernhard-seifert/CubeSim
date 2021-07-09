@@ -160,7 +160,7 @@ void CubeSim::Module::Ephemeris::_behavior(void)
             dynamic_cast<CelestialBody::Moon*>(celestial_body->second))
          {
             // Set Earth-Moon Barycenter Orbit around Solar System Barycenter
-            element = {1.495982612E+11, 1.671123000E-02, 2.672099085E-07, 4.895030211E+00, 4.938194128E+00,
+            element = {1.495982612E+11, 1.671123000E-02, 2.672099085E-07, 1.753437557E+00, 1.796601474E+00,
                3.141592654E+00, 3.155784242E+07};
             rate = {8.407400333E+03, -4.392000000E-07, 2.259621932E-06, 6.283075779E+00, 5.642189403E-05,
                0.000000000E+00, 2.660319173E+00};

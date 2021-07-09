@@ -9,8 +9,8 @@
 #include "../simulation.hpp"
 
 
-// Measure Irradiance [W]
-double CubeSim::System::Photodetector::irradiance(void) const
+// Measure Radiant Flux [W]
+double CubeSim::System::Photodetector::radiant_flux(void) const
 {
    // Check if enabled
    if (!is_enabled())

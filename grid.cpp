@@ -46,7 +46,7 @@ const std::vector<CubeSim::Vector3D> CubeSim::Grid3D::points(void) const
    std::vector<Vector3D> grid;
 
    // Compute Number of Latitudes
-   uint32_t n = static_cast<uint32_t>(sqrt(_resolution / 5.093));
+   uint32_t n = static_cast<uint32_t>(sqrt(_resolution / 4.0));
 
    // Parse Latitudes
    for (uint32_t i = 0; i <= n; ++i)

@@ -9,7 +9,7 @@
 
 
 // Gravitational Constant [m^3/kg/s^2]
-const double CubeSim::Constant::G = 6.67384E-11;
+const double CubeSim::Constant::G = 6.67430E-11;
 
 // Pi
 const double CubeSim::Constant::PI = 3.14159265358979323846;

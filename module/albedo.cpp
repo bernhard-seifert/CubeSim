@@ -151,5 +151,5 @@ double CubeSim::Module::Albedo::_irradiance(const CelestialBody& celestial_body,
    }
 
    // Compute and return Irradiance
-   return (irradiance * celestial_body.area() / _grid.size() / 4.0 / Constant::PI);
+   return (irradiance * celestial_body.area() / _grid.size() / Constant::PI);
 }
