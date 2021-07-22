@@ -53,9 +53,9 @@ const CubeSim::Location CubeSim::System::GNSS::location(void) const
    Vector3D position = spacecraft()->position() - _earth->position() - _earth->rotation();
 
    // Consider spatial Accuracy
-   position.x(position.x() + _distribution(_generator) * _spatial_accuracy_);
-   position.y(position.y() + _distribution(_generator) * _spatial_accuracy_);
-   position.z(position.z() + _distribution(_generator) * _spatial_accuracy_);
+   position.x(position.x() + _distribution(_generator) * _spatial_accuracy_ / sqrt(3.0));
+   position.y(position.y() + _distribution(_generator) * _spatial_accuracy_ / sqrt(3.0));
+   position.z(position.z() + _distribution(_generator) * _spatial_accuracy_ / sqrt(3.0));
 
    // Get Time (consider temporal Accuracy)
    Time time = simulation()->time() + static_cast<int64_t>(_distribution(_generator) * _temporal_accuracy_ * 1000.0);

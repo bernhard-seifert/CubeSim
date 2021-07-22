@@ -99,6 +99,9 @@ void CubeSim::Module::Motion::_behavior(void)
          // Compute Wrench
          Wrench wrench = spacecraft->second->wrench();
 
+         // *** SPACECRAFT TRANSLATION FROM HERE ***********************************************************************************
+
+
          // Compute Acceleration
          Vector3D acceleration = wrench.force() / spacecraft->second->mass();
 
@@ -142,7 +145,8 @@ void CubeSim::Module::Motion::_behavior(void)
          // *** => reaction wheel does not need to generate torque, but only change spin rate!
          // *** L = I * w + L_int => w = I_new_inv * L_old
          // *** problem: angular momentum is allowed to change due to external torques!!!
-
+         // *** dw/dt = I_-1 * (T - w x L)
+         // *** I * dw/dt + w x L = T, is that correct?
 
 
          // Compute angular Acceleration
