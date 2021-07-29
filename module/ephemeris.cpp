@@ -233,7 +233,7 @@ void CubeSim::Module::Ephemeris::_behavior(void)
 }
 
 
-// Wrap to [0; 2 * PI) Range
+// Wrap to [0; 2*PI) Range
 double CubeSim::Module::Ephemeris::_wrap(double x)
 {
    // Increase Number when < 0

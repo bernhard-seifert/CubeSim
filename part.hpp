@@ -51,6 +51,7 @@ private:
 
    // Update Properties
    static const uint8_t _UPDATE_DIMENSION = 1;
+   static const uint8_t _UPDATE_MATERIAL = 2;
 
    // Compute Mass
    virtual double _mass(void) const;

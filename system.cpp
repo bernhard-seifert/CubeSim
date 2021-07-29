@@ -15,14 +15,14 @@ CubeSim::System::System(const System& system) : Behavior(system), RigidBody(syst
    // Parse Assembly List
    for (auto assembly = this->assembly().begin(); assembly != this->assembly().end(); ++assembly)
    {
-      // Set parent rigid Body
+      // Set Parent rigid Body
       assembly->second->_rigid_body = this;
    }
 
    // Parse System List
    for (auto system = this->system().begin(); system != this->system().end(); ++system)
    {
-      // Set parent System and parent rigid Body
+      // Set Parent System and Parent rigid Body
       system->second->_system = this;
       system->second->_rigid_body = this;
    }
@@ -49,14 +49,14 @@ CubeSim::System& CubeSim::System::operator =(const System& system)
    // Parse Assembly List
    for (auto assembly = this->assembly().begin(); assembly != this->assembly().end(); ++assembly)
    {
-      // Set parent rigid Body
+      // Set Parent rigid Body
       assembly->second->_rigid_body = this;
    }
 
    // Parse System List
    for (auto system = this->system().begin(); system != this->system().end(); ++system)
    {
-      // Set parent rigid Body, parent System, Spacecraft
+      // Set Parent rigid Body, Parent System, Spacecraft
       system->second->_rigid_body = this;
       system->second->_system = this;
       system->second->_spacecraft = NULL;

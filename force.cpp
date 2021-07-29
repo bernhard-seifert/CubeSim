@@ -8,6 +8,11 @@
 #include "rigid_body.hpp"
 
 
+// Update Properties
+const uint8_t CubeSim::Force::_UPDATE_MAGNITUDE;
+const uint8_t CubeSim::Force::_UPDATE_POINT;
+
+
 // Update Property
 void CubeSim::Force::_update(uint8_t update)
 {

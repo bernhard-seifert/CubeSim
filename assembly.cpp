@@ -14,14 +14,14 @@ CubeSim::Assembly::Assembly(const Assembly& assembly) : RigidBody(assembly), Lis
    // Parse Assembly List
    for (auto assembly = this->assembly().begin(); assembly != this->assembly().end(); ++assembly)
    {
-      // Set parent Rigid Body
+      // Set Parent Rigid Body
       assembly->second->_rigid_body = this;
    }
 
    // Parse Part List
    for (auto part = this->part().begin(); part != this->part().end(); ++part)
    {
-      // Set parent Rigid Body
+      // Set Parent Rigid Body
       part->second->_rigid_body = this;
    }
 }
@@ -39,14 +39,14 @@ CubeSim::Assembly& CubeSim::Assembly::operator =(const Assembly& assembly)
    // Parse Assembly List
    for (auto assembly = this->assembly().begin(); assembly != this->assembly().end(); ++assembly)
    {
-      // Set parent Rigid Body
+      // Set Parent Rigid Body
       assembly->second->_rigid_body = this;
    }
 
    // Parse Part List
    for (auto part = this->part().begin(); part != this->part().end(); ++part)
    {
-      // Set parent Rigid Body
+      // Set Parent Rigid Body
       part->second->_rigid_body = this;
    }
 

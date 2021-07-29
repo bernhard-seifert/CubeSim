@@ -7,6 +7,10 @@
 #include "rigid_body.hpp"
 
 
+// Update Properties
+const uint8_t CubeSim::Torque::_UPDATE_MAGNITUDE;
+
+
 // Update Property
 void CubeSim::Torque::_update(uint8_t update)
 {

@@ -1,4 +1,4 @@
-   
+
 
 // CUBESIM - SYSTEM
 
@@ -179,7 +179,7 @@ inline void CubeSim::System::insert(const std::string& name, const Assembly& ass
    // Insert Assembly
    Assembly& assembly_ = List<Assembly>::insert(name, assembly);
 
-   // Set parent Rigid Body
+   // Set Parent Rigid Body
    assembly_._rigid_body = this;
 }
 
@@ -198,7 +198,7 @@ inline void CubeSim::System::insert(const std::string& name, const System& syste
    // Insert System
    System& system_ = List<System>::insert(name, system);
 
-   // Set parent Rigid Body and parent System
+   // Set Parent Rigid Body and Parent System
    system_._rigid_body = this;
    system_._system = this;
 }

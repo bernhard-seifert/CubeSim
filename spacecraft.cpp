@@ -15,7 +15,7 @@ CubeSim::Spacecraft::Spacecraft(const Spacecraft& spacecraft) : Behavior(spacecr
    // Parse System List
    for (auto system = this->system().begin(); system != this->system().end(); ++system)
    {
-      // Set parent rigid Body and Spacecraft
+      // Set Parent rigid Body and Spacecraft
       system->second->_spacecraft = this;
       system->second->_rigid_body = this;
    }
@@ -41,7 +41,7 @@ CubeSim::Spacecraft& CubeSim::Spacecraft::operator =(const Spacecraft& spacecraf
    // Parse System List
    for (auto system = this->system().begin(); system != this->system().end(); ++system)
    {
-      // Set parent rigid Body and Spacecraft
+      // Set Parent rigid Body and Spacecraft
       system->second->_rigid_body = this;
       system->second->_spacecraft = this;
    }

@@ -268,7 +268,6 @@ void CubeSim::RigidBody::_update(uint8_t update)
          {
             // Update Property
             _rigid_body->_update(_UPDATE_ANGULAR_MOMENTUM);
-            _rigid_body->_update(_UPDATE_MOMENTUM);
          }
 
          // Reset Cache
@@ -279,8 +278,9 @@ void CubeSim::RigidBody::_update(uint8_t update)
       // Angular Rate
       case _UPDATE_ANGULAR_RATE:
       {
-         // Update Property
+         // Update Properties
          _update(_UPDATE_ANGULAR_MOMENTUM);
+         _update(_UPDATE_MOMENTUM);
          break;
       }
 
@@ -309,8 +309,9 @@ void CubeSim::RigidBody::_update(uint8_t update)
             _rigid_body->_update(_UPDATE_CENTER);
          }
 
-         // Update Property
-         _update(_UPDATE_WRENCH);
+         // Update Properties
+         _update(_UPDATE_ANGULAR_MOMENTUM);
+         _update(_UPDATE_MOMENTUM);
 
          // Reset Cache
          _cache &= ~_CACHE_CENTER;
@@ -349,11 +350,15 @@ void CubeSim::RigidBody::_update(uint8_t update)
          // Check Parent Rigid Body
          if (_rigid_body)
          {
-            // Update Property
+            // Update Properties
+            _rigid_body->_update(_UPDATE_CENTER);
+            _rigid_body->_update(_UPDATE_INERTIA);
             _rigid_body->_update(_UPDATE_MASS);
          }
 
-         // Update Property
+         // Update Properties
+         _update(_UPDATE_ANGULAR_MOMENTUM);
+         _update(_UPDATE_INERTIA);
          _update(_UPDATE_MOMENTUM);
 
          // Reset Cache
@@ -367,8 +372,7 @@ void CubeSim::RigidBody::_update(uint8_t update)
          // Check Parent Rigid Body
          if (_rigid_body)
          {
-            // Update Properties
-            _rigid_body->_update(_UPDATE_ANGULAR_MOMENTUM);
+            // Update Property
             _rigid_body->_update(_UPDATE_MOMENTUM);
          }
 
@@ -385,10 +389,12 @@ void CubeSim::RigidBody::_update(uint8_t update)
          {
             // Update Properties
             _rigid_body->_update(_UPDATE_INERTIA);
-            _rigid_body->_update(_UPDATE_CENTER);
+            _rigid_body->_update(_UPDATE_WRENCH);
          }
 
-         // Break
+         // Update Properties
+         _update(_UPDATE_CENTER);
+         _update(_UPDATE_MOMENTUM);
          break;
       }
 
@@ -400,10 +406,11 @@ void CubeSim::RigidBody::_update(uint8_t update)
          {
             // Update Properties
             _rigid_body->_update(_UPDATE_INERTIA);
-            _rigid_body->_update(_UPDATE_CENTER);
+            _rigid_body->_update(_UPDATE_WRENCH);
          }
 
-         // Break
+         // Update Property
+         _update(_UPDATE_CENTER);
          break;
       }
 
@@ -418,7 +425,8 @@ void CubeSim::RigidBody::_update(uint8_t update)
       // Velocity
       case _UPDATE_VELOCITY:
       {
-         // Update Property
+         // Update Properties
+         _update(_UPDATE_ANGULAR_MOMENTUM);
          _update(_UPDATE_MOMENTUM);
          break;
       }

@@ -105,7 +105,7 @@ inline CubeSim::Assembly& CubeSim::Assembly::insert(const std::string& name, con
    // Insert Assembly
    Assembly& assembly_ = List<Assembly>::insert(name, assembly);
 
-   // Set parent rigid Body
+   // Set Parent rigid Body
    assembly_._rigid_body = this;
 
    // Return Assembly
@@ -119,7 +119,7 @@ inline CubeSim::Part& CubeSim::Assembly::insert(const std::string& name, const P
    // Insert Part
    Part& part_ = List<Part>::insert(name, part);
 
-   // Set parent rigid Body
+   // Set Parent rigid Body
    part_._rigid_body = this;
 
    // Return Part
