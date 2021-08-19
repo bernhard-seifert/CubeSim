@@ -28,7 +28,7 @@ protected:
    // Constructor
    Gyroscope(double accuracy = _ACCURACY, double range = _RANGE);
 
-   // Copy Constructor
+   // Copy Constructor (reset Part)
    Gyroscope(const Gyroscope& gyroscope);
 
    // Accuracy [rad/s]
@@ -79,7 +79,7 @@ inline CubeSim::System::Gyroscope::Gyroscope(double accuracy, double range) : _p
 }
 
 
-// Copy Constructor
+// Copy Constructor (reset Part)
 inline CubeSim::System::Gyroscope::Gyroscope(const Gyroscope& gyroscope) : System(gyroscope),
    _accuracy_(gyroscope._accuracy_), _range_(gyroscope._range_), _part_(), _init(),
    _distribution(gyroscope._distribution)

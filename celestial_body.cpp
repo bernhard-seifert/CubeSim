@@ -10,20 +10,24 @@
 // Assign (Simulation Reference is maintained)
 inline CubeSim::CelestialBody& CubeSim::CelestialBody::operator =(const CelestialBody& celestial_body)
 {
-   // Check Type
-   if (typeid(*this) != typeid(celestial_body))
+   // Check Celestial Body
+   if (this != &celestial_body)
    {
-      // Exception
-      throw Exception::Parameter();
-   }
+      // Check Type to avoid Object Slicing
+      if (typeid(*this) != typeid(celestial_body))
+      {
+         // Exception
+         throw Exception::Parameter();
+      }
 
-   // Assign
-   static_cast<RigidBody&>(*this) = celestial_body;
-   static_cast<List<CelestialBody>::Item&>(*this) = celestial_body;
-   _density = celestial_body._density;
-   _flattening = celestial_body._flattening;
-   _radius = celestial_body._radius;
-   _temperature = celestial_body._temperature;
+      // Assign
+      static_cast<RigidBody&>(*this) = celestial_body;
+      static_cast<List<CelestialBody>::Item&>(*this) = celestial_body;
+      _density = celestial_body._density;
+      _flattening = celestial_body._flattening;
+      _radius = celestial_body._radius;
+      _temperature = celestial_body._temperature;
+   }
 
    // Return Reference
    return *this;

@@ -117,18 +117,22 @@ template <typename T> inline CubeSim::List<T>::~List(void)
 // Assign
 template <typename T> CubeSim::List<T>& CubeSim::List<T>::operator =(const List& list)
 {
-   // Clear
-   clear();
-
-   // Parse List
-   for (auto item = list._item.begin(); item != list._item.end(); ++item)
+   // Check List
+   if (this != &list)
    {
-      // Clone Item and set List
-      T* item_ = item->second->clone();
-      item_->_list = this;
+      // Clear
+      clear();
 
-      // Insert Item into List
-      _item.insert(std::pair<std::string, T*>(item->first, item_));
+      // Parse List
+      for (auto item = list._item.begin(); item != list._item.end(); ++item)
+      {
+         // Clone Item and set List
+         T* item_ = item->second->clone();
+         item_->_list = this;
+
+         // Insert Item into List
+         _item.insert(std::pair<std::string, T*>(item->first, item_));
+      }
    }
 
    // Return Reference
@@ -193,7 +197,7 @@ template <typename T> inline T* CubeSim::List<T>::item(const std::string& name) 
    auto item = _item.find(name);
 
    // Return Item
-   return ((item == _item.end()) ? NULL : item->second);
+   return ((item == _item.end()) ? nullptr : item->second);
 }
 
 
@@ -245,7 +249,7 @@ template <typename T> inline void CubeSim::List<T>::Item::remove(void)
 template <typename T> inline T* CubeSim::List<T>::Item::_clone(std::true_type) const
 {
    // Return
-   return NULL;
+   return nullptr;
 }
 
 

@@ -25,25 +25,29 @@ CubeSim::Spacecraft::Spacecraft(const Spacecraft& spacecraft) : Behavior(spacecr
 // Assign (Simulation Reference is maintained)
 CubeSim::Spacecraft& CubeSim::Spacecraft::operator =(const Spacecraft& spacecraft)
 {
-   // Check Type
-   if (typeid(*this) != typeid(spacecraft))
+   // Check Spacecraft
+   if (this != &spacecraft)
    {
-      // Exception
-      throw Exception::Parameter();
-   }
+      // Check Type to avoid Object Slicing
+      if (typeid(*this) != typeid(spacecraft))
+      {
+         // Exception
+         throw Exception::Parameter();
+      }
 
-   // Assign
-   static_cast<Behavior&>(*this) = spacecraft;
-   static_cast<RigidBody&>(*this) = spacecraft;
-   static_cast<List<System>&>(*this) = spacecraft;
-   static_cast<List<Spacecraft>::Item&>(*this) = spacecraft;
+      // Assign
+      static_cast<Behavior&>(*this) = spacecraft;
+      static_cast<RigidBody&>(*this) = spacecraft;
+      static_cast<List<System>&>(*this) = spacecraft;
+      static_cast<List<Spacecraft>::Item&>(*this) = spacecraft;
 
-   // Parse System List
-   for (auto system = this->system().begin(); system != this->system().end(); ++system)
-   {
-      // Set Parent rigid Body and Spacecraft
-      system->second->_rigid_body = this;
-      system->second->_spacecraft = this;
+      // Parse System List
+      for (auto system = this->system().begin(); system != this->system().end(); ++system)
+      {
+         // Set Parent rigid Body and Spacecraft
+         system->second->_rigid_body = this;
+         system->second->_spacecraft = this;
+      }
    }
 
    // Return Reference

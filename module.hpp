@@ -57,6 +57,8 @@ public:
    // Copy Constructor (Simulation Reference is reset)
    Module(const Module& module);
 
+   // Assign (Simulation Reference is maintained)
+   Module& operator =(const Module& module);
 
    // Clone
    virtual Module* clone(void) const = 0;
@@ -65,9 +67,6 @@ public:
    Simulation* simulation(void) const;
 
 private:
-
-   // Assign
-   Module& operator =(const Module& module) = delete;
 
    // Variables
    Simulation* _simulation;
@@ -86,6 +85,14 @@ inline CubeSim::Module::Module(void) : _simulation()
 // Copy Constructor (Simulation Reference is reset)
 inline CubeSim::Module::Module(const Module& module) : _simulation()
 {
+}
+
+
+// Assign (Simulation Reference is maintained)
+inline CubeSim::Module& CubeSim::Module::operator =(const Module& module)
+{
+   // Return Reference
+   return *this;
 }
 
 

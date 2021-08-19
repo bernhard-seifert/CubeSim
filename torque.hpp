@@ -32,10 +32,10 @@ public:
    Torque(double x, double y, double z);
    Torque(const Vector3D& torque = Vector3D());
 
-   // Copy Constructor (rigid Body Reference is reset)
+   // Copy Constructor (Rigid Body Reference is reset)
    Torque(const Torque& torque);
 
-   // Assign (rigid Body Reference is maintained)
+   // Assign (Rigid Body Reference is maintained)
    Torque& operator =(const Torque& torque);
    Torque& operator =(const Vector3D& torque);
 
@@ -103,21 +103,28 @@ inline CubeSim::Torque::Torque(const Vector3D& torque) : Vector3D(torque), _rigi
 }
 
 
-// Copy Constructor (rigid Body Reference is reset)
+// Copy Constructor (Rigid Body Reference is reset)
 inline CubeSim::Torque::Torque(const Torque& torque) : Vector3D(torque), _rigid_body()
 {
 }
 
 
-// Assign (rigid Body Reference is maintained)
+// Assign (Rigid Body Reference is maintained)
 inline CubeSim::Torque& CubeSim::Torque::operator =(const Torque& torque)
 {
-   // Assign and return Reference
-   return (*this = static_cast<const Vector3D&>(torque));
+   // Check Torque
+   if (this != &torque)
+   {
+      // Assign
+      *this = static_cast<const Vector3D&>(torque);
+   }
+
+   // Return Reference
+   return *this;
 }
 
 
-// Assign (rigid Body Reference is maintained)
+// Assign (Rigid Body Reference is maintained)
 inline CubeSim::Torque& CubeSim::Torque::operator =(const Vector3D& torque)
 {
    // Assign

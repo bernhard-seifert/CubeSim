@@ -34,7 +34,7 @@ protected:
    // Constructor
    Thruster(double range = _RANGE, double accuracy = _ACCURACY, double time_step = _TIME_STEP);
 
-   // Copy Constructor
+   // Copy Constructor (reset Part)
    Thruster(const Thruster& thruster);
 
    // Accuracy [N]
@@ -95,9 +95,6 @@ inline void CubeSim::System::Thruster::thrust(double thrust)
 {
    // Set Thrust
    _thrust = std::min(_range_, std::max(0.0, thrust));
-
-   // ***
-   _thrust = thrust;
 }
 
 
@@ -135,7 +132,7 @@ inline CubeSim::System::Thruster::Thruster(double range, double accuracy, double
 }
 
 
-// Copy Constructor
+// Copy Constructor (reset Part)
 inline CubeSim::System::Thruster::Thruster(const Thruster& thruster) : System(thruster),
    _accuracy_(thruster._accuracy_), _range_(thruster._range_), _thrust(), _time_step(thruster._time_step), _part_(),
    _distribution(thruster._distribution)

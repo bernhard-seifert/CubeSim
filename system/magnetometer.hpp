@@ -29,7 +29,7 @@ protected:
    // Constructor
    Magnetometer(double accuracy = _ACCURACY, double range = _RANGE);
 
-   // Copy Constructor
+   // Copy Constructor (reset Part)
    Magnetometer(const Magnetometer& magnetometer);
 
    // Accuracy [T]
@@ -82,7 +82,7 @@ inline CubeSim::System::Magnetometer::Magnetometer(double accuracy, double range
 }
 
 
-// Copy Constructor
+// Copy Constructor (reset Part)
 inline CubeSim::System::Magnetometer::Magnetometer(const Magnetometer& magnetometer) : System(magnetometer),
    _accuracy_(magnetometer._accuracy_), _range_(magnetometer._range_), _part_(), _init(),
    _distribution(magnetometer._distribution)

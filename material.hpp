@@ -17,6 +17,9 @@ namespace CubeSim
 {
    // Class Material
    class Material;
+
+   // Class Part
+   class Part;
 }
 
 
@@ -38,6 +41,12 @@ public:
    // Constructor
    Material(const std::string& name = "", double density = 0.0, const Color& color = Color::BLACK);
 
+   // Copy Constructor (Part is reset)
+   Material(const Material& material);
+
+   // Assign (Part is maintained)
+   Material& operator =(const Material& material);
+
    // Color
    const Color& color(void) const;
    void color(const Color& color);
@@ -56,15 +65,26 @@ private:
    double _density;
    Color _color;
    std::string _name;
+   Part* _part;
+
+   // Friends
+   friend class Part;
 };
 
 
 // Constructor
 inline CubeSim::Material::Material(const std::string& name, double density, const Color& color) : _color(color),
-   _name(name)
+   _name(name), _part()
 {
    // Initialize
    this->density(density);
+}
+
+
+// Copy Constructor (Part is reset)
+inline CubeSim::Material::Material(const Material& material) : _density(material._density), _color(material._color),
+   _name(material._name), _part()
+{
 }
 
 
@@ -89,21 +109,6 @@ inline double CubeSim::Material::density(void) const
 {
    // Return Density
    return _density;
-}
-
-
-// Set Density [kg/m^3]
-inline void CubeSim::Material::density(double density)
-{
-   // Check Density
-   if (density < 0.0)
-   {
-      // Exception
-      throw Exception::Parameter();
-   }
-
-   // Set Density
-   _density = density;
 }
 
 

@@ -40,6 +40,15 @@ public:
    // Class Sphere
    class Sphere;
 
+   // Constructor
+   Part(void);
+
+   // Copy Constructor
+   Part(const Part& part);
+
+   // Assign
+   Part& operator =(const Part& part);
+
    // Clone
    virtual Part* clone(void) const = 0;
 
@@ -61,7 +70,27 @@ private:
 
    // Variables
    Material _material;
+
+   // Friends
+   friend class Material;
 };
+
+
+// Constructor
+inline CubeSim::Part::Part(void)
+{
+   // Initialize
+   _material._part = this;
+}
+
+
+// Copy Constructor
+inline CubeSim::Part::Part(const Part& part) : RigidBody(part), List<Part>::Item(part)
+{
+   // Initialize
+   _material = part._material;
+   _material._part = this;
+}
 
 
 // Get Material

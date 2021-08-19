@@ -34,7 +34,7 @@ protected:
    // Constructor
    Magnetorquer(double area, double range = _RANGE, double accuracy = _ACCURACY, double time_step = _TIME_STEP);
 
-   // Copy Constructor
+   // Copy Constructor (reset Part)
    Magnetorquer(const Magnetorquer& magnetorquer);
 
    // Accuracy [A]
@@ -143,7 +143,7 @@ inline CubeSim::System::Magnetorquer::Magnetorquer(double area, double range, do
 }
 
 
-// Copy Constructor
+// Copy Constructor (reset Part)
 inline CubeSim::System::Magnetorquer::Magnetorquer(const Magnetorquer& magnetorquer) : System(magnetorquer),
    _accuracy_(magnetorquer._accuracy_), _area_(magnetorquer._area_), _current(magnetorquer._current),
    _permeability_(1.0), _range_(magnetorquer._range_), _time_step(magnetorquer._time_step), _part_(),

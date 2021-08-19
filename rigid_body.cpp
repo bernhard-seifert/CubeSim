@@ -40,29 +40,33 @@ CubeSim::RigidBody::RigidBody(const RigidBody& rigid_body) : List<Force>(rigid_b
 // Assign (Rigid Body Reference is maintained)
 CubeSim::RigidBody& CubeSim::RigidBody::operator =(const RigidBody& rigid_body)
 {
-   // Check Type to avoid Object Slicing
-   if (typeid(*this) != typeid(rigid_body))
+   // Check Rigid Body
+   if (this != &rigid_body)
    {
-      // Exception
-      throw Exception::Parameter();
-   }
+      // Check Type to avoid Object Slicing
+      if (typeid(*this) != typeid(rigid_body))
+      {
+         // Exception
+         throw Exception::Parameter();
+      }
 
-   // Assign
-   static_cast<List<Force>&>(*this) = rigid_body;
-   static_cast<List<Torque>&>(*this) = rigid_body;
-   _angular_rate = rigid_body._angular_rate;
-   _position = rigid_body._position;
-   _velocity = rigid_body._velocity;
-   _rotation = rigid_body._rotation;
-   _cache = rigid_body._cache;
-   __area = rigid_body.__area;
-   __mass = rigid_body.__mass;
-   __volume = rigid_body.__volume;
-   __angular_momentum = rigid_body.__angular_momentum;
-   __center = rigid_body.__center;
-   __momentum = rigid_body.__momentum;
-   __inertia = rigid_body.__inertia;
-   __wrench = rigid_body.__wrench;
+      // Assign
+      static_cast<List<Force>&>(*this) = rigid_body;
+      static_cast<List<Torque>&>(*this) = rigid_body;
+      _angular_rate = rigid_body._angular_rate;
+      _position = rigid_body._position;
+      _velocity = rigid_body._velocity;
+      _rotation = rigid_body._rotation;
+      _cache = rigid_body._cache;
+      __area = rigid_body.__area;
+      __mass = rigid_body.__mass;
+      __volume = rigid_body.__volume;
+      __angular_momentum = rigid_body.__angular_momentum;
+      __center = rigid_body.__center;
+      __momentum = rigid_body.__momentum;
+      __inertia = rigid_body.__inertia;
+      __wrench = rigid_body.__wrench;
+   }
 
    // Return Reference
    return *this;
@@ -352,7 +356,6 @@ void CubeSim::RigidBody::_update(uint8_t update)
          {
             // Update Properties
             _rigid_body->_update(_UPDATE_CENTER);
-            _rigid_body->_update(_UPDATE_INERTIA);
             _rigid_body->_update(_UPDATE_MASS);
          }
 

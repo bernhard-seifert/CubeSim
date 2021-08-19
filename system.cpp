@@ -32,34 +32,38 @@ CubeSim::System::System(const System& system) : Behavior(system), RigidBody(syst
 // Assign (Spacecraft and System References are maintained)
 CubeSim::System& CubeSim::System::operator =(const System& system)
 {
-   // Check Type
-   if (typeid(*this) != typeid(system))
+   // Check System
+   if (this != &system)
    {
-      // Exception
-      throw Exception::Parameter();
-   }
+      // Check Type to avoid Object Slicing
+      if (typeid(*this) != typeid(system))
+      {
+         // Exception
+         throw Exception::Parameter();
+      }
 
-   // Assign
-   static_cast<Behavior&>(*this) = system;
-   static_cast<RigidBody&>(*this) = system;
-   static_cast<List<Assembly>&>(*this) = system;
-   static_cast<List<System>&>(*this) = system;
-   static_cast<List<System>::Item&>(*this) = system;
+      // Assign
+      static_cast<Behavior&>(*this) = system;
+      static_cast<RigidBody&>(*this) = system;
+      static_cast<List<Assembly>&>(*this) = system;
+      static_cast<List<System>&>(*this) = system;
+      static_cast<List<System>::Item&>(*this) = system;
 
-   // Parse Assembly List
-   for (auto assembly = this->assembly().begin(); assembly != this->assembly().end(); ++assembly)
-   {
-      // Set Parent rigid Body
-      assembly->second->_rigid_body = this;
-   }
+      // Parse Assembly List
+      for (auto assembly = this->assembly().begin(); assembly != this->assembly().end(); ++assembly)
+      {
+         // Set Parent rigid Body
+         assembly->second->_rigid_body = this;
+      }
 
-   // Parse System List
-   for (auto system = this->system().begin(); system != this->system().end(); ++system)
-   {
-      // Set Parent rigid Body, Parent System, Spacecraft
-      system->second->_rigid_body = this;
-      system->second->_system = this;
-      system->second->_spacecraft = NULL;
+      // Parse System List
+      for (auto system = this->system().begin(); system != this->system().end(); ++system)
+      {
+         // Set Parent rigid Body, Parent System, Spacecraft
+         system->second->_rigid_body = this;
+         system->second->_system = this;
+         system->second->_spacecraft = nullptr;
+      }
    }
 
    // Return Reference
@@ -74,7 +78,7 @@ CubeSim::Simulation* CubeSim::System::simulation(void) const
    Spacecraft* spacecraft = this->spacecraft();
 
    // Return Simulation
-   return (spacecraft ? spacecraft->simulation() : NULL);
+   return (spacecraft ? spacecraft->simulation() : nullptr);
 }
 
 

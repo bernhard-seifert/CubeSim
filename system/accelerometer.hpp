@@ -32,7 +32,7 @@ protected:
    // Constructor
    Accelerometer(double accuracy = _ACCURACY, double range = _RANGE, double time_step = _TIME_STEP);
 
-   // Copy Constructor
+   // Copy Constructor (reset Part)
    Accelerometer(const Accelerometer& accelerometer);
 
    // Accuracy [m/s^2]
@@ -115,7 +115,7 @@ inline CubeSim::System::Accelerometer::Accelerometer(double accuracy, double ran
 }
 
 
-// Copy Constructor
+// Copy Constructor (reset Part)
 inline CubeSim::System::Accelerometer::Accelerometer(const Accelerometer& accelerometer) : System(accelerometer),
    _accuracy_(accelerometer._accuracy_), _range_(accelerometer._range_), _time_step(accelerometer._time_step),
    _part_(), _distribution(accelerometer._distribution)

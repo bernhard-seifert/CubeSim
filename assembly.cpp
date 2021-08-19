@@ -30,24 +30,28 @@ CubeSim::Assembly::Assembly(const Assembly& assembly) : RigidBody(assembly), Lis
 // Assign
 CubeSim::Assembly& CubeSim::Assembly::operator =(const Assembly& assembly)
 {
-   // Assign
-   static_cast<RigidBody&>(*this) = assembly;
-   static_cast<List<Assembly>&>(*this) = assembly;
-   static_cast<List<Part>&>(*this) = assembly;
-   static_cast<List<Assembly>::Item&>(*this) = assembly;
-
-   // Parse Assembly List
-   for (auto assembly = this->assembly().begin(); assembly != this->assembly().end(); ++assembly)
+   // Check Assembly
+   if (this != &assembly)
    {
-      // Set Parent Rigid Body
-      assembly->second->_rigid_body = this;
-   }
+      // Assign
+      static_cast<RigidBody&>(*this) = assembly;
+      static_cast<List<Assembly>&>(*this) = assembly;
+      static_cast<List<Part>&>(*this) = assembly;
+      static_cast<List<Assembly>::Item&>(*this) = assembly;
 
-   // Parse Part List
-   for (auto part = this->part().begin(); part != this->part().end(); ++part)
-   {
-      // Set Parent Rigid Body
-      part->second->_rigid_body = this;
+      // Parse Assembly List
+      for (auto assembly = this->assembly().begin(); assembly != this->assembly().end(); ++assembly)
+      {
+         // Set Parent Rigid Body
+         assembly->second->_rigid_body = this;
+      }
+
+      // Parse Part List
+      for (auto part = this->part().begin(); part != this->part().end(); ++part)
+      {
+         // Set Parent Rigid Body
+         part->second->_rigid_body = this;
+      }
    }
 
    // Return Reference

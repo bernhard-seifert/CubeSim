@@ -118,7 +118,7 @@ inline void CubeSim::Spacecraft::insert(const std::string& name, const System& s
 
    // Set Parent Rigid Body, Parent System, Spacecraft
    system_._rigid_body = this;
-   system_._system = NULL;
+   system_._system = nullptr;
    system_._spacecraft = this;
 }
 

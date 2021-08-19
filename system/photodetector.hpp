@@ -30,7 +30,7 @@ protected:
    // Constructor
    Photodetector(double area, double angle = _ANGLE, double accuracy = _ACCURACY, double range = _RANGE);
 
-   // Copy Constructor
+   // Copy Constructor (reset Part)
    Photodetector(const Photodetector& photodetector);
 
    // Accuracy [W/m^2]
@@ -99,7 +99,7 @@ inline CubeSim::System::Photodetector::Photodetector(double area, double angle, 
 }
 
 
-// Copy Constructor
+// Copy Constructor (reset Part)
 inline CubeSim::System::Photodetector::Photodetector(const Photodetector& photodetector) : System(photodetector),
    _accuracy_(photodetector._accuracy_), _angle_(photodetector._angle_), _area_(photodetector._area_),
    _range_(photodetector._range_), _part_(), _init(), _distribution(photodetector._distribution)

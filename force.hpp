@@ -36,10 +36,10 @@ public:
    Force(double x, double y, double z, double point_x, double point_y, double point_z);
    Force(const Vector3D& force = Vector3D(), const Vector3D& point = Vector3D());
 
-   // Copy Constructor (rigid Body Reference is reset)
+   // Copy Constructor (Rigid Body Reference is reset)
    Force(const Force& force);
 
-   // Assign (rigid Body Reference is maintained)
+   // Assign (Rigid Body Reference is maintained)
    Force& operator =(const Force& force);
 
    // Sign
@@ -126,24 +126,9 @@ inline CubeSim::Force::Force(const Vector3D& force, const Vector3D& point) : Vec
 }
 
 
-// Copy Constructor (rigid Body Reference is reset)
+// Copy Constructor (Rigid Body Reference is reset)
 inline CubeSim::Force::Force(const Force& force) : Vector3D(force), _point(force._point), _rigid_body()
 {
-}
-
-
-// Assign (rigid Body Reference is maintained)
-inline CubeSim::Force& CubeSim::Force::operator =(const Force& force)
-{
-   // Assign
-   static_cast<Vector3D&>(*this) = force;
-   _point = force._point;
-
-   // Update Property
-   _update(_UPDATE_MAGNITUDE);
-
-   // Return Reference
-   return *this;
 }
 
 

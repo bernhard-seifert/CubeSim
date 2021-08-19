@@ -31,7 +31,7 @@ void CubeSim::Module::Ephemeris::_behavior(void)
    }
 
    // Earth, J2000.0 Epoch
-   CelestialBody* earth = NULL;
+   CelestialBody* earth = nullptr;
    Time epoch(2000, 1, 1, 11, 58, 55, 816);
 
    // Parse Celestial Body List

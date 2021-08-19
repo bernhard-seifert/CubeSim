@@ -35,7 +35,7 @@ protected:
    ReactionWheel(double range = _RANGE, double accuracy = _ACCURACY, double acceleration = _ACCELERATION,
       double time_step = _TIME_STEP);
 
-   // Copy Constructor
+   // Copy Constructor (reset Part)
    ReactionWheel(const ReactionWheel& reaction_wheel);
 
    // Spin Rate Acceleration [rad/s^2]
@@ -142,7 +142,7 @@ inline CubeSim::System::ReactionWheel::ReactionWheel(double range, double accura
 }
 
 
-// Copy Constructor
+// Copy Constructor (reset Part)
 inline CubeSim::System::ReactionWheel::ReactionWheel(const ReactionWheel& reaction_wheel) : System(reaction_wheel),
    _acceleration_(reaction_wheel._acceleration_), _accuracy_(reaction_wheel._accuracy_), _range_(reaction_wheel._range_),
    _spin_rate(), _time_step(reaction_wheel._time_step), _part_(), _distribution(reaction_wheel._distribution)
