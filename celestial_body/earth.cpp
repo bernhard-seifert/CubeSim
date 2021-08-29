@@ -19,7 +19,7 @@ const CubeSim::Vector3D CubeSim::CelestialBody::Earth::magnetic_field(const Vect
    }
 
    // Check IGRF Model Time
-   if (_IGRF_REFRESH < (abs(_igrf.time() - simulation()->time()) / 1000))
+   if (_IGRF_REFRESH < (abs(_igrf.time() - simulation()->time()) / 1000.0))
    {
       // Set IGRF Time
       _igrf.time(simulation()->time());
@@ -34,4 +34,4 @@ const CubeSim::Vector3D CubeSim::CelestialBody::Earth::magnetic_field(const Vect
 
 
 // IGRF Model Refresh Time [s]
-const double CubeSim::CelestialBody::Earth::_IGRF_REFRESH = 24 * 3600;
+const double CubeSim::CelestialBody::Earth::_IGRF_REFRESH = 24.0 * 3600;

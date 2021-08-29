@@ -180,7 +180,7 @@ const std::string CubeSim::CAD::_code(const Part& part) const
       }
 
       // Insert Code of Prism
-      code << std::fixed << std::setprecision(6) << "\" spine=\"0 0 0 0 0 " << prism.height() << "\" />";
+      code << std::fixed << std::setprecision(6) << "\" spine=\"0 0 " << prism.height() << " 0 0 0\" />" << std::endl;
    }
    else if (dynamic_cast<const Part::Sphere*>(&part))
    {

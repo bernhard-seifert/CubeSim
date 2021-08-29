@@ -33,8 +33,8 @@ public:
    static const Material COPPER;
    static const Material EPOXY;
    static const Material FR4;
-   static const Material NYLON;
    static const Material PEEK;
+   static const Material POLYAMIDE;
    static const Material PTFE;
    static const Material STEEL;
 

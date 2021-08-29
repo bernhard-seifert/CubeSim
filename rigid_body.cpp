@@ -412,8 +412,9 @@ void CubeSim::RigidBody::_update(uint8_t update)
             _rigid_body->_update(_UPDATE_WRENCH);
          }
 
-         // Update Property
+         // Update Properties
          _update(_UPDATE_CENTER);
+         _update(_UPDATE_MOMENTUM);
          break;
       }
 

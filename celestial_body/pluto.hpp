@@ -25,7 +25,7 @@ public:
 
 
 // Constructor
-inline CubeSim::CelestialBody::Pluto::Pluto(void) : CelestialBody(1.1883E6, 0.0, 1859.553540, 44.0,
+inline CubeSim::CelestialBody::Pluto::Pluto(void) : CelestialBody(1.1883E6, 0.0, 1859.553540, 37.5,
    Vector3D(-1.478626341E12, -4.182878119E12, 8.753002593E11), Vector3D(5.271230990E3, -2.661751412E3, -1.242036207E3))
 {
 }
