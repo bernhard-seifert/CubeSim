@@ -25,7 +25,7 @@ public:
 
 
 // Constructor
-inline CubeSim::CelestialBody::Uranus::Uranus(void) : CelestialBody(2.5362E7, 2.293E-2, 1300.229399, 76.0,
+inline CubeSim::CelestialBody::Uranus::Uranus(void) : CelestialBody(2.5362E7, 2.293E-2, 1300.229399, 58.1,
    Vector3D(2.157706703E12, -2.055242912E12, -3.559264257E10), Vector3D(4.646953713E3, 4.6143611105E3, -4.301340943E1))
 {
 }
