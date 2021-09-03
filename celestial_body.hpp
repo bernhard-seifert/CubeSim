@@ -375,14 +375,6 @@ inline const CubeSim::Vector3D CubeSim::CelestialBody::_center(void) const
 }
 
 
-// Check if Point is inside (Body Frame)
-inline bool CubeSim::CelestialBody::_contains(const Vector3D& point) const
-{
-   // Return Result
-   return ((point.x() * point.x() + point.y() * point.y() + point.z() * point.z()) <= (_radius * _radius));
-}
-
-
 // Compute Mass [kg]
 inline double CubeSim::CelestialBody::_mass(void) const
 {

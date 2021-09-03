@@ -28,7 +28,7 @@ public:
    // Export Code
    const std::string code(void) const;
 
-   // Insert Item
+   // Insert Item (only Reference is stored)
    void operator +=(const Assembly& assembly);
    void operator +=(const CelestialBody& celestial_body);
    void operator +=(const Part& part);

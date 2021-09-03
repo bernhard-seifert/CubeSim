@@ -45,6 +45,15 @@ const CubeSim::Vector3D CubeSim::CelestialBody::gravitational_field(const Vector
 }
 
 
+// Check if Point is inside (Body Frame)
+bool CubeSim::CelestialBody::_contains(const Vector3D& point) const
+{
+   // Return Result
+   return ((point.z() * point.z()) <= ((1.0 - _flattening) * (1.0 - _flattening) * (_radius * _radius -
+      point.x() * point.x() - point.y() * point.y())));
+}
+
+
 // Compute Moment of Inertia Tensor (Body Frame) [kg*m^2]
 const CubeSim::Inertia CubeSim::CelestialBody::_inertia(void) const
 {
