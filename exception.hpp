@@ -26,16 +26,13 @@ public:
    // Class Internal
    class Internal;
 
-   // Class NotFound
-   class NotFound;
-
    // Class Parameter
    class Parameter;
 
 private:
 
    // Virtual Function for RTTI
-   virtual void _func() {}
+   virtual void _func(void);
 };
 
 
@@ -51,13 +48,13 @@ class CubeSim::Exception::Internal : public Exception
 };
 
 
-// Class NotFound
-class CubeSim::Exception::NotFound : public Exception
-{
-};
-
-
 // Class Parameter
 class CubeSim::Exception::Parameter : public Exception
 {
 };
+
+
+// Virtual Function for RTTI
+inline void CubeSim::Exception::_func(void)
+{
+}
