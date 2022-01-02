@@ -39,9 +39,9 @@ public:
    void delay(const Time& time);
 
    // Insert celestial Body, Module and Spacecraft
-   void insert(const std::string& name, const CelestialBody& celestial_body);
-   void insert(const std::string& name, const Module& module);
-   void insert(const std::string& name, const Spacecraft& spacecraft);
+   CelestialBody& insert(const std::string& name, const CelestialBody& celestial_body);
+   Module& insert(const std::string& name, const Module& module);
+   Spacecraft& insert(const std::string& name, const Spacecraft& spacecraft);
 
    // Get Module
    const std::map<std::string, Module*>& module(void) const;
@@ -142,35 +142,44 @@ inline void CubeSim::Simulation::delay(const Time& time)
 
 
 // Insert Celestial Body
-inline void CubeSim::Simulation::insert(const std::string& name, const CelestialBody& celestial_body)
+inline CubeSim::CelestialBody& CubeSim::Simulation::insert(const std::string& name, const CelestialBody& celestial_body)
 {
    // Insert Celestial Body
    CelestialBody& celestial_body_ = List<CelestialBody>::insert(name, celestial_body);
 
    // Set Simulation
    celestial_body_._simulation = this;
+
+   // Return Reference
+   return celestial_body_;
 }
 
 
 // Insert Module
-inline void CubeSim::Simulation::insert(const std::string& name, const Module& module)
+inline CubeSim::Module& CubeSim::Simulation::insert(const std::string& name, const Module& module)
 {
    // Insert Module
    Module& module_ = List<Module>::insert(name, module);
 
    // Set Simulation
    module_._simulation = this;
+
+   // Return Reference
+   return module_;
 }
 
 
 // Insert Spacecraft
-inline void CubeSim::Simulation::insert(const std::string& name, const Spacecraft& spacecraft)
+inline CubeSim::Spacecraft& CubeSim::Simulation::insert(const std::string& name, const Spacecraft& spacecraft)
 {
    // Insert Spacecraft
    Spacecraft& spacecraft_ = List<Spacecraft>::insert(name, spacecraft);
 
    // Set Simulation
    spacecraft_._simulation = this;
+
+   // Return Reference
+   return spacecraft_;
 }
 
 

@@ -63,8 +63,8 @@ public:
    const Inertia inertia(void) const;
 
    // Insert Force (Body Frame) and Torque (Body Frame)
-   void insert(const std::string& name, const Force& force);
-   void insert(const std::string& name, const Torque& torque);
+   Force& insert(const std::string& name, const Force& force);
+   Torque& insert(const std::string& name, const Torque& torque);
 
    // Locate in global Frame
    const std::pair<Vector3D, Rotation> locate(void) const;
@@ -289,7 +289,7 @@ inline CubeSim::Force* CubeSim::RigidBody::force(const std::string& name) const
 
 
 // Insert Force (Body Frame) [N]
-inline void CubeSim::RigidBody::insert(const std::string& name, const Force& force)
+inline CubeSim::Force& CubeSim::RigidBody::insert(const std::string& name, const Force& force)
 {
    // Insert Force (Body Frame)
    Force& force_ = List<Force>::insert(name, force);
@@ -299,11 +299,14 @@ inline void CubeSim::RigidBody::insert(const std::string& name, const Force& for
 
    // Update Property
    _update(_UPDATE_FORCE);
+
+   // Return Reference
+   return force_;
 }
 
 
 // Insert Torque (Body Frame) [N*m]
-inline void CubeSim::RigidBody::insert(const std::string& name, const Torque& torque)
+inline CubeSim::Torque& CubeSim::RigidBody::insert(const std::string& name, const Torque& torque)
 {
    // Insert Torque (Body Frame)
    Torque& torque_ = List<Torque>::insert(name, torque);
@@ -313,6 +316,9 @@ inline void CubeSim::RigidBody::insert(const std::string& name, const Torque& to
 
    // Update Property
    _update(_UPDATE_TORQUE);
+
+   // Return Reference
+   return torque_;
 }
 
 

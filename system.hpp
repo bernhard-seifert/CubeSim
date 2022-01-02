@@ -79,8 +79,8 @@ public:
    void enable(void);
 
    // Insert Assembly, System, Force (Body Frame) and Torque (Body Frame)
-   void insert(const std::string& name, const Assembly& assembly);
-   void insert(const std::string& name, const System& system);
+   Assembly& insert(const std::string& name, const Assembly& assembly);
+   System& insert(const std::string& name, const System& system);
    using RigidBody::insert;
 
    // Check if enabled
@@ -174,13 +174,31 @@ inline void CubeSim::System::enable(void)
 
 
 // Insert Assembly
-inline void CubeSim::System::insert(const std::string& name, const Assembly& assembly)
+inline CubeSim::Assembly& CubeSim::System::insert(const std::string& name, const Assembly& assembly)
 {
    // Insert Assembly
    Assembly& assembly_ = List<Assembly>::insert(name, assembly);
 
    // Set Parent Rigid Body
    assembly_._rigid_body = this;
+
+   // Return Reference
+   return assembly_;
+}
+
+
+// Insert System
+inline CubeSim::System& CubeSim::System::insert(const std::string& name, const System& system)
+{
+   // Insert System
+   System& system_ = List<System>::insert(name, system);
+
+   // Set Parent Rigid Body and Parent System
+   system_._rigid_body = this;
+   system_._system = this;
+
+   // Return Reference
+   return system_;
 }
 
 
@@ -189,18 +207,6 @@ inline bool CubeSim::System::is_enabled(void) const
 {
    // Return enabled Flag
    return _enabled;
-}
-
-
-// Insert System
-inline void CubeSim::System::insert(const std::string& name, const System& system)
-{
-   // Insert System
-   System& system_ = List<System>::insert(name, system);
-
-   // Set Parent Rigid Body and Parent System
-   system_._rigid_body = this;
-   system_._system = this;
 }
 
 

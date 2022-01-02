@@ -38,8 +38,8 @@ public:
    Assembly* assembly(const std::string& name) const;
 
    // Insert Assembly, Part, Force (Body Frame) and Torque (Body Frame)
-   void insert(const std::string& name, const Assembly& assembly);
-   void insert(const std::string& name, const Part& part);
+   Assembly& insert(const std::string& name, const Assembly& assembly);
+   Part& insert(const std::string& name, const Part& part);
    using RigidBody::insert;
 
    // Get Part
@@ -100,24 +100,30 @@ inline CubeSim::Assembly* CubeSim::Assembly::assembly(const std::string& name) c
 
 
 // Insert Assembly
-inline void CubeSim::Assembly::insert(const std::string& name, const Assembly& assembly)
+inline CubeSim::Assembly& CubeSim::Assembly::insert(const std::string& name, const Assembly& assembly)
 {
    // Insert Assembly
    Assembly& assembly_ = List<Assembly>::insert(name, assembly);
 
    // Set Parent rigid Body
    assembly_._rigid_body = this;
+
+   // Return Reference
+   return assembly_;
 }
 
 
 // Insert Part
-inline void CubeSim::Assembly::insert(const std::string& name, const Part& part)
+inline CubeSim::Part& CubeSim::Assembly::insert(const std::string& name, const Part& part)
 {
    // Insert Part
    Part& part_ = List<Part>::insert(name, part);
 
    // Set Parent rigid Body
    part_._rigid_body = this;
+
+   // Return Reference
+   return part_;
 }
 
 

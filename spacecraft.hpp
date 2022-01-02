@@ -43,7 +43,7 @@ public:
    Spacecraft& operator =(const Spacecraft& spacecraft);
 
    // Insert System, Force and Torque
-   void insert(const std::string& name, const System& system);
+   System& insert(const std::string& name, const System& system);
    using RigidBody::insert;
 
    // Compute Orbit
@@ -111,7 +111,7 @@ inline CubeSim::Spacecraft::Spacecraft(const Vector3D& position, const Vector3D&
 
 
 // Insert System
-inline void CubeSim::Spacecraft::insert(const std::string& name, const System& system)
+inline CubeSim::System& CubeSim::Spacecraft::insert(const std::string& name, const System& system)
 {
    // Insert System
    System& system_ = List<System>::insert(name, system);
@@ -120,6 +120,9 @@ inline void CubeSim::Spacecraft::insert(const std::string& name, const System& s
    system_._rigid_body = this;
    system_._system = nullptr;
    system_._spacecraft = this;
+
+   // Return Reference
+   return system_;
 }
 
 
