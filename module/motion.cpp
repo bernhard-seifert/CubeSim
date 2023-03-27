@@ -182,6 +182,14 @@ void CubeSim::Module::Motion::_behavior(void)
 
          // Update Acceleration
          state_.acceleration = acceleration;
+
+         // Check angular Rate
+         if (celestial_body->second->angular_rate() != Vector3D())
+         {
+            // Update Rotation
+            celestial_body->second->rotate(celestial_body->second->angular_rate(),
+               celestial_body->second->angular_rate().norm() * _time_step);
+         }
       }
 
       // Clear first Flag

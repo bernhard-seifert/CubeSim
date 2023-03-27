@@ -24,7 +24,7 @@
 #include "../simulation.hpp"
 
 
-// Default Spin Rate Acceleration [rad/s]
+// Default Spin Rate Acceleration [rad/s^2]
 const double CubeSim::System::ReactionWheel::_ACCELERATION = std::numeric_limits<double>::infinity();
 
 // Default Accuracy [rad/s]

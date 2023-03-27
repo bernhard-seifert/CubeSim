@@ -39,6 +39,9 @@ private:
    // Behavior
    virtual void _behavior(void);
 
+   // Initialization
+   virtual void _init(void);
+
    // Friends
    friend class Simulation;
 };
@@ -46,5 +49,11 @@ private:
 
 // Behavior
 inline void CubeSim::Behavior::_behavior(void)
+{
+}
+
+
+// Initialization
+inline void CubeSim::Behavior::_init(void)
 {
 }

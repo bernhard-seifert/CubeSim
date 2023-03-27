@@ -44,6 +44,9 @@ void CubeSim::Simulation::run(const Time& time)
    {
       try
       {
+         // Initialize
+         module->second->_init();
+
          // Create Fiber
          Fiber* fiber_ = new Fiber(_behavior, dynamic_cast<Behavior*>(module->second));
 
@@ -62,6 +65,9 @@ void CubeSim::Simulation::run(const Time& time)
    {
       try
       {
+         // Initialize
+         spacecraft->second->_init();
+
          // Create Fiber
          Fiber* fiber_ = new Fiber(_behavior, dynamic_cast<Behavior*>(spacecraft->second));
 
@@ -142,6 +148,9 @@ void CubeSim::Simulation::_parse(std::vector<Fiber*>& fiber, const std::map<std:
    {
       try
       {
+         // Initialize
+         system_->second->_init();
+
          // Create Fiber
          Fiber* fiber_ = new Fiber(_behavior, dynamic_cast<Behavior*>(system_->second));
 
