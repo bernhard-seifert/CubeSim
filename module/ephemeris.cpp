@@ -160,7 +160,7 @@ void CubeSim::Module::Ephemeris::_behavior(void)
          // Compute elapsed Years since Epoch
          double dt = (simulation()->time() - epoch) / 1000.0 / 3600 / 24 / 365.25;
 
-         // Parse oribital Element Rates
+         // Parse orbital Element Rates
          for (uint8_t i = 0; i < rate.size(); ++i)
          {
             // Update orbital Elements
@@ -181,7 +181,7 @@ void CubeSim::Module::Ephemeris::_behavior(void)
             rate = {8.407400333E+03, -4.392000000E-07, 2.259621932E-06, 6.283075779E+00, 5.642189403E-05,
                0.000000000E+00, 2.660319173E+00};
 
-            // Parse oribital Element Rates
+            // Parse orbital Element Rates
             for (uint8_t i = 0; i < rate.size(); ++i)
             {
                // Update orbital Elements

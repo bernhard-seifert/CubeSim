@@ -51,7 +51,7 @@ public:
    // Copy Constructor (Rigid Body Reference is reset)
    Torque(const Torque& torque);
 
-   // Assign (Rigid Body Reference is maintained)
+   // Assign
    Torque& operator =(const Torque& torque);
    Torque& operator =(const Vector3D& torque);
 
@@ -140,7 +140,7 @@ inline CubeSim::Torque& CubeSim::Torque::operator =(const Torque& torque)
 }
 
 
-// Assign (Rigid Body Reference is maintained)
+// Assign
 inline CubeSim::Torque& CubeSim::Torque::operator =(const Vector3D& torque)
 {
    // Assign
