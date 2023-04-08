@@ -60,7 +60,6 @@ void CubeSim::Part::_update(uint8_t update)
          // Update Properties
          RigidBody::_update(RigidBody::_UPDATE_AREA);
          RigidBody::_update(RigidBody::_UPDATE_CENTER);
-         RigidBody::_update(RigidBody::_UPDATE_INERTIA);
          RigidBody::_update(RigidBody::_UPDATE_VOLUME);
          break;
       }

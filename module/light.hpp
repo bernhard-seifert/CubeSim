@@ -149,7 +149,7 @@ inline void CubeSim::Module::Light::model(uint8_t model)
 inline uint32_t CubeSim::Module::Light::resolution(void) const
 {
    // Return Resolution
-   return _grid.size();
+   return static_cast<uint32_t>(_grid.size());
 }
 
 

@@ -137,6 +137,12 @@ inline CubeSim::System& CubeSim::Spacecraft::insert(const std::string& name, con
    system_._system = nullptr;
    system_._spacecraft = this;
 
+   // Update Properties
+   _update(_UPDATE_AREA);
+   _update(_UPDATE_CENTER);
+   _update(_UPDATE_VOLUME);
+   _update(_UPDATE_WRENCH);
+
    // Return Reference
    return system_;
 }

@@ -86,7 +86,7 @@ public:
    Assembly* assembly(const std::string& name) const;
 
    // Clone
-   virtual System* clone(void) const = 0;
+   virtual System* clone(void) const;
 
    // Disable
    void disable(void);
@@ -173,6 +173,14 @@ inline CubeSim::Assembly* CubeSim::System::assembly(const std::string& name) con
 }
 
 
+// Clone
+inline CubeSim::System* CubeSim::System::clone(void) const
+{
+   // Return Copy
+   return new System(*this);
+}
+
+
 // Disable
 inline void CubeSim::System::disable(void)
 {
@@ -198,6 +206,12 @@ inline CubeSim::Assembly& CubeSim::System::insert(const std::string& name, const
    // Set Parent Rigid Body
    assembly_._rigid_body = this;
 
+   // Update Properties
+   _update(_UPDATE_AREA);
+   _update(_UPDATE_CENTER);
+   _update(_UPDATE_VOLUME);
+   _update(_UPDATE_WRENCH);
+
    // Return Reference
    return assembly_;
 }
@@ -212,6 +226,12 @@ inline CubeSim::System& CubeSim::System::insert(const std::string& name, const S
    // Set Parent Rigid Body and Parent System
    system_._rigid_body = this;
    system_._system = this;
+
+   // Update Properties
+   _update(_UPDATE_AREA);
+   _update(_UPDATE_CENTER);
+   _update(_UPDATE_VOLUME);
+   _update(_UPDATE_WRENCH);
 
    // Return Reference
    return system_;

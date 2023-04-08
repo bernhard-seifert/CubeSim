@@ -124,6 +124,12 @@ inline CubeSim::Assembly& CubeSim::Assembly::insert(const std::string& name, con
    // Set Parent rigid Body
    assembly_._rigid_body = this;
 
+   // Update Properties
+   _update(_UPDATE_AREA);
+   _update(_UPDATE_CENTER);
+   _update(_UPDATE_VOLUME);
+   _update(_UPDATE_WRENCH);
+
    // Return Reference
    return assembly_;
 }
@@ -137,6 +143,12 @@ inline CubeSim::Part& CubeSim::Assembly::insert(const std::string& name, const P
 
    // Set Parent rigid Body
    part_._rigid_body = this;
+
+   // Update Properties
+   _update(_UPDATE_AREA);
+   _update(_UPDATE_CENTER);
+   _update(_UPDATE_VOLUME);
+   _update(_UPDATE_WRENCH);
 
    // Return Reference
    return part_;

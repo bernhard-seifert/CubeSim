@@ -114,7 +114,7 @@ inline CubeSim::Module* CubeSim::Module::Albedo::clone(void) const
 inline uint32_t CubeSim::Module::Albedo::resolution(void) const
 {
    // Return Resolution
-   return _grid.size();
+   return static_cast<uint32_t>(_grid.size());
 }
 
 
