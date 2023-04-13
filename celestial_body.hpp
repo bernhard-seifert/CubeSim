@@ -276,8 +276,8 @@ inline const CubeSim::Location CubeSim::CelestialBody::locate(double x, double y
 // Locate Point
 inline const CubeSim::Location CubeSim::CelestialBody::locate(const Vector3D& point) const
 {
-   // Locate Point
-   return Location(*this, point - position() - rotation());
+   // Return Location
+   return Location(*this, point);
 }
 
 

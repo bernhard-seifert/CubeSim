@@ -45,7 +45,7 @@ class CubeSim::Location
 public:
 
    // Constructor
-   Location(const CelestialBody& celestial_body, const Vector3D& point = Vector3D(), const Time& time = Time());
+   Location(const CelestialBody& celestial_body, const Vector3D& position = Vector3D(), const Time& time = Time());
    Location(const CelestialBody& celestial_body, double latitude, double longitude, double altitude,
       const Time& time = Time());
 
@@ -68,9 +68,9 @@ public:
    double longitude(void) const;
    void longitude(double longitude);
 
-   // Point
-   const Vector3D point(void) const;
-   void point(const Vector3D& point);
+   // Position
+   const Vector3D position(void) const;
+   void position(const Vector3D& position);
 
    // Radius [m]
    double radius(void) const;
@@ -95,11 +95,11 @@ private:
 
 
 // Constructor
-inline CubeSim::Location::Location(const CelestialBody& celestial_body, const Vector3D& point, const Time& time)
+inline CubeSim::Location::Location(const CelestialBody& celestial_body, const Vector3D& position, const Time& time)
 {
    // Initialize
    this->celectial_body(celestial_body);
-   this->point(point);
+   this->position(position);
    this->time(time);
 }
 
@@ -120,8 +120,8 @@ inline CubeSim::Location::Location(const CelestialBody& celestial_body, double l
 // Convert to Vector3D
 inline CubeSim::Location::operator const CubeSim::Vector3D(void) const
 {
-   // Return Point
-   return point();
+   // Return Position
+   return position();
 }
 
 

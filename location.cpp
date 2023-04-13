@@ -23,8 +23,8 @@
 #include "celestial_body.hpp"
 
 
-// Get Point
-const CubeSim::Vector3D CubeSim::Location::point(void) const
+// Get Position
+const CubeSim::Vector3D CubeSim::Location::position(void) const
 {
    // Compute Normal
    double normal = _normal();
@@ -32,17 +32,20 @@ const CubeSim::Vector3D CubeSim::Location::point(void) const
    // Compute Distance from Axis
    double d = (normal + _altitude) * cos(_latitude);
 
-   // Compute and return Point
-   return Vector3D(d * cos(_longitude), d * sin(_longitude),
-      (normal * pow(1.0 - _celestial_body->flattening(), 2.0) + _altitude) * sin(_latitude));
+   // Compute and return Position
+   return (Vector3D(d * cos(_longitude), d * sin(_longitude), (normal * pow(1.0 - _celestial_body->flattening(), 2.0) +
+      _altitude) * sin(_latitude)) + _celestial_body->rotation() + _celestial_body->position());
 }
 
 
-// Set Point
-void CubeSim::Location::point(const Vector3D& point)
+// Set Position
+void CubeSim::Location::position(const Vector3D& position)
 {
-   // Check Point
-   if (point == Vector3D())
+   // Compute relative position
+   Vector3D position_ = position - _celestial_body->position() - _celestial_body->rotation();
+
+   // Check Position
+   if (position_ == Vector3D())
    {
       // Set Latitude, Longitude, Altitude
       _latitude = 0.0;
@@ -55,8 +58,8 @@ void CubeSim::Location::point(const Vector3D& point)
       if (_celestial_body->flattening() == 0.0)
       {
          // Compute Latitude and Altitude
-         _latitude = atan2(point.z(), sqrt(point.x() * point.x() + point.y() * point.y()));
-         _altitude = point.norm() - _celestial_body->radius();
+         _latitude = atan2(position_.z(), sqrt(position_.x() * position_.x() + position_.y() * position_.y()));
+         _altitude = position_.norm() - _celestial_body->radius();
       }
       else
       {
@@ -73,12 +76,12 @@ void CubeSim::Location::point(const Vector3D& point)
             double k_ = k;
 
             // Compute auxiliary Variable
-            double c = pow(point.x() * point.x() + point.y() * point.y() +
-               (1.0 - e * e) * point.z() * point.z() * k * k, 1.5) / _celestial_body->radius() / e / e;
+            double c = pow(position_.x() * position_.x() + position_.y() * position_.y() +
+               (1.0 - e * e) * position_.z() * position_.z() * k * k, 1.5) / _celestial_body->radius() / e / e;
 
             // Iterate
-            k = (c + (1.0 - e * e) * point.z() * point.z() * k * k * k) /
-               (c - point.x() * point.x() - point.y() * point.y());
+            k = (c + (1.0 - e * e) * position_.z() * position_.z() * k * k * k) /
+               (c - position_.x() * position_.x() - position_.y() * position_.y());
 
             // Check Convergence
             if (fabs(k - k_) < std::numeric_limits<double>::epsilon())
@@ -89,13 +92,13 @@ void CubeSim::Location::point(const Vector3D& point)
          }
 
          // Compute Latitude and Altitude
-         _latitude = atan2(k * point.z(), sqrt(point.x() * point.x() + point.y() * point.y()));
-         _altitude = sqrt(point.x() * point.x() + point.y() * point.y() + point.z() * point.z() * k * k) *
-            (e * e + 1.0 / k - 1.0) / e / e;
+         _latitude = atan2(k * position_.z(), sqrt(position_.x() * position_.x() + position_.y() * position_.y()));
+         _altitude = sqrt(position_.x() * position_.x() + position_.y() * position_.y() +
+            position_.z() * position_.z() * k * k) * (e * e + 1.0 / k - 1.0) / e / e;
       }
 
       // Compute Longitude
-      _longitude = ((point.x() == 0.0) && (point.y() == 0.0)) ? 0.0 : atan2(point.y(), point.x());
+      _longitude = ((position_.x() == 0.0) && (position_.y() == 0.0)) ? 0.0 : atan2(position_.y(), position_.x());
    }
 }
 

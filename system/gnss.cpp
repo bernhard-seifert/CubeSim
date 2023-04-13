@@ -65,8 +65,8 @@ const CubeSim::Location CubeSim::System::GNSS::location(void) const
       return Location(*_earth, NAN, NAN, NAN);
    }
 
-   // Get Spacecraft Position (ECEF Frame)
-   Vector3D position = spacecraft()->position() - _earth->position() - _earth->rotation();
+   // Get Spacecraft Position
+   Vector3D position = spacecraft()->position();
 
    // Consider spatial Accuracy
    position.x(position.x() + _distribution(_generator) * _spatial_accuracy_ / sqrt(3.0));
@@ -76,7 +76,7 @@ const CubeSim::Location CubeSim::System::GNSS::location(void) const
    // Get Time (consider temporal Accuracy)
    Time time = simulation()->time() + static_cast<int64_t>(_distribution(_generator) * _temporal_accuracy_ * 1000.0);
 
-   // Return Location (ECEF Frame)
+   // Return Location
    return Location(*_earth, position, time);
 }
 
