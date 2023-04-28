@@ -59,9 +59,9 @@ const CubeSim::Vector3D CubeSim::System::Gyroscope::spin_rate(void) const
    Vector3D angular_rate = spacecraft()->angular_rate() - spacecraft()->rotation() - _rotation;
 
    // Compute and return angular Rate (consider Accuracy and Range)
-   return Vector3D(std::min(_range_, std::max(-_range_, angular_rate.x() + _distribution(_generator) * _accuracy_)),
-      std::min(_range_, std::max(-_range_, angular_rate.y() + _distribution(_generator) * _accuracy_)),
-      std::min(_range_, std::max(-_range_, angular_rate.z() + _distribution(_generator) * _accuracy_)));
+   return Vector3D(std::clamp(angular_rate.x() + _distribution(_generator) * _accuracy_, -_range_, _range_),
+      std::clamp(angular_rate.y() + _distribution(_generator) * _accuracy_, -_range_, _range_),
+      std::clamp(angular_rate.z() + _distribution(_generator) * _accuracy_, -_range_, _range_));
 }
 
 

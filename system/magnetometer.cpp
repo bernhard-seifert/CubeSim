@@ -77,9 +77,9 @@ const CubeSim::Vector3D CubeSim::System::Magnetometer::magnetic_field(void) cons
    }
 
    // Compute and return magnetic Field (consider Accuracy and Range)
-   return Vector3D(std::min(_range_, std::max(-_range_, magnetic_field.x() + _distribution(_generator) * _accuracy_)),
-      std::min(_range_, std::max(-_range_, magnetic_field.y() + _distribution(_generator) * _accuracy_)),
-      std::min(_range_, std::max(-_range_, magnetic_field.z() + _distribution(_generator) * _accuracy_)));
+   return Vector3D(std::clamp(magnetic_field.x() + _distribution(_generator) * _accuracy_, -_range_, _range_),
+      std::clamp(magnetic_field.y() + _distribution(_generator) * _accuracy_, -_range_, _range_),
+      std::clamp(magnetic_field.z() + _distribution(_generator) * _accuracy_, -_range_, _range_));
 }
 
 

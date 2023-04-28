@@ -60,9 +60,9 @@ const CubeSim::Vector3D CubeSim::System::Accelerometer::acceleration(void) const
    }
 
    // Compute and return Acceleration (consider Accuracy and Range)
-   return Vector3D(std::min(_range_, std::max(-_range_, acceleration.x() + _distribution(_generator) * _accuracy_)),
-      std::min(_range_, std::max(-_range_, acceleration.y() + _distribution(_generator) * _accuracy_)),
-      std::min(_range_, std::max(-_range_, acceleration.z() + _distribution(_generator) * _accuracy_)));
+   return Vector3D(std::clamp(acceleration.x() + _distribution(_generator) * _accuracy_, -_range_, _range_),
+      std::clamp(acceleration.y() + _distribution(_generator) * _accuracy_, -_range_, _range_),
+      std::clamp(acceleration.z() + _distribution(_generator) * _accuracy_, -_range_, _range_));
 }
 
 

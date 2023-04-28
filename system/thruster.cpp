@@ -20,6 +20,7 @@
 
 
 // Includes
+#include <algorithm>
 #include "thruster.hpp"
 #include "../simulation.hpp"
 
@@ -50,19 +51,23 @@ void CubeSim::System::Thruster::_behavior(void)
    // Loop
    for (;;)
    {
+      // Force
+      double force = 0.0;
+
       // Check if enabled
       if (is_enabled())
       {
-         // Compute and update Force (Body Frame)
-         *_part_->force("Thruster") = (_thrust + _distribution(_generator) * _accuracy_) * Vector3D::Z;
+         // Compute Force
+         force = std::clamp(_thrust + _distribution(_generator) * _accuracy_, 0.0, _range_);
       }
-      else
-      {
-         // Reset Force
-         *_part_->force("Force") = Vector3D();
-      }
+
+      // Update Force (Body Frame)
+      *_part_->force("Thruster") = force * Vector3D::Z;
 
       // Delay
       simulation()->delay(_time_step);
+
+      // Update total Impulse
+      _total_impulse += force * _time_step;
    }
 }

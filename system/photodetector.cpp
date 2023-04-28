@@ -91,7 +91,7 @@ double CubeSim::System::Photodetector::radiant_flux(void) const
    }
 
    // Compute and return Irradiance (consider Accuracy, Range and Area)
-   return (std::min(_range_, std::max(0.0, (irradiance + _distribution(_generator) * _accuracy_))) * _area_);
+   return std::clamp((irradiance + _distribution(_generator) * _accuracy_) * _area_, 0.0, _range_);
 }
 
 

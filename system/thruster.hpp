@@ -41,6 +41,9 @@ public:
    double thrust(void) const;
    void thrust(double thrust);
 
+   // Get total Impulse [N*s]
+   double total_impulse(void) const;
+
    // Time Step [s]
    double time_step(void) const;
    void time_step(double time_step);
@@ -84,6 +87,7 @@ private:
    double _range_;
    double _thrust;
    double _time_step;
+   double _total_impulse;
    Part* _part_;
    mutable std::normal_distribution<double> _distribution;
    mutable std::default_random_engine _generator;
@@ -110,7 +114,7 @@ inline double CubeSim::System::Thruster::thrust(void) const
 inline void CubeSim::System::Thruster::thrust(double thrust)
 {
    // Set Thrust
-   _thrust = std::min(_range_, std::max(0.0, thrust));
+   _thrust = std::clamp(thrust, 0.0, _range_);
 }
 
 
@@ -137,9 +141,17 @@ inline void CubeSim::System::Thruster::time_step(double time_step)
 }
 
 
+// Get total Impulse [N*s]
+inline double CubeSim::System::Thruster::total_impulse(void) const
+{
+   // Return total Impulse
+   return _total_impulse;
+}
+
+
 // Constructor
 inline CubeSim::System::Thruster::Thruster(double range, double accuracy, double time_step) : _part_(), _thrust(),
-   _distribution(0.0, 1.0)
+   _total_impulse(), _distribution(0.0, 1.0)
 {
    // Initialize
    this->time_step(time_step);
@@ -150,8 +162,8 @@ inline CubeSim::System::Thruster::Thruster(double range, double accuracy, double
 
 // Copy Constructor (reset Part)
 inline CubeSim::System::Thruster::Thruster(const Thruster& thruster) : System(thruster),
-   _accuracy_(thruster._accuracy_), _range_(thruster._range_), _thrust(), _time_step(thruster._time_step), _part_(),
-   _distribution(thruster._distribution)
+   _accuracy_(thruster._accuracy_), _range_(thruster._range_), _thrust(), _time_step(thruster._time_step),
+   _total_impulse(), _part_(), _distribution(thruster._distribution)
 {
 }
 

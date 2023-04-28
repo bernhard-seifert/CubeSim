@@ -120,7 +120,7 @@ inline double CubeSim::System::Magnetorquer::current(void) const
 inline void CubeSim::System::Magnetorquer::current(double current)
 {
    // Set Current
-   _current = std::min(_range_, std::max(-_range_, current));
+   _current = std::clamp(current, -_range_, _range_);
 }
 
 
