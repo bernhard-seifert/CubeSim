@@ -1,0 +1,630 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Pegasus">
+      <UniqueIdentifier>{324010d7-d50c-48eb-b0c6-f662377721f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Pegasus\ADCS">
+      <UniqueIdentifier>{3a048e8f-1416-435e-b812-8b402916f4b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CubeSim">
+      <UniqueIdentifier>{94b2df3c-4148-4461-8212-f1e386f94b0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Library">
+      <UniqueIdentifier>{77aa51d5-2395-4b26-8903-ed93a77c7c3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CubeSim">
+      <UniqueIdentifier>{b238a53d-ec5c-4c9f-a0c7-85f7a39aeff8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Library">
+      <UniqueIdentifier>{3bac7599-ea18-4e6a-b14a-57a911565766}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CubeSim\system">
+      <UniqueIdentifier>{b50a3d00-69df-475d-8f89-2f1d5cdfe02b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CubeSim\celestial_body">
+      <UniqueIdentifier>{3d974ffa-d2f7-4694-a4b3-c15bbd3c6051}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CubeSim\module">
+      <UniqueIdentifier>{7d892db2-82e1-4f02-82cd-d90e6b545adc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CubeSim\part">
+      <UniqueIdentifier>{2d982b19-cef6-4d1f-a29d-fc5efdb22dca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CubeSim\spacecraft">
+      <UniqueIdentifier>{a00ce8ca-3e39-4063-ae93-ad7b846f8b0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CubeSim\celestial_body">
+      <UniqueIdentifier>{68e264da-ad01-4585-a920-e00d73eb9a90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CubeSim\system">
+      <UniqueIdentifier>{2372c0c1-f52b-4e9e-9134-8a848079936d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CubeSim\spacecraft">
+      <UniqueIdentifier>{aad5f309-e0cf-4ae6-82b2-aa04f7550681}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CubeSim\module">
+      <UniqueIdentifier>{ccf05f09-6bd0-4afa-9919-c11e153c1435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CubeSim\part">
+      <UniqueIdentifier>{c5a5b2a9-523b-4c8e-ab2f-ac8f13f53978}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Pegasus\system">
+      <UniqueIdentifier>{ff5fab94-d4a2-48f7-a2c8-658b37805a60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Pegasus">
+      <UniqueIdentifier>{0d3caf3c-8687-483a-b2c4-14ec14a93e5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Pegasus\ADCS">
+      <UniqueIdentifier>{5c77cc3c-5f62-47d5-b6f6-786dc64e4fba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Pegasus\system">
+      <UniqueIdentifier>{170dd279-eb5c-43a9-8d0c-f49ab6095067}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\CubeSim\wrench.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\assembly.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\behavior.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\cad.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\celestial_body.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\color.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\constant.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\exception.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\force.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\grid.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\inertia.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\location.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\material.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\matrix.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\module.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\orbit.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\part.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\polygon.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\rigid_body.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\rotation.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\simulation.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\spacecraft.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\system.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\time.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\torque.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\vector.cpp">
+      <Filter>Source Files\CubeSim</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\celestial_body\earth.cpp">
+      <Filter>Source Files\CubeSim\celestial_body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\celestial_body\jupiter.cpp">
+      <Filter>Source Files\CubeSim\celestial_body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\celestial_body\mars.cpp">
+      <Filter>Source Files\CubeSim\celestial_body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\celestial_body\mercury.cpp">
+      <Filter>Source Files\CubeSim\celestial_body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\celestial_body\moon.cpp">
+      <Filter>Source Files\CubeSim\celestial_body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\celestial_body\neptune.cpp">
+      <Filter>Source Files\CubeSim\celestial_body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\celestial_body\pluto.cpp">
+      <Filter>Source Files\CubeSim\celestial_body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\celestial_body\saturn.cpp">
+      <Filter>Source Files\CubeSim\celestial_body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\celestial_body\sun.cpp">
+      <Filter>Source Files\CubeSim\celestial_body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\celestial_body\uranus.cpp">
+      <Filter>Source Files\CubeSim\celestial_body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\celestial_body\venus.cpp">
+      <Filter>Source Files\CubeSim\celestial_body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\module\motion.cpp">
+      <Filter>Source Files\CubeSim\module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\module\albedo.cpp">
+      <Filter>Source Files\CubeSim\module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\module\ephemeris.cpp">
+      <Filter>Source Files\CubeSim\module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\module\gravitation.cpp">
+      <Filter>Source Files\CubeSim\module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\module\light.cpp">
+      <Filter>Source Files\CubeSim\module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\module\magnetics.cpp">
+      <Filter>Source Files\CubeSim\module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\part\sphere.cpp">
+      <Filter>Source Files\CubeSim\part</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\part\box.cpp">
+      <Filter>Source Files\CubeSim\part</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\part\cone.cpp">
+      <Filter>Source Files\CubeSim\part</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\part\cylinder.cpp">
+      <Filter>Source Files\CubeSim\part</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\part\prism.cpp">
+      <Filter>Source Files\CubeSim\part</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\spacecraft\iss.cpp">
+      <Filter>Source Files\CubeSim\spacecraft</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\spacecraft\hubble.cpp">
+      <Filter>Source Files\CubeSim\spacecraft</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\system\thruster.cpp">
+      <Filter>Source Files\CubeSim\system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\system\accelerometer.cpp">
+      <Filter>Source Files\CubeSim\system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\system\gnss.cpp">
+      <Filter>Source Files\CubeSim\system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\system\gyroscope.cpp">
+      <Filter>Source Files\CubeSim\system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\system\magnetometer.cpp">
+      <Filter>Source Files\CubeSim\system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\system\magnetorquer.cpp">
+      <Filter>Source Files\CubeSim\system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\system\photodetector.cpp">
+      <Filter>Source Files\CubeSim\system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CubeSim\system\reaction_wheel.cpp">
+      <Filter>Source Files\CubeSim\system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\time.cpp">
+      <Filter>Source Files\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\color.cpp">
+      <Filter>Source Files\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\console.cpp">
+      <Filter>Source Files\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\fiber.cpp">
+      <Filter>Source Files\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\igrf.cpp">
+      <Filter>Source Files\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="ADCS\vector.cpp">
+      <Filter>Source Files\Pegasus\ADCS</Filter>
+    </ClCompile>
+    <ClCompile Include="ADCS\constant.cpp">
+      <Filter>Source Files\Pegasus\ADCS</Filter>
+    </ClCompile>
+    <ClCompile Include="ADCS\float16.cpp">
+      <Filter>Source Files\Pegasus\ADCS</Filter>
+    </ClCompile>
+    <ClCompile Include="ADCS\frame.cpp">
+      <Filter>Source Files\Pegasus\ADCS</Filter>
+    </ClCompile>
+    <ClCompile Include="ADCS\igrf.cpp">
+      <Filter>Source Files\Pegasus\ADCS</Filter>
+    </ClCompile>
+    <ClCompile Include="ADCS\interface.cpp">
+      <Filter>Source Files\Pegasus\ADCS</Filter>
+    </ClCompile>
+    <ClCompile Include="ADCS\location.cpp">
+      <Filter>Source Files\Pegasus\ADCS</Filter>
+    </ClCompile>
+    <ClCompile Include="ADCS\magnetics.cpp">
+      <Filter>Source Files\Pegasus\ADCS</Filter>
+    </ClCompile>
+    <ClCompile Include="ADCS\matrix.cpp">
+      <Filter>Source Files\Pegasus\ADCS</Filter>
+    </ClCompile>
+    <ClCompile Include="ADCS\operation.cpp">
+      <Filter>Source Files\Pegasus\ADCS</Filter>
+    </ClCompile>
+    <ClCompile Include="ADCS\orbit.cpp">
+      <Filter>Source Files\Pegasus\ADCS</Filter>
+    </ClCompile>
+    <ClCompile Include="ADCS\rotation.cpp">
+      <Filter>Source Files\Pegasus\ADCS</Filter>
+    </ClCompile>
+    <ClCompile Include="ADCS\spacecraft.cpp">
+      <Filter>Source Files\Pegasus\ADCS</Filter>
+    </ClCompile>
+    <ClCompile Include="ADCS\status.cpp">
+      <Filter>Source Files\Pegasus\ADCS</Filter>
+    </ClCompile>
+    <ClCompile Include="ADCS\sun.cpp">
+      <Filter>Source Files\Pegasus\ADCS</Filter>
+    </ClCompile>
+    <ClCompile Include="ADCS\task.cpp">
+      <Filter>Source Files\Pegasus\ADCS</Filter>
+    </ClCompile>
+    <ClCompile Include="ADCS\time.cpp">
+      <Filter>Source Files\Pegasus\ADCS</Filter>
+    </ClCompile>
+    <ClCompile Include="system\TEMD6200FX01.cpp">
+      <Filter>Source Files\Pegasus\system</Filter>
+    </ClCompile>
+    <ClCompile Include="system\adapter_torquer.cpp">
+      <Filter>Source Files\Pegasus\system</Filter>
+    </ClCompile>
+    <ClCompile Include="system\ADXL330.cpp">
+      <Filter>Source Files\Pegasus\system</Filter>
+    </ClCompile>
+    <ClCompile Include="system\HMC5983.cpp">
+      <Filter>Source Files\Pegasus\system</Filter>
+    </ClCompile>
+    <ClCompile Include="system\L3G4200D.cpp">
+      <Filter>Source Files\Pegasus\system</Filter>
+    </ClCompile>
+    <ClCompile Include="system\monitor.cpp">
+      <Filter>Source Files\Pegasus\system</Filter>
+    </ClCompile>
+    <ClCompile Include="system\OEM615.cpp">
+      <Filter>Source Files\Pegasus\system</Filter>
+    </ClCompile>
+    <ClCompile Include="system\sidepanel_torquer.cpp">
+      <Filter>Source Files\Pegasus\system</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\CubeSim\inertia.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\list.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\location.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\material.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\matrix.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\module.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\orbit.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\part.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\polygon.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\rigid_body.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\rotation.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\simulation.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\spacecraft.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\system.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\time.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\torque.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\vector.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\wrench.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\assembly.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\behavior.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\cad.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\celestial_body.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\color.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\constant.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\exception.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\force.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\grid.hpp">
+      <Filter>Header Files\CubeSim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\celestial_body\venus.hpp">
+      <Filter>Header Files\CubeSim\celestial_body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\celestial_body\earth.hpp">
+      <Filter>Header Files\CubeSim\celestial_body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\celestial_body\jupiter.hpp">
+      <Filter>Header Files\CubeSim\celestial_body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\celestial_body\mars.hpp">
+      <Filter>Header Files\CubeSim\celestial_body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\celestial_body\mercury.hpp">
+      <Filter>Header Files\CubeSim\celestial_body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\celestial_body\moon.hpp">
+      <Filter>Header Files\CubeSim\celestial_body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\celestial_body\neptune.hpp">
+      <Filter>Header Files\CubeSim\celestial_body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\celestial_body\pluto.hpp">
+      <Filter>Header Files\CubeSim\celestial_body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\celestial_body\saturn.hpp">
+      <Filter>Header Files\CubeSim\celestial_body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\celestial_body\sun.hpp">
+      <Filter>Header Files\CubeSim\celestial_body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\celestial_body\uranus.hpp">
+      <Filter>Header Files\CubeSim\celestial_body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\module\motion.hpp">
+      <Filter>Header Files\CubeSim\module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\module\albedo.hpp">
+      <Filter>Header Files\CubeSim\module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\module\ephemeris.hpp">
+      <Filter>Header Files\CubeSim\module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\module\gravitation.hpp">
+      <Filter>Header Files\CubeSim\module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\module\light.hpp">
+      <Filter>Header Files\CubeSim\module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\module\magnetics.hpp">
+      <Filter>Header Files\CubeSim\module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\spacecraft\iss.hpp">
+      <Filter>Header Files\CubeSim\spacecraft</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\spacecraft\hubble.hpp">
+      <Filter>Header Files\CubeSim\spacecraft</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\part\sphere.hpp">
+      <Filter>Header Files\CubeSim\part</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\part\box.hpp">
+      <Filter>Header Files\CubeSim\part</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\part\cone.hpp">
+      <Filter>Header Files\CubeSim\part</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\part\cylinder.hpp">
+      <Filter>Header Files\CubeSim\part</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\part\prism.hpp">
+      <Filter>Header Files\CubeSim\part</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\system\thruster.hpp">
+      <Filter>Header Files\CubeSim\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\system\accelerometer.hpp">
+      <Filter>Header Files\CubeSim\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\system\gnss.hpp">
+      <Filter>Header Files\CubeSim\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\system\gyroscope.hpp">
+      <Filter>Header Files\CubeSim\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\system\magnetometer.hpp">
+      <Filter>Header Files\CubeSim\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\system\magnetorquer.hpp">
+      <Filter>Header Files\CubeSim\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\system\photodetector.hpp">
+      <Filter>Header Files\CubeSim\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CubeSim\system\reaction_wheel.hpp">
+      <Filter>Header Files\CubeSim\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\vector.hpp">
+      <Filter>Header Files\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\color.hpp">
+      <Filter>Header Files\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\console.hpp">
+      <Filter>Header Files\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\fiber.hpp">
+      <Filter>Header Files\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\igrf.hpp">
+      <Filter>Header Files\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\matrix.hpp">
+      <Filter>Header Files\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\time.hpp">
+      <Filter>Header Files\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="ADCS\float16.h">
+      <Filter>Header Files\Pegasus\ADCS</Filter>
+    </ClInclude>
+    <ClInclude Include="ADCS\constant.hpp">
+      <Filter>Header Files\Pegasus\ADCS</Filter>
+    </ClInclude>
+    <ClInclude Include="ADCS\frame.hpp">
+      <Filter>Header Files\Pegasus\ADCS</Filter>
+    </ClInclude>
+    <ClInclude Include="ADCS\igrf.hpp">
+      <Filter>Header Files\Pegasus\ADCS</Filter>
+    </ClInclude>
+    <ClInclude Include="ADCS\info.hpp">
+      <Filter>Header Files\Pegasus\ADCS</Filter>
+    </ClInclude>
+    <ClInclude Include="ADCS\interface.hpp">
+      <Filter>Header Files\Pegasus\ADCS</Filter>
+    </ClInclude>
+    <ClInclude Include="ADCS\location.hpp">
+      <Filter>Header Files\Pegasus\ADCS</Filter>
+    </ClInclude>
+    <ClInclude Include="ADCS\magnetics.hpp">
+      <Filter>Header Files\Pegasus\ADCS</Filter>
+    </ClInclude>
+    <ClInclude Include="ADCS\matrix.hpp">
+      <Filter>Header Files\Pegasus\ADCS</Filter>
+    </ClInclude>
+    <ClInclude Include="ADCS\numeric.hpp">
+      <Filter>Header Files\Pegasus\ADCS</Filter>
+    </ClInclude>
+    <ClInclude Include="ADCS\operation.hpp">
+      <Filter>Header Files\Pegasus\ADCS</Filter>
+    </ClInclude>
+    <ClInclude Include="ADCS\orbit.hpp">
+      <Filter>Header Files\Pegasus\ADCS</Filter>
+    </ClInclude>
+    <ClInclude Include="ADCS\rotation.hpp">
+      <Filter>Header Files\Pegasus\ADCS</Filter>
+    </ClInclude>
+    <ClInclude Include="ADCS\spacecraft.hpp">
+      <Filter>Header Files\Pegasus\ADCS</Filter>
+    </ClInclude>
+    <ClInclude Include="ADCS\status.hpp">
+      <Filter>Header Files\Pegasus\ADCS</Filter>
+    </ClInclude>
+    <ClInclude Include="ADCS\sun.hpp">
+      <Filter>Header Files\Pegasus\ADCS</Filter>
+    </ClInclude>
+    <ClInclude Include="ADCS\task.hpp">
+      <Filter>Header Files\Pegasus\ADCS</Filter>
+    </ClInclude>
+    <ClInclude Include="ADCS\time.hpp">
+      <Filter>Header Files\Pegasus\ADCS</Filter>
+    </ClInclude>
+    <ClInclude Include="ADCS\vector.hpp">
+      <Filter>Header Files\Pegasus\ADCS</Filter>
+    </ClInclude>
+    <ClInclude Include="system\TEMD6200FX01.hpp">
+      <Filter>Header Files\Pegasus\system</Filter>
+    </ClInclude>
+    <ClInclude Include="system\adapter_torquer.hpp">
+      <Filter>Header Files\Pegasus\system</Filter>
+    </ClInclude>
+    <ClInclude Include="system\ADXL330.hpp">
+      <Filter>Header Files\Pegasus\system</Filter>
+    </ClInclude>
+    <ClInclude Include="system\HMC5983.hpp">
+      <Filter>Header Files\Pegasus\system</Filter>
+    </ClInclude>
+    <ClInclude Include="system\L3G4200D.hpp">
+      <Filter>Header Files\Pegasus\system</Filter>
+    </ClInclude>
+    <ClInclude Include="system\monitor.hpp">
+      <Filter>Header Files\Pegasus\system</Filter>
+    </ClInclude>
+    <ClInclude Include="system\OEM615.hpp">
+      <Filter>Header Files\Pegasus\system</Filter>
+    </ClInclude>
+    <ClInclude Include="system\sidepanel_torquer.hpp">
+      <Filter>Header Files\Pegasus\system</Filter>
+    </ClInclude>
+    <ClInclude Include="main.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{71fd8957-d00e-4b48-8da3-b0f1368a603c}</ProjectGuid>
+    <RootNamespace>CubeSimDemo</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>PEGASUS</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>..\..\Library;..\..;$(IncludePath)</IncludePath>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>..\..\Library;..\..;$(IncludePath)</IncludePath>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>D:\Visual Studio\CubeSim_new\Library;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>D:\Visual Studio\CubeSim_new\Library;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);NOMINMAX</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>$(Configuration)\Demo\$(ShortProjectName)\%(RelativeDir)</ObjectFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);NOMINMAX</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>$(Configuration)\Demo\$(ShortProjectName)\%(RelativeDir)</ObjectFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);NOMINMAX</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>$(Configuration)\$(Configuration)\$(Configuration)\%(RelativeDir)</ObjectFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);NOMINMAX</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>$(Configuration)\$(Configuration)\$(Configuration)\%(RelativeDir)</ObjectFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\CubeSim\assembly.cpp" />
+    <ClCompile Include="..\..\CubeSim\behavior.cpp" />
+    <ClCompile Include="..\..\CubeSim\cad.cpp" />
+    <ClCompile Include="..\..\CubeSim\celestial_body.cpp" />
+    <ClCompile Include="..\..\CubeSim\celestial_body\earth.cpp" />
+    <ClCompile Include="..\..\CubeSim\celestial_body\jupiter.cpp" />
+    <ClCompile Include="..\..\CubeSim\celestial_body\mars.cpp" />
+    <ClCompile Include="..\..\CubeSim\celestial_body\mercury.cpp" />
+    <ClCompile Include="..\..\CubeSim\celestial_body\moon.cpp" />
+    <ClCompile Include="..\..\CubeSim\celestial_body\neptune.cpp" />
+    <ClCompile Include="..\..\CubeSim\celestial_body\pluto.cpp" />
+    <ClCompile Include="..\..\CubeSim\celestial_body\saturn.cpp" />
+    <ClCompile Include="..\..\CubeSim\celestial_body\sun.cpp" />
+    <ClCompile Include="..\..\CubeSim\celestial_body\uranus.cpp" />
+    <ClCompile Include="..\..\CubeSim\celestial_body\venus.cpp" />
+    <ClCompile Include="..\..\CubeSim\color.cpp" />
+    <ClCompile Include="..\..\CubeSim\constant.cpp" />
+    <ClCompile Include="..\..\CubeSim\exception.cpp" />
+    <ClCompile Include="..\..\CubeSim\force.cpp" />
+    <ClCompile Include="..\..\CubeSim\grid.cpp" />
+    <ClCompile Include="..\..\CubeSim\inertia.cpp" />
+    <ClCompile Include="..\..\CubeSim\location.cpp" />
+    <ClCompile Include="..\..\CubeSim\material.cpp" />
+    <ClCompile Include="..\..\CubeSim\matrix.cpp" />
+    <ClCompile Include="..\..\CubeSim\module.cpp" />
+    <ClCompile Include="..\..\CubeSim\module\albedo.cpp" />
+    <ClCompile Include="..\..\CubeSim\module\ephemeris.cpp" />
+    <ClCompile Include="..\..\CubeSim\module\gravitation.cpp" />
+    <ClCompile Include="..\..\CubeSim\module\light.cpp" />
+    <ClCompile Include="..\..\CubeSim\module\magnetics.cpp" />
+    <ClCompile Include="..\..\CubeSim\module\motion.cpp" />
+    <ClCompile Include="..\..\CubeSim\orbit.cpp" />
+    <ClCompile Include="..\..\CubeSim\part.cpp" />
+    <ClCompile Include="..\..\CubeSim\part\box.cpp" />
+    <ClCompile Include="..\..\CubeSim\part\cone.cpp" />
+    <ClCompile Include="..\..\CubeSim\part\cylinder.cpp" />
+    <ClCompile Include="..\..\CubeSim\part\prism.cpp" />
+    <ClCompile Include="..\..\CubeSim\part\sphere.cpp" />
+    <ClCompile Include="..\..\CubeSim\polygon.cpp" />
+    <ClCompile Include="..\..\CubeSim\rigid_body.cpp" />
+    <ClCompile Include="..\..\CubeSim\rotation.cpp" />
+    <ClCompile Include="..\..\CubeSim\simulation.cpp" />
+    <ClCompile Include="..\..\CubeSim\spacecraft.cpp" />
+    <ClCompile Include="..\..\CubeSim\spacecraft\hubble.cpp" />
+    <ClCompile Include="..\..\CubeSim\spacecraft\iss.cpp" />
+    <ClCompile Include="..\..\CubeSim\system.cpp" />
+    <ClCompile Include="..\..\CubeSim\system\accelerometer.cpp" />
+    <ClCompile Include="..\..\CubeSim\system\gnss.cpp" />
+    <ClCompile Include="..\..\CubeSim\system\gyroscope.cpp" />
+    <ClCompile Include="..\..\CubeSim\system\magnetometer.cpp" />
+    <ClCompile Include="..\..\CubeSim\system\magnetorquer.cpp" />
+    <ClCompile Include="..\..\CubeSim\system\photodetector.cpp" />
+    <ClCompile Include="..\..\CubeSim\system\reaction_wheel.cpp" />
+    <ClCompile Include="..\..\CubeSim\system\thruster.cpp" />
+    <ClCompile Include="..\..\CubeSim\time.cpp" />
+    <ClCompile Include="..\..\CubeSim\torque.cpp" />
+    <ClCompile Include="..\..\CubeSim\vector.cpp" />
+    <ClCompile Include="..\..\CubeSim\wrench.cpp" />
+    <ClCompile Include="..\..\Library\color.cpp" />
+    <ClCompile Include="..\..\Library\console.cpp" />
+    <ClCompile Include="..\..\Library\fiber.cpp" />
+    <ClCompile Include="..\..\Library\igrf.cpp" />
+    <ClCompile Include="..\..\Library\time.cpp" />
+    <ClCompile Include="ADCS\constant.cpp" />
+    <ClCompile Include="ADCS\float16.cpp" />
+    <ClCompile Include="ADCS\frame.cpp" />
+    <ClCompile Include="ADCS\igrf.cpp" />
+    <ClCompile Include="ADCS\interface.cpp" />
+    <ClCompile Include="ADCS\location.cpp" />
+    <ClCompile Include="ADCS\magnetics.cpp" />
+    <ClCompile Include="ADCS\matrix.cpp" />
+    <ClCompile Include="ADCS\operation.cpp" />
+    <ClCompile Include="ADCS\orbit.cpp" />
+    <ClCompile Include="ADCS\rotation.cpp" />
+    <ClCompile Include="ADCS\spacecraft.cpp" />
+    <ClCompile Include="ADCS\status.cpp" />
+    <ClCompile Include="ADCS\sun.cpp" />
+    <ClCompile Include="ADCS\task.cpp" />
+    <ClCompile Include="ADCS\time.cpp" />
+    <ClCompile Include="ADCS\vector.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="system\adapter_torquer.cpp" />
+    <ClCompile Include="system\ADXL330.cpp" />
+    <ClCompile Include="system\HMC5983.cpp" />
+    <ClCompile Include="system\L3G4200D.cpp" />
+    <ClCompile Include="system\monitor.cpp" />
+    <ClCompile Include="system\OEM615.cpp" />
+    <ClCompile Include="system\sidepanel_torquer.cpp" />
+    <ClCompile Include="system\TEMD6200FX01.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\CubeSim\assembly.hpp" />
+    <ClInclude Include="..\..\CubeSim\behavior.hpp" />
+    <ClInclude Include="..\..\CubeSim\cad.hpp" />
+    <ClInclude Include="..\..\CubeSim\celestial_body.hpp" />
+    <ClInclude Include="..\..\CubeSim\celestial_body\earth.hpp" />
+    <ClInclude Include="..\..\CubeSim\celestial_body\jupiter.hpp" />
+    <ClInclude Include="..\..\CubeSim\celestial_body\mars.hpp" />
+    <ClInclude Include="..\..\CubeSim\celestial_body\mercury.hpp" />
+    <ClInclude Include="..\..\CubeSim\celestial_body\moon.hpp" />
+    <ClInclude Include="..\..\CubeSim\celestial_body\neptune.hpp" />
+    <ClInclude Include="..\..\CubeSim\celestial_body\pluto.hpp" />
+    <ClInclude Include="..\..\CubeSim\celestial_body\saturn.hpp" />
+    <ClInclude Include="..\..\CubeSim\celestial_body\sun.hpp" />
+    <ClInclude Include="..\..\CubeSim\celestial_body\uranus.hpp" />
+    <ClInclude Include="..\..\CubeSim\celestial_body\venus.hpp" />
+    <ClInclude Include="..\..\CubeSim\color.hpp" />
+    <ClInclude Include="..\..\CubeSim\constant.hpp" />
+    <ClInclude Include="..\..\CubeSim\exception.hpp" />
+    <ClInclude Include="..\..\CubeSim\force.hpp" />
+    <ClInclude Include="..\..\CubeSim\grid.hpp" />
+    <ClInclude Include="..\..\CubeSim\inertia.hpp" />
+    <ClInclude Include="..\..\CubeSim\list.hpp" />
+    <ClInclude Include="..\..\CubeSim\location.hpp" />
+    <ClInclude Include="..\..\CubeSim\material.hpp" />
+    <ClInclude Include="..\..\CubeSim\matrix.hpp" />
+    <ClInclude Include="..\..\CubeSim\module.hpp" />
+    <ClInclude Include="..\..\CubeSim\module\albedo.hpp" />
+    <ClInclude Include="..\..\CubeSim\module\ephemeris.hpp" />
+    <ClInclude Include="..\..\CubeSim\module\gravitation.hpp" />
+    <ClInclude Include="..\..\CubeSim\module\light.hpp" />
+    <ClInclude Include="..\..\CubeSim\module\magnetics.hpp" />
+    <ClInclude Include="..\..\CubeSim\module\motion.hpp" />
+    <ClInclude Include="..\..\CubeSim\orbit.hpp" />
+    <ClInclude Include="..\..\CubeSim\part.hpp" />
+    <ClInclude Include="..\..\CubeSim\part\box.hpp" />
+    <ClInclude Include="..\..\CubeSim\part\cone.hpp" />
+    <ClInclude Include="..\..\CubeSim\part\cylinder.hpp" />
+    <ClInclude Include="..\..\CubeSim\part\prism.hpp" />
+    <ClInclude Include="..\..\CubeSim\part\sphere.hpp" />
+    <ClInclude Include="..\..\CubeSim\polygon.hpp" />
+    <ClInclude Include="..\..\CubeSim\rigid_body.hpp" />
+    <ClInclude Include="..\..\CubeSim\rotation.hpp" />
+    <ClInclude Include="..\..\CubeSim\simulation.hpp" />
+    <ClInclude Include="..\..\CubeSim\spacecraft.hpp" />
+    <ClInclude Include="..\..\CubeSim\spacecraft\hubble.hpp" />
+    <ClInclude Include="..\..\CubeSim\spacecraft\iss.hpp" />
+    <ClInclude Include="..\..\CubeSim\system.hpp" />
+    <ClInclude Include="..\..\CubeSim\system\accelerometer.hpp" />
+    <ClInclude Include="..\..\CubeSim\system\gnss.hpp" />
+    <ClInclude Include="..\..\CubeSim\system\gyroscope.hpp" />
+    <ClInclude Include="..\..\CubeSim\system\magnetometer.hpp" />
+    <ClInclude Include="..\..\CubeSim\system\magnetorquer.hpp" />
+    <ClInclude Include="..\..\CubeSim\system\photodetector.hpp" />
+    <ClInclude Include="..\..\CubeSim\system\reaction_wheel.hpp" />
+    <ClInclude Include="..\..\CubeSim\system\thruster.hpp" />
+    <ClInclude Include="..\..\CubeSim\time.hpp" />
+    <ClInclude Include="..\..\CubeSim\torque.hpp" />
+    <ClInclude Include="..\..\CubeSim\vector.hpp" />
+    <ClInclude Include="..\..\CubeSim\wrench.hpp" />
+    <ClInclude Include="..\..\Library\color.hpp" />
+    <ClInclude Include="..\..\Library\console.hpp" />
+    <ClInclude Include="..\..\Library\fiber.hpp" />
+    <ClInclude Include="..\..\Library\igrf.hpp" />
+    <ClInclude Include="..\..\Library\matrix.hpp" />
+    <ClInclude Include="..\..\Library\time.hpp" />
+    <ClInclude Include="..\..\Library\vector.hpp" />
+    <ClInclude Include="ADCS\constant.hpp" />
+    <ClInclude Include="ADCS\float16.h" />
+    <ClInclude Include="ADCS\frame.hpp" />
+    <ClInclude Include="ADCS\igrf.hpp" />
+    <ClInclude Include="ADCS\info.hpp" />
+    <ClInclude Include="ADCS\interface.hpp" />
+    <ClInclude Include="ADCS\location.hpp" />
+    <ClInclude Include="ADCS\magnetics.hpp" />
+    <ClInclude Include="ADCS\matrix.hpp" />
+    <ClInclude Include="ADCS\numeric.hpp" />
+    <ClInclude Include="ADCS\operation.hpp" />
+    <ClInclude Include="ADCS\orbit.hpp" />
+    <ClInclude Include="ADCS\rotation.hpp" />
+    <ClInclude Include="ADCS\spacecraft.hpp" />
+    <ClInclude Include="ADCS\status.hpp" />
+    <ClInclude Include="ADCS\sun.hpp" />
+    <ClInclude Include="ADCS\task.hpp" />
+    <ClInclude Include="ADCS\time.hpp" />
+    <ClInclude Include="ADCS\vector.hpp" />
+    <ClInclude Include="main.hpp" />
+    <ClInclude Include="system\adapter_torquer.hpp" />
+    <ClInclude Include="system\ADXL330.hpp" />
+    <ClInclude Include="system\HMC5983.hpp" />
+    <ClInclude Include="system\L3G4200D.hpp" />
+    <ClInclude Include="system\monitor.hpp" />
+    <ClInclude Include="system\OEM615.hpp" />
+    <ClInclude Include="system\sidepanel_torquer.hpp" />
+    <ClInclude Include="system\TEMD6200FX01.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
